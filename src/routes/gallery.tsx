@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/gallery")({
@@ -7,13 +8,14 @@ export const Route = createFileRoute("/gallery")({
     meta: [
       { title: "Design Gallery — BuildYourHome" },
       { name: "description", content: "Explore residential apartments, villas, duplexes, country houses, studios, and custom home designs." },
+      { property: "og:title", content: "Design Gallery — BuildYourHome" },
+      { property: "og:description", content: "Explore residential apartments, villas, duplexes, country houses, studios, and custom home designs." },
     ],
   }),
   component: GalleryPage,
 });
 
-type Card = { img: string; alt: string; short: string; title: string; features: string[] };
-type Section = { slug: string; title: string; cards: Card[] };
+type CardText = { alt: string; short: string; title: string; features: string[] };
 
 const SECTION_IMAGES: Record<string, string[]> = {
   "apartments": [
@@ -93,19 +95,19 @@ const SECTION_IMAGES: Record<string, string[]> = {
 const SLUGS = ["apartments", "villas", "duplexes", "country-houses", "studios", "custom-designs"] as const;
 
 
+
 function GalleryPage() {
+  const { t } = useTranslation("gallery");
   return (
     <div className="bg-background">
       {/* Hero */}
       <section className="relative bg-hero-gradient text-primary-foreground py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,white,transparent_40%)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Explore Our Design Gallery</h1>
-          <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto mb-8">
-            Discover inspiring home designs across every style — from compact studios to luxurious villas.
-          </p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">{t("hero.title")}</h1>
+          <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto mb-8">{t("hero.subtitle")}</p>
           <a href="#apartments" className="inline-block bg-accent text-accent-foreground px-6 py-3 rounded-lg font-bold hover:-translate-y-0.5 transition shadow-soft">
-            View Gallery
+            {t("hero.cta")}
           </a>
         </div>
       </section>
@@ -114,13 +116,13 @@ function GalleryPage() {
       <nav className="sticky top-0 z-40 bg-primary text-primary-foreground shadow-soft">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex gap-2 md:gap-4 overflow-x-auto py-3 no-scrollbar">
-            {SECTIONS.map((s) => (
+            {SLUGS.map((slug) => (
               <a
-                key={s.slug}
-                href={`#${s.slug}`}
+                key={slug}
+                href={`#${slug}`}
                 className="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium bg-white/10 hover:bg-secondary transition"
               >
-                {s.title.split(" - ")[0]}
+                {t(`sections.${slug}.title`)}
               </a>
             ))}
           </div>
@@ -129,30 +131,32 @@ function GalleryPage() {
 
       {/* Sections */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 space-y-20">
-        {SECTIONS.map((section) => (
-          <GallerySection key={section.slug} section={section} />
+        {SLUGS.map((slug) => (
+          <GallerySection key={slug} slug={slug} />
         ))}
       </div>
     </div>
   );
 }
 
-function GallerySection({ section }: { section: Section }) {
+function GallerySection({ slug }: { slug: string }) {
+  const { t } = useTranslation("gallery");
   const trackRef = useRef<HTMLDivElement>(null);
   const scroll = (dir: number) => {
     trackRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
   };
-  const [main, sub] = section.title.split(" - ");
+  const images = SECTION_IMAGES[slug] ?? [];
+  const cards = (t(`sections.${slug}.cards`, { returnObjects: true }) as CardText[]) ?? [];
   return (
-    <section id={section.slug} className="scroll-mt-24">
-      <div className="mb-6 pl-4 border-l-4 border-secondary">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary">{main}</h2>
-        {sub && <p className="text-muted-foreground mt-1">{sub}</p>}
+    <section id={slug} className="scroll-mt-24">
+      <div className="mb-6 ps-4 border-s-4 border-secondary">
+        <h2 className="text-2xl md:text-3xl font-bold text-primary">{t(`sections.${slug}.title`)}</h2>
+        <p className="text-muted-foreground mt-1">{t(`sections.${slug}.subtitle`)}</p>
       </div>
 
       <div className="relative group">
         <button
-          aria-label="Scroll left"
+          aria-label={t("controls.scrollLeft")}
           onClick={() => scroll(-1)}
           className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-elegant hover:bg-secondary transition"
         >
@@ -163,13 +167,13 @@ function GallerySection({ section }: { section: Section }) {
           ref={trackRef}
           className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory no-scrollbar scroll-smooth"
         >
-          {section.cards.map((card, i) => (
-            <GalleryCard key={i} card={card} />
+          {(Array.isArray(cards) ? cards : []).map((card, i) => (
+            <GalleryCard key={i} card={card} img={images[i] ?? images[0]} more={t("controls.more")} />
           ))}
         </div>
 
         <button
-          aria-label="Scroll right"
+          aria-label={t("controls.scrollRight")}
           onClick={() => scroll(1)}
           className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-elegant hover:bg-secondary transition"
         >
@@ -180,12 +184,12 @@ function GallerySection({ section }: { section: Section }) {
   );
 }
 
-function GalleryCard({ card }: { card: Card }) {
+function GalleryCard({ card, img, more }: { card: CardText; img: string; more: string }) {
   return (
     <article className="group relative w-[260px] flex-shrink-0 snap-start rounded-2xl overflow-hidden bg-card shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-1">
       <div className="relative h-[180px] overflow-hidden">
         <img
-          src={card.img}
+          src={img}
           alt={card.alt}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -197,7 +201,7 @@ function GalleryCard({ card }: { card: Card }) {
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-primary/95 text-primary-foreground p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col">
           <button className="self-end bg-accent text-accent-foreground rounded-full px-3 py-1 text-xs font-bold mb-2 hover:scale-105 transition">
-            More...
+            {more}
           </button>
           <h3 className="text-base font-bold mb-2">{card.title}</h3>
           <ul className="text-xs space-y-1 list-disc list-inside opacity-95">
