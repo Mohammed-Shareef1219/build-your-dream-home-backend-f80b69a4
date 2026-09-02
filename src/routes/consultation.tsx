@@ -93,16 +93,17 @@ function ConsultationPage() {
     try {
       const res = await submit({
         data: {
-          name: form.name.trim(),
-          email: form.email.trim(),
-          phone: form.phone || null,
-          company: form.company || null,
-          service: form.service || null,
-          project_type: form.project_type || null,
-          budget: form.budget || null,
-          timeline: form.timeline || null,
-          description: form.description || null,
-          notes: form.notes || null,
+          name: f.name,
+          email: f.email,
+          phone: f.phone || null,
+          company: f.company || null,
+          service: f.service || null,
+          project_type: f.project_type || null,
+          budget: f.budget || null,
+          timeline: f.timeline || null,
+          description: f.description || null,
+          notes: f.notes || null,
+
           user_agent:
             typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : null,
         },
