@@ -19,7 +19,7 @@ const ConsultationSchema = z.object({
 
 export type ConsultationInput = z.infer<typeof ConsultationSchema>
 
-const NOTIFY_TO = 'mohammedshareef1219@gmail.com'
+const NOTIFY_TO = 'buildyourhom@gmail.com'
 
 async function sendNotificationEmail(row: Record<string, unknown>) {
   const apiKey = process.env.RESEND_API_KEY
@@ -118,7 +118,8 @@ export const submitConsultation = createServerFn({ method: 'POST' })
       emailResult = await sendNotificationEmail({
         ...insertRow,
         id: inserted.id,
-        submitted_at: inserted.created_at,
+        user_id: userId,
+        submitted_at: new Date(inserted.created_at).toLocaleString('en-GB', { timeZone: 'Africa/Cairo' }),
       })
     } catch (e) {
       console.error('[consultation] notification email failed:', e)
