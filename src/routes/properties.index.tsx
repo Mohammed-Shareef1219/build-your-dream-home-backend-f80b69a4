@@ -196,9 +196,10 @@ function ListingsPage() {
                     className="w-full h-11 pl-9 pr-3 rounded-xl bg-white/5 border border-white/10 text-sm placeholder:text-slate-400 focus:outline-none focus:border-cyan-400/60"
                   />
                 </div>
-                <GlassSelect className="md:col-span-3" value={type} onChange={(v) => setSearch({ type: v })} options={TYPES} />
-                <GlassSelect className="md:col-span-2" value={beds} onChange={(v) => setSearch({ beds: v })} options={BEDS} />
-                <GlassSelect className="md:col-span-2" value={sort} onChange={(v) => setSearch({ sort: v })} options={SORTS} />
+                <GlassSelect className="md:col-span-3" value={type ?? "all"} onChange={(v) => setSearch({ type: v })} options={TYPES} />
+                <GlassSelect className="md:col-span-2" value={beds ?? "any"} onChange={(v) => setSearch({ beds: v })} options={BEDS} />
+                <GlassSelect className="md:col-span-2" value={sort ?? "featured"} onChange={(v) => setSearch({ sort: v })} options={SORTS} />
+
               </div>
               <div className="mt-3 flex items-center justify-between text-xs text-slate-400 px-1">
                 <span>{t("properties.filters.matchingListings", { count: filtered.length })}</span>
