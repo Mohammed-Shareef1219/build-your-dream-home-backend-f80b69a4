@@ -55,17 +55,41 @@ function ConsultationPage() {
     notes: "",
   });
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) {
       toast.error(t("toast.signIn"));
       return;
     }
-    if (!form.name.trim() || !form.email.trim() || !form.service || !form.description.trim()) {
+
+    // Read the live DOM values as source of truth so browser/password-manager
+    // autofill (which can skip React onChange) never looks "empty" to validation.
+    const fd = new FormData(e.currentTarget);
+    const read = (key: keyof Requirements) => {
+      const v = fd.get(key);
+      return (typeof v === "string" ? v : form[key] ?? "").trim();
+    };
+    const values: Requirements = {
+      name: read("name"),
+      email: read("email"),
+      phone: read("phone"),
+      company: read("company"),
+      service: read("service"),
+      project_type: read("project_type"),
+      budget: read("budget"),
+      timeline: read("timeline"),
+      description: read("description"),
+      notes: read("notes"),
+    };
+    setForm(values);
+
+    if (!values.name || !values.email || !values.service || !values.description) {
       toast.error(t("toast.required"));
       return;
     }
     setLoading(true);
+    const f = values;
+
     try {
       const res = await submit({
         data: {
