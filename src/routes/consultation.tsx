@@ -55,30 +55,55 @@ function ConsultationPage() {
     notes: "",
   });
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) {
       toast.error(t("toast.signIn"));
       return;
     }
-    if (!form.name.trim() || !form.email.trim() || !form.service || !form.description.trim()) {
+
+    // Read the live DOM values as source of truth so browser/password-manager
+    // autofill (which can skip React onChange) never looks "empty" to validation.
+    const fd = new FormData(e.currentTarget);
+    const read = (key: keyof Requirements) => {
+      const v = fd.get(key);
+      return (typeof v === "string" ? v : form[key] ?? "").trim();
+    };
+    const values: Requirements = {
+      name: read("name"),
+      email: read("email"),
+      phone: read("phone"),
+      company: read("company"),
+      service: read("service"),
+      project_type: read("project_type"),
+      budget: read("budget"),
+      timeline: read("timeline"),
+      description: read("description"),
+      notes: read("notes"),
+    };
+    setForm(values);
+
+    if (!values.name || !values.email || !values.service || !values.description) {
       toast.error(t("toast.required"));
       return;
     }
     setLoading(true);
+    const f = values;
+
     try {
       const res = await submit({
         data: {
-          name: form.name.trim(),
-          email: form.email.trim(),
-          phone: form.phone || null,
-          company: form.company || null,
-          service: form.service || null,
-          project_type: form.project_type || null,
-          budget: form.budget || null,
-          timeline: form.timeline || null,
-          description: form.description || null,
-          notes: form.notes || null,
+          name: f.name,
+          email: f.email,
+          phone: f.phone || null,
+          company: f.company || null,
+          service: f.service || null,
+          project_type: f.project_type || null,
+          budget: f.budget || null,
+          timeline: f.timeline || null,
+          description: f.description || null,
+          notes: f.notes || null,
+
           user_agent:
             typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : null,
         },
@@ -167,6 +192,7 @@ function ConsultationPage() {
             <form onSubmit={onSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormGroup title={t("form.name")}>
                 <TextInput
+                  name="name"
                   value={form.name}
                   onChange={(v) => setForm({ ...form, name: v })}
                   placeholder={t("form.namePlaceholder")}
@@ -175,6 +201,7 @@ function ConsultationPage() {
               <FormGroup title={t("form.email")}>
                 <TextInput
                   type="email"
+                  name="email"
                   value={form.email}
                   onChange={(v) => setForm({ ...form, email: v })}
                   placeholder={t("form.emailPlaceholder")}
@@ -182,6 +209,7 @@ function ConsultationPage() {
               </FormGroup>
               <FormGroup title={t("form.phone")}>
                 <TextInput
+                  name="phone"
                   value={form.phone}
                   onChange={(v) => setForm({ ...form, phone: v })}
                   placeholder={t("form.phonePlaceholder")}
@@ -189,6 +217,7 @@ function ConsultationPage() {
               </FormGroup>
               <FormGroup title={t("form.company")}>
                 <TextInput
+                  name="company"
                   value={form.company}
                   onChange={(v) => setForm({ ...form, company: v })}
                   placeholder={t("form.companyPlaceholder")}
@@ -197,6 +226,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.service")}>
                 <Select
+                  name="service"
                   value={form.service}
                   onChange={(v) => setForm({ ...form, service: v })}
                   options={[
@@ -213,6 +243,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.propertyType")}>
                 <Select
+                  name="project_type"
                   value={form.project_type}
                   onChange={(v) => setForm({ ...form, project_type: v })}
                   options={[
@@ -228,6 +259,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.budget")}>
                 <Select
+                  name="budget"
                   value={form.budget}
                   onChange={(v) => setForm({ ...form, budget: v })}
                   options={[
@@ -243,6 +275,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.timeline")}>
                 <Select
+                  name="timeline"
                   value={form.timeline}
                   onChange={(v) => setForm({ ...form, timeline: v })}
                   options={[
@@ -258,6 +291,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.description")} full>
                 <textarea
+                  name="description"
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   placeholder={t("form.descriptionPlaceholder")}
@@ -268,6 +302,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.notes")} full>
                 <textarea
+                  name="notes"
                   value={form.notes}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
                   placeholder={t("form.notesPlaceholder")}
@@ -309,16 +344,19 @@ function FormGroup({
 }
 
 function Select({
+  name,
   value,
   onChange,
   options,
 }: {
+  name?: string;
   value: string;
   onChange: (v: string) => void;
   options: [string, string][];
 }) {
   return (
     <select
+      name={name}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className="w-full rounded-lg border bg-background px-3 py-3 text-sm"
@@ -333,11 +371,13 @@ function Select({
 }
 
 function TextInput({
+  name,
   value,
   onChange,
   placeholder,
   type = "text",
 }: {
+  name?: string;
   value: string;
   onChange: (v: string) => void;
   placeholder: string;
@@ -345,6 +385,7 @@ function TextInput({
 }) {
   return (
     <input
+      name={name}
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}

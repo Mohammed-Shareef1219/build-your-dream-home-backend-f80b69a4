@@ -69,7 +69,7 @@
     "signIn": "Please sign in to submit a consultation.",
     "required": "Please fill in your name, email, service, and project description.",
     "notSaved": "Submission was not saved. Please try again.",
-    "success": "Consultation saved (ref {{ref}}). We'll reach out shortly.",
+    "success": "Consultation submitted! We’ll reach out shortly. (Ref {{ref}})",
     "genericError": "Something went wrong"
   },
   "contact": {
