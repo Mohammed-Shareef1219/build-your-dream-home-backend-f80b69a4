@@ -192,6 +192,7 @@ function ConsultationPage() {
             <form onSubmit={onSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormGroup title={t("form.name")}>
                 <TextInput
+                  name="name"
                   value={form.name}
                   onChange={(v) => setForm({ ...form, name: v })}
                   placeholder={t("form.namePlaceholder")}
@@ -200,6 +201,7 @@ function ConsultationPage() {
               <FormGroup title={t("form.email")}>
                 <TextInput
                   type="email"
+                  name="email"
                   value={form.email}
                   onChange={(v) => setForm({ ...form, email: v })}
                   placeholder={t("form.emailPlaceholder")}
@@ -207,6 +209,7 @@ function ConsultationPage() {
               </FormGroup>
               <FormGroup title={t("form.phone")}>
                 <TextInput
+                  name="phone"
                   value={form.phone}
                   onChange={(v) => setForm({ ...form, phone: v })}
                   placeholder={t("form.phonePlaceholder")}
@@ -214,6 +217,7 @@ function ConsultationPage() {
               </FormGroup>
               <FormGroup title={t("form.company")}>
                 <TextInput
+                  name="company"
                   value={form.company}
                   onChange={(v) => setForm({ ...form, company: v })}
                   placeholder={t("form.companyPlaceholder")}
@@ -222,6 +226,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.service")}>
                 <Select
+                  name="service"
                   value={form.service}
                   onChange={(v) => setForm({ ...form, service: v })}
                   options={[
@@ -238,6 +243,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.propertyType")}>
                 <Select
+                  name="project_type"
                   value={form.project_type}
                   onChange={(v) => setForm({ ...form, project_type: v })}
                   options={[
@@ -253,6 +259,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.budget")}>
                 <Select
+                  name="budget"
                   value={form.budget}
                   onChange={(v) => setForm({ ...form, budget: v })}
                   options={[
@@ -268,6 +275,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.timeline")}>
                 <Select
+                  name="timeline"
                   value={form.timeline}
                   onChange={(v) => setForm({ ...form, timeline: v })}
                   options={[
@@ -283,6 +291,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.description")} full>
                 <textarea
+                  name="description"
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   placeholder={t("form.descriptionPlaceholder")}
@@ -293,6 +302,7 @@ function ConsultationPage() {
 
               <FormGroup title={t("form.notes")} full>
                 <textarea
+                  name="notes"
                   value={form.notes}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
                   placeholder={t("form.notesPlaceholder")}
@@ -334,16 +344,19 @@ function FormGroup({
 }
 
 function Select({
+  name,
   value,
   onChange,
   options,
 }: {
+  name?: string;
   value: string;
   onChange: (v: string) => void;
   options: [string, string][];
 }) {
   return (
     <select
+      name={name}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className="w-full rounded-lg border bg-background px-3 py-3 text-sm"
@@ -358,11 +371,13 @@ function Select({
 }
 
 function TextInput({
+  name,
   value,
   onChange,
   placeholder,
   type = "text",
 }: {
+  name?: string;
   value: string;
   onChange: (v: string) => void;
   placeholder: string;
@@ -370,6 +385,7 @@ function TextInput({
 }) {
   return (
     <input
+      name={name}
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}
