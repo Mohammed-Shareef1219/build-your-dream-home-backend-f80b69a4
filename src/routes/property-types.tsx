@@ -25,7 +25,6 @@ import {
   Wallet,
   CheckCircle2,
   Calculator,
-  Calculator,
   LandPlot,
   MapPin,
   Star,
