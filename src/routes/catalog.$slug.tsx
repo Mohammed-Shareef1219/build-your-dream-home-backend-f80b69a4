@@ -1,10 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Phone, Star, MapPin, Ruler, Building2, User, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import montCityImg from "@/assets/land-mont-city.jpg";
+import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
 
 /* ---------------- Types ---------------- */
 
-export type CategorySlug = "apartment" | "villa" | "duplex" | "country_house" | "studio";
+export type CategorySlug = "apartment" | "villa" | "duplex" | "country_house" | "studio" | "land";
 
 export interface Listing {
   code: string;
