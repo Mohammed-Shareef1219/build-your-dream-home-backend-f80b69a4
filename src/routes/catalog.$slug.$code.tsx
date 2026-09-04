@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, type CategorySlug, type Listing } from "./catalog.$slug";
+import montCityImg from "@/assets/land-mont-city.jpg";
+import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
 
 /* ---------------- Mood-board templates per category ---------------- */
 
@@ -56,6 +58,10 @@ const BOARDS_BY_CATEGORY: Record<CategorySlug, Board[]> = {
     { id: "rooms", label: "Wooden Rooms", emoji: "🛏️", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1400&auto=format&fit=crop", caption: "Wooden rooms with fresh air & quietness." },
     { id: "bbq", label: "BBQ Area", emoji: "🔥", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&auto=format&fit=crop", caption: "Outdoor seating around the BBQ pavilion." },
   ],
+  land: [
+    { id: "plot", label: "Land Plot", emoji: "📐", image: montCityImg, caption: "200 m² clear plot, ready for immediate construction." },
+    { id: "coast", label: "Coastline", emoji: "🌊", image: mountAgibaImg, caption: "Close to Agiba Beach and Umm El Rakham Beach." },
+  ],
 };
 
 const PITCH_BY_CATEGORY: Record<CategorySlug, string> = {
@@ -64,6 +70,7 @@ const PITCH_BY_CATEGORY: Record<CategorySlug, string> = {
   duplex: "Complete separation between guest area and bedrooms, with a private garden and elegant internal stairs.",
   studio: "Smart furnishing, energy-efficient and close to all services — the perfect investor unit.",
   country_house: "The tranquility of nature with a design that blends natural stone with open green spaces.",
+  land: "A 100% clear land plot in a prime strategic location near the beaches of Marsa Matrouh, with immediate handover and construction.",
 };
 
 const SMART_HOME_LINE =
@@ -287,10 +294,12 @@ function PropertyDetail() {
                 <span className="font-semibold text-white">{cat.title.replace(/s$/, "")}: </span>
                 "{PITCH_BY_CATEGORY[slug as CategorySlug]}"
               </p>
-              <p className="text-sm text-white/85 leading-relaxed">
-                <Sparkles className="inline size-3.5 text-amber-300 mr-1" />
-                {SMART_HOME_LINE}
-              </p>
+              {slug !== "land" && (
+                <p className="text-sm text-white/85 leading-relaxed">
+                  <Sparkles className="inline size-3.5 text-amber-300 mr-1" />
+                  {SMART_HOME_LINE}
+                </p>
+              )}
 
               {/* Spec table */}
               <div className="mt-5 rounded-xl border border-white/10 overflow-hidden">

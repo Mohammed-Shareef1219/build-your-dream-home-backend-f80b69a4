@@ -25,8 +25,13 @@ import {
   Wallet,
   CheckCircle2,
   Calculator,
+  LandPlot,
+  MapPin,
+  Star,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import montCityImg from "@/assets/land-mont-city.jpg";
+import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
 
 export const Route = createFileRoute("/property-types")({
   head: () => ({
@@ -232,6 +237,23 @@ const TYPES: PropertyType[] = [
   },
 ];
 
+/* ---------------- Lands ---------------- */
+
+interface LandProject {
+  key: "mont_city" | "mount_agiba";
+  code: string;
+  image: string;
+  rating: number;
+  area: string;
+}
+
+const LAND_PROJECTS: LandProject[] = [
+  { key: "mont_city", code: "IB-2026-A1", image: montCityImg, rating: 4.9, area: "200 m²" },
+  { key: "mount_agiba", code: "IB-2026-A2", image: mountAgibaImg, rating: 4.9, area: "200 m²" },
+];
+
+const LAND_CONTACTS = ["01020010906", "01020010905", "01155405831"];
+
 /* ---------------- Page ---------------- */
 
 function PropertyTypesPage() {
@@ -383,6 +405,29 @@ function ComparisonSection() {
                 <td className="px-4 py-4 whitespace-nowrap">{t(`types.${tp.slug}.liquidity`)}</td>
               </tr>
             ))}
+            {LAND_PROJECTS.map((lp) => (
+              <tr key={lp.code} className="border-t hover:bg-muted/30 transition-colors">
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="size-9 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center">
+                      <LandPlot className="size-4" />
+                    </div>
+                    <div>
+                      <div className="font-semibold">{t(`land.projects.${lp.key}.name`)}</div>
+                      <div className="text-xs text-muted-foreground">{t("land.locationShort")}</div>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-4 py-4 font-medium whitespace-nowrap">{t("land.priceRange")}</td>
+                <td className="px-4 py-4 whitespace-nowrap">200 m²</td>
+                <td className="px-4 py-4 whitespace-nowrap">{t("land.familyFit")}</td>
+                <td className="px-4 py-4">
+                  <MaintenancePill level="Low" label={t("land.maintenance")} />
+                </td>
+                <td className="px-4 py-4 whitespace-nowrap text-muted-foreground">—</td>
+                <td className="px-4 py-4 whitespace-nowrap">{t("land.liquidity")}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -474,6 +519,9 @@ function ShowcaseSection() {
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {SHOWCASE.map((c) => (
             <ShowcaseCardView key={c.slug} card={c} />
+          ))}
+          {LAND_PROJECTS.map((lp) => (
+            <LandShowcaseCard key={lp.code} project={lp} />
           ))}
         </div>
       </div>
@@ -999,9 +1047,9 @@ function MaintenancePill({ level, label }: { level: "Low" | "Medium" | "High"; l
   );
 }
 
-function formatAED(n: number) {
-  if (n >= 1_000_000) return `AED ${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}M`;
-  return `AED ${(n / 1000).toFixed(0)}K`;
+function formatEGP(n: number) {
+  if (n >= 1_000_000) return `EGP ${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}M`;
+  return `EGP ${(n / 1000).toFixed(0)}K`;
 }
 
 function matchFamily(ideal: string, size: number): number {

@@ -1,10 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Phone, Star, MapPin, Ruler, Building2, User, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import montCityImg from "@/assets/land-mont-city.jpg";
+import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
 
 /* ---------------- Types ---------------- */
 
-export type CategorySlug = "apartment" | "villa" | "duplex" | "country_house" | "studio";
+export type CategorySlug = "apartment" | "villa" | "duplex" | "country_house" | "studio" | "land";
 
 export interface Listing {
   code: string;
@@ -480,6 +482,46 @@ export const CATEGORIES: Record<CategorySlug, Category> = {
         builder: "Ebny Betak Smart Living", seller: "Hazem Fathy", contact: "+20 102 100 4010",
         location: "Nasr City — Makram Ebeid",
         image: "https://images.unsplash.com/photo-1560448075-bb485b067938?w=900&auto=format&fit=crop",
+      },
+    ],
+  },
+
+  land: {
+    slug: "land",
+    title: "Lands",
+    arabicTitle: "الأراضي",
+    subtitle: "Marsa Matrouh Land Plots Catalogue",
+    directoryLine: "Vision 2026 — Lands",
+    listings: [
+      {
+        code: "IB-2026-A1", name: "Mont City", arabicName: "مونت سيتي",
+        area: "200 m²", price: "40,000 - 160,000 EGP", designStyle: "Marsa Matrouh Land Complex", rating: 4.9,
+        features: [
+          "Prime strategic location",
+          "Close to beautiful beaches",
+          "100% clear land area",
+          "Immediate handover and construction",
+          "Modern layout and security",
+        ],
+        builder: "Roya Company", seller: "Mr. Ahmed Hussein",
+        contact: "01020010906 · 01020010905 · 01155405831",
+        location: "Matrouh Umm El Rakham, Awlad Mara'i Road, near Agiba Beach and Umm El Rakham Beach",
+        image: montCityImg,
+      },
+      {
+        code: "IB-2026-A2", name: "Mount Agiba Resort", arabicName: "منتجع مونت عجيبه",
+        area: "200 m²", price: "40,000 - 160,000 EGP", designStyle: "Marsa Matrouh Resorts Complex", rating: 4.9,
+        features: [
+          "Prime strategic location",
+          "Close to beautiful beaches",
+          "100% clear land area",
+          "Immediate handover and construction",
+          "Modern layout and security",
+        ],
+        builder: "Roya Company", seller: "Mr. Ahmed Hussein",
+        contact: "01020010906 · 01020010905 · 01155405831",
+        location: "Matrouh Umm El Rakham, Awlad Mara'i Road, near Agiba Beach and Umm El Rakham Beach",
+        image: mountAgibaImg,
       },
     ],
   },
