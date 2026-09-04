@@ -498,6 +498,9 @@ function ShowcaseSection() {
           {SHOWCASE.map((c) => (
             <ShowcaseCardView key={c.slug} card={c} />
           ))}
+          {LAND_PROJECTS.map((lp) => (
+            <LandShowcaseCard key={lp.code} project={lp} />
+          ))}
         </div>
       </div>
     </section>
