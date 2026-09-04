@@ -25,8 +25,14 @@ import {
   Wallet,
   CheckCircle2,
   Calculator,
+  Calculator,
+  LandPlot,
+  MapPin,
+  Star,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import montCityImg from "@/assets/land-mont-city.jpg";
+import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
 
 export const Route = createFileRoute("/property-types")({
   head: () => ({
