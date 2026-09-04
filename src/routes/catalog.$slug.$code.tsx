@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, type CategorySlug, type Listing } from "./catalog.$slug";
+import montCityImg from "@/assets/land-mont-city.jpg";
+import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
 
 /* ---------------- Mood-board templates per category ---------------- */
 
