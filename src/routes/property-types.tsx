@@ -999,9 +999,9 @@ function MaintenancePill({ level, label }: { level: "Low" | "Medium" | "High"; l
   );
 }
 
-function formatAED(n: number) {
-  if (n >= 1_000_000) return `AED ${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}M`;
-  return `AED ${(n / 1000).toFixed(0)}K`;
+function formatEGP(n: number) {
+  if (n >= 1_000_000) return `EGP ${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}M`;
+  return `EGP ${(n / 1000).toFixed(0)}K`;
 }
 
 function matchFamily(ideal: string, size: number): number {
