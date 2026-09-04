@@ -232,6 +232,23 @@ const TYPES: PropertyType[] = [
   },
 ];
 
+/* ---------------- Lands ---------------- */
+
+interface LandProject {
+  key: "mont_city" | "mount_agiba";
+  code: string;
+  image: string;
+  rating: number;
+  area: string;
+}
+
+const LAND_PROJECTS: LandProject[] = [
+  { key: "mont_city", code: "IB-2026-A1", image: montCityImg, rating: 4.9, area: "200 m²" },
+  { key: "mount_agiba", code: "IB-2026-A2", image: mountAgibaImg, rating: 4.9, area: "200 m²" },
+];
+
+const LAND_CONTACTS = ["01020010906", "01020010905", "01155405831"];
+
 /* ---------------- Page ---------------- */
 
 function PropertyTypesPage() {
