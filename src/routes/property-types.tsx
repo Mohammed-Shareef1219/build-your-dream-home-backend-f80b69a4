@@ -383,6 +383,29 @@ function ComparisonSection() {
                 <td className="px-4 py-4 whitespace-nowrap">{t(`types.${tp.slug}.liquidity`)}</td>
               </tr>
             ))}
+            {LAND_PROJECTS.map((lp) => (
+              <tr key={lp.code} className="border-t hover:bg-muted/30 transition-colors">
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="size-9 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center">
+                      <LandPlot className="size-4" />
+                    </div>
+                    <div>
+                      <div className="font-semibold">{t(`land.projects.${lp.key}.name`)}</div>
+                      <div className="text-xs text-muted-foreground">{t("land.locationShort")}</div>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-4 py-4 font-medium whitespace-nowrap">{t("land.priceRange")}</td>
+                <td className="px-4 py-4 whitespace-nowrap">200 m²</td>
+                <td className="px-4 py-4 whitespace-nowrap">{t("land.familyFit")}</td>
+                <td className="px-4 py-4">
+                  <MaintenancePill level="Low" label={t("land.maintenance")} />
+                </td>
+                <td className="px-4 py-4 whitespace-nowrap text-muted-foreground">—</td>
+                <td className="px-4 py-4 whitespace-nowrap">{t("land.liquidity")}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
