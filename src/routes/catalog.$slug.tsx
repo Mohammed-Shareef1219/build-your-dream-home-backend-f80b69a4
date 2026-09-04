@@ -485,6 +485,46 @@ export const CATEGORIES: Record<CategorySlug, Category> = {
       },
     ],
   },
+
+  land: {
+    slug: "land",
+    title: "Lands",
+    arabicTitle: "الأراضي",
+    subtitle: "Marsa Matrouh Land Plots Catalogue",
+    directoryLine: "Vision 2026 — Lands",
+    listings: [
+      {
+        code: "IB-2026-A1", name: "Mont City", arabicName: "مونت سيتي",
+        area: "200 m²", price: "40,000 - 160,000 EGP", designStyle: "Marsa Matrouh Land Complex", rating: 4.9,
+        features: [
+          "Prime strategic location",
+          "Close to beautiful beaches",
+          "100% clear land area",
+          "Immediate handover and construction",
+          "Modern layout and security",
+        ],
+        builder: "Roya Company", seller: "Mr. Ahmed Hussein",
+        contact: "01020010906 · 01020010905 · 01155405831",
+        location: "Matrouh Umm El Rakham, Awlad Mara'i Road, near Agiba Beach and Umm El Rakham Beach",
+        image: montCityImg,
+      },
+      {
+        code: "IB-2026-A2", name: "Mount Agiba Resort", arabicName: "منتجع مونت عجيبه",
+        area: "200 m²", price: "40,000 - 160,000 EGP", designStyle: "Marsa Matrouh Resorts Complex", rating: 4.9,
+        features: [
+          "Prime strategic location",
+          "Close to beautiful beaches",
+          "100% clear land area",
+          "Immediate handover and construction",
+          "Modern layout and security",
+        ],
+        builder: "Roya Company", seller: "Mr. Ahmed Hussein",
+        contact: "01020010906 · 01020010905 · 01155405831",
+        location: "Matrouh Umm El Rakham, Awlad Mara'i Road, near Agiba Beach and Umm El Rakham Beach",
+        image: mountAgibaImg,
+      },
+    ],
+  },
 };
 
 const VALID_SLUGS = Object.keys(CATEGORIES) as CategorySlug[];
