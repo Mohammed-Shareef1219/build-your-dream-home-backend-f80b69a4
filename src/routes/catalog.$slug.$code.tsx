@@ -294,10 +294,12 @@ function PropertyDetail() {
                 <span className="font-semibold text-white">{cat.title.replace(/s$/, "")}: </span>
                 "{PITCH_BY_CATEGORY[slug as CategorySlug]}"
               </p>
-              <p className="text-sm text-white/85 leading-relaxed">
-                <Sparkles className="inline size-3.5 text-amber-300 mr-1" />
-                {SMART_HOME_LINE}
-              </p>
+              {slug !== "land" && (
+                <p className="text-sm text-white/85 leading-relaxed">
+                  <Sparkles className="inline size-3.5 text-amber-300 mr-1" />
+                  {SMART_HOME_LINE}
+                </p>
+              )}
 
               {/* Spec table */}
               <div className="mt-5 rounded-xl border border-white/10 overflow-hidden">
