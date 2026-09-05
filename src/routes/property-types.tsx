@@ -62,7 +62,7 @@ interface PropertyType {
   name: string;
   tagline: string;
   icon: React.ComponentType<{ className?: string }>;
-  startingPrice: number; // AED
+  startingPrice: number; // EGP
   pricePerSqm: number;
   minSize: number;
   idealFamily: string;
@@ -392,7 +392,7 @@ function ComparisonSection() {
                   </div>
                 </td>
                 <td className="px-4 py-4 font-medium whitespace-nowrap">
-                  {formatAED(tp.startingPrice)}
+                  {formatEGP(tp.startingPrice)}
                 </td>
                 <td className="px-4 py-4 whitespace-nowrap">{tp.minSize} m²</td>
                 <td className="px-4 py-4 whitespace-nowrap">{t(`types.${tp.slug}.idealFamily`)}</td>
@@ -856,7 +856,7 @@ function CalculatorSection() {
             <div>
               <div className="flex justify-between mb-3">
                 <Label className="flex items-center gap-2"><Wallet className="size-4" /> {t("calculator.budget")}</Label>
-                <span className="font-semibold text-secondary">{formatAED(budget)}</span>
+                <span className="font-semibold text-secondary">{formatEGP(budget)}</span>
               </div>
               <Slider
                 value={[budget]}
@@ -914,7 +914,7 @@ function CalculatorSection() {
                   </div>
                   <p className="text-sm text-muted-foreground line-clamp-1">{t(`types.${r.type.slug}.tagline`)}</p>
                   <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>{formatAED(r.type.startingPrice)}+</span>
+                    <span>{formatEGP(r.type.startingPrice)}+</span>
                     <span>·</span>
                     <span>{t(`types.${r.type.slug}.idealFamily`)}</span>
                     <span>·</span>
