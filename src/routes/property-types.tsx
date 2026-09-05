@@ -625,6 +625,89 @@ function ShowcaseCardView({ card }: { card: ShowcaseCard }) {
   );
 }
 
+function LandShowcaseCard({ project }: { project: LandProject }) {
+  const { t } = useTranslation("propertyTypes");
+  const name = t(`land.projects.${project.key}.name`);
+  const arabicName = t(`land.projects.${project.key}.arabicName`);
+  const design = t(`land.projects.${project.key}.design`);
+  const features = t("land.features", { returnObjects: true }) as string[];
+  return (
+    <article className="group rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 flex flex-col bg-card">
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+        <img
+          src={project.image}
+          alt={name}
+          loading="lazy"
+          width={1200}
+          height={900}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <span className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-soft">
+          {t("land.badge")}
+        </span>
+      </div>
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-xl font-bold">{name}</h3>
+            <p className="text-sm text-muted-foreground">{arabicName}</p>
+          </div>
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-secondary shrink-0">
+            <Star className="size-4 fill-current" /> {project.rating.toFixed(1)}
+          </span>
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">{design}</p>
+
+        <div className="mt-4 space-y-2 text-sm">
+          <div className="flex items-center gap-2">
+            <Ruler className="size-4 text-secondary shrink-0" />
+            <span>
+              <span className="text-muted-foreground">{t("land.areaLabel")}:</span> {project.area}
+            </span>
+          </div>
+          <div className="flex items-start gap-2">
+            <MapPin className="size-4 text-secondary shrink-0 mt-0.5" />
+            <span className="text-foreground/80">{t("land.location")}</span>
+          </div>
+        </div>
+
+        <ul className="mt-5 space-y-2.5">
+          {features.map((f) => (
+            <li key={f} className="flex items-start gap-2 text-sm">
+              <CheckCircle2 className="size-4 shrink-0 text-secondary mt-0.5" />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5 text-xs space-y-1 text-muted-foreground">
+          <div><span className="font-semibold">{t("showcase.builderLabel")}:</span> {t("land.builder")}</div>
+          <div><span className="font-semibold">{t("showcase.sellerLabel")}:</span> {t("land.seller")}</div>
+          <div className="flex flex-wrap gap-x-2">
+            <span className="font-semibold">{t("showcase.contactLabel")}:</span>
+            {LAND_CONTACTS.map((c) => (
+              <a key={c} href={`tel:${c}`} className="text-secondary hover:underline" dir="ltr">
+                {c}
+              </a>
+            ))}
+          </div>
+          <div>{t("land.codeLabel")}: {project.code}</div>
+        </div>
+
+        <div className="mt-6 flex items-end justify-between gap-3 pt-4 border-t border-foreground/10">
+          <div className="font-bold text-base text-primary">{t("land.priceRange")}</div>
+          <Button asChild variant="brand" size="sm">
+            <Link to="/catalog/$slug/$code" params={{ slug: "land", code: project.code }}>
+              {t("showcase.explore")} <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+
 function FloorPlansSection() {
   const { t } = useTranslation("propertyTypes");
   const [active, setActive] = useState<TypeKey>("apartment");
