@@ -7,7 +7,11 @@
       "maintenance": "Low",
       "liquidity": "High",
       "acStrategy": "Single split unit with smart zoning",
-      "sustainability": ["LED-only lighting", "Compact thermal envelope", "Low water fixtures"],
+      "sustainability": [
+        "LED-only lighting",
+        "Compact thermal envelope",
+        "Low water fixtures"
+      ],
       "spaceTrick": "Convertible furniture + mezzanine = 28m² feels like 42m².",
       "zones": {
         "livingSleep": "Living / Sleep",
@@ -23,7 +27,11 @@
       "maintenance": "Low",
       "liquidity": "High",
       "acStrategy": "Central VRF with per-room thermostats",
-      "sustainability": ["Shared building insulation", "Greywater recycling", "Smart metering"],
+      "sustainability": [
+        "Shared building insulation",
+        "Greywater recycling",
+        "Smart metering"
+      ],
       "spaceTrick": "Open-plan + concealed storage walls turn 100m² into perceived 130m².",
       "zones": {
         "livingDining": "Living / Dining",
@@ -39,7 +47,11 @@
       "maintenance": "Medium",
       "liquidity": "Medium",
       "acStrategy": "Two-zone central AC, upper/lower independent",
-      "sustainability": ["Stacked plumbing core", "Cross-ventilation stairwell", "Roof PV ready"],
+      "sustainability": [
+        "Stacked plumbing core",
+        "Cross-ventilation stairwell",
+        "Roof PV ready"
+      ],
       "spaceTrick": "Stairwell as light-well doubles daylight reach across both floors.",
       "zones": {
         "groundSocial": "Ground Social",
@@ -54,7 +66,11 @@
       "maintenance": "High",
       "liquidity": "Medium",
       "acStrategy": "Zoned ducted system + ceiling fans, mashrabiya shading",
-      "sustainability": ["Double-skin walls", "Solar water heating", "Greywater garden irrigation"],
+      "sustainability": [
+        "Double-skin walls",
+        "Solar water heating",
+        "Greywater garden irrigation"
+      ],
       "spaceTrick": "Courtyard plan cools internal rooms passively, reducing AC by ~30%.",
       "zones": {
         "livingMajlis": "Living / Majlis",
@@ -70,7 +86,11 @@
       "maintenance": "Medium",
       "liquidity": "Low",
       "acStrategy": "Passive cooling + minimal split units; thermal mass walls",
-      "sustainability": ["Rammed-earth or stone walls", "Rainwater harvesting", "Solar PV array"],
+      "sustainability": [
+        "Rammed-earth or stone walls",
+        "Rainwater harvesting",
+        "Solar PV array"
+      ],
       "spaceTrick": "Deep verandas extend living space outdoors 6 months a year.",
       "zones": {
         "indoorLiving": "Indoor Living",
@@ -86,7 +106,11 @@
       "maintenance": "Low",
       "liquidity": "High",
       "acStrategy": "AI-driven HVAC reacting to occupancy + weather forecasts",
-      "sustainability": ["Net-zero ready", "Battery storage", "Auto-tinting glazing"],
+      "sustainability": [
+        "Net-zero ready",
+        "Battery storage",
+        "Auto-tinting glazing"
+      ],
       "spaceTrick": "Sensor-driven lighting & motorized partitions adapt rooms by time of day.",
       "zones": {
         "adaptiveLiving": "Adaptive Living",
@@ -153,42 +177,66 @@
         "badge": "Apartment",
         "title": "Smart Apartments",
         "description": "Innovative solutions for small spaces with integrated technology",
-        "features": ["Smart lighting and energy control", "Multi-functional design", "Integrated security systems"],
-        "price": "Starting from 250,000 AED"
+        "features": [
+          "Smart lighting and energy control",
+          "Multi-functional design",
+          "Integrated security systems"
+        ],
+        "price": "Starting from 250,000 EGP"
       },
       "villa": {
         "badge": "Villa",
         "title": "Luxury Villas",
         "description": "Elegant homes with innovative designs and spacious areas",
-        "features": ["Private outdoor spaces", "Integrated entertainment systems", "Sustainable designs"],
-        "price": "Starting from 1,200,000 AED"
+        "features": [
+          "Private outdoor spaces",
+          "Integrated entertainment systems",
+          "Sustainable designs"
+        ],
+        "price": "Starting from 1,200,000 EGP"
       },
       "duplex": {
         "badge": "Duplex",
         "title": "Duplex Designs",
         "description": "Practical family spaces with perfect privacy",
-        "features": ["Multi-floor design", "Shared family spaces", "Perfect privacy"],
-        "price": "Starting from 450,000 AED"
+        "features": [
+          "Multi-floor design",
+          "Shared family spaces",
+          "Perfect privacy"
+        ],
+        "price": "Starting from 450,000 EGP"
       },
       "country_house": {
         "badge": "Country House",
         "title": "Country Houses",
         "description": "Connection with nature with modern living luxury",
-        "features": ["Natural building materials", "Sustainable energy systems", "Nature-harmonious design"],
-        "price": "Starting from 350,000 AED"
+        "features": [
+          "Natural building materials",
+          "Sustainable energy systems",
+          "Nature-harmonious design"
+        ],
+        "price": "Starting from 350,000 EGP"
       },
       "studio": {
         "badge": "Studio",
         "title": "Studios",
         "description": "Compact spaces with smart and innovative designs",
-        "features": ["Multi-functional furniture", "Innovative storage solutions", "Space-expanding designs"],
-        "price": "Starting from 180,000 AED"
+        "features": [
+          "Multi-functional furniture",
+          "Innovative storage solutions",
+          "Space-expanding designs"
+        ],
+        "price": "Starting from 180,000 EGP"
       },
       "custom": {
         "badge": "Custom",
         "title": "Custom Design",
         "description": "Design your own home from scratch according to your vision and needs",
-        "features": ["Unique and innovative design", "Material and finishing selection", "Complete design flexibility"],
+        "features": [
+          "Unique and innovative design",
+          "Material and finishing selection",
+          "Complete design flexibility"
+        ],
         "price": "Custom Pricing"
       }
     }
@@ -241,5 +289,38 @@
     "subtitle": "We'll review your land, family and budget — then return with two structural options and a sustainability brief, free of charge.",
     "bookConsultation": "Book consultation",
     "browseProperties": "Browse properties"
+  },
+  "land": {
+    "badge": "Land",
+    "title": "Lands",
+    "areaLabel": "Land area",
+    "location": "Matrouh Umm El Rakham, Awlad Mara'i Road, near Agiba Beach and Umm El Rakham Beach",
+    "locationShort": "Matrouh — Umm El Rakham, near Agiba Beach",
+    "priceRange": "40,000 - 160,000 EGP",
+    "builder": "Roya Company",
+    "seller": "Mr. Ahmed Hussein",
+    "codeLabel": "Code",
+    "familyFit": "Build to fit",
+    "maintenance": "Low",
+    "liquidity": "Medium",
+    "features": [
+      "Prime strategic location",
+      "Close to beautiful beaches",
+      "100% clear land area",
+      "Immediate handover and construction",
+      "Modern layout and security"
+    ],
+    "projects": {
+      "mont_city": {
+        "name": "Mont City",
+        "arabicName": "مونت سيتي",
+        "design": "Marsa Matrouh Land Complex"
+      },
+      "mount_agiba": {
+        "name": "Mount Agiba Resort",
+        "arabicName": "منتجع مونت عجيبه",
+        "design": "Marsa Matrouh Resorts Complex"
+      }
+    }
   }
 }
