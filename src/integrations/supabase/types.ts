@@ -200,6 +200,7 @@ export type Database = {
           area_sqm: number | null
           bathrooms: number | null
           bedrooms: number | null
+          category: string
           created_at: string
           currency: string
           description: string | null
@@ -207,6 +208,7 @@ export type Database = {
           features: string[]
           id: string
           image_urls: string[]
+          listing_type: string
           location: string | null
           price: number
           status: Database["public"]["Enums"]["property_status"]
@@ -218,6 +220,7 @@ export type Database = {
           area_sqm?: number | null
           bathrooms?: number | null
           bedrooms?: number | null
+          category?: string
           created_at?: string
           currency?: string
           description?: string | null
@@ -225,6 +228,7 @@ export type Database = {
           features?: string[]
           id?: string
           image_urls?: string[]
+          listing_type?: string
           location?: string | null
           price: number
           status?: Database["public"]["Enums"]["property_status"]
@@ -236,6 +240,7 @@ export type Database = {
           area_sqm?: number | null
           bathrooms?: number | null
           bedrooms?: number | null
+          category?: string
           created_at?: string
           currency?: string
           description?: string | null
@@ -243,6 +248,7 @@ export type Database = {
           features?: string[]
           id?: string
           image_urls?: string[]
+          listing_type?: string
           location?: string | null
           price?: number
           status?: Database["public"]["Enums"]["property_status"]

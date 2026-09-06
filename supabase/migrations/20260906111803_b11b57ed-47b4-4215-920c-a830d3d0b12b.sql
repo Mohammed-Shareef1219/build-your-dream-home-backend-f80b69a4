@@ -1,0 +1,2 @@
+ALTER TABLE public.properties ADD COLUMN IF NOT EXISTS listing_type text NOT NULL DEFAULT 'sale' CHECK (listing_type IN ('sale','rent'));
+ALTER TABLE public.properties ADD COLUMN IF NOT EXISTS category text NOT NULL DEFAULT 'residential' CHECK (category IN ('residential','commercial'));
