@@ -28,7 +28,7 @@ import {
   LandPlot,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { PropertyTypesShowcaseGrid } from "@/components/PropertyTypeShowcase";
+import { LAND_PROJECTS, PropertyTypesShowcaseGrid } from "@/components/PropertyTypeShowcase";
 
 export const Route = createFileRoute("/property-types")({
   head: () => ({
