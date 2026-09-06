@@ -9,18 +9,11 @@ import {
   Building2,
   Home as HomeIcon,
   Warehouse,
-  MapPin,
-  Wallet,
-  Hammer,
   Brain,
   Users,
   Clock,
   PiggyBank,
   Smile,
-  UserPlus,
-  LayoutGrid,
-  Settings2,
-  FileCheck2,
   Target,
   Eye,
   Rocket,
@@ -28,6 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { PropertyCard } from "@/components/PropertyCard";
+import { PropertyTypesShowcaseGrid } from "@/components/PropertyTypeShowcase";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import heroImg from "@/assets/hero-villa.jpg";
@@ -51,6 +45,7 @@ export const Route = createFileRoute("/")({
 
 function IndexPage() {
   const { t } = useTranslation("home");
+  const { t: tPT } = useTranslation("propertyTypes");
   const [featured, setFeatured] = useState<Property[]>([]);
   const [favIds, setFavIds] = useState<Set<string>>(new Set());
   const { user } = useAuth();
@@ -205,28 +200,17 @@ function IndexPage() {
         </div>
       </section>
 
-      {/* Real Estate Tips */}
-      <section className="bg-muted/30 py-20">
+      {/* Property Types showcase — shared with /property-types */}
+      <section className="bg-muted/20 border-y py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("tips.heading")}</h2>
-            <p className="text-muted-foreground text-lg">{t("tips.subheading")}</p>
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 text-secondary font-semibold text-sm uppercase tracking-wider">
+              {tPT("showcase.eyebrow")}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-3">{tPT("showcase.title")}</h2>
+            <p className="text-muted-foreground text-lg">{tPT("showcase.subtitle")}</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { key: "location", icon: MapPin },
-              { key: "valuation", icon: Wallet },
-              { key: "legal", icon: Hammer },
-            ].map((tip) => (
-              <div key={tip.key} className="rounded-2xl bg-card p-8 shadow-soft hover:shadow-elegant transition-all">
-                <div className="h-12 w-12 rounded-xl bg-accent/15 text-accent flex items-center justify-center mb-4">
-                  <tip.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{t(`tips.${tip.key}.title`)}</h3>
-                <p className="text-muted-foreground leading-relaxed">{t(`tips.${tip.key}.desc`)}</p>
-              </div>
-            ))}
-          </div>
+          <PropertyTypesShowcaseGrid />
         </div>
       </section>
 
@@ -269,57 +253,6 @@ function IndexPage() {
         )}
       </section>
 
-      {/* Start Searching — steps */}
-      <section className="bg-muted/30 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("steps.heading")}</h2>
-            <p className="text-muted-foreground text-lg">{t("steps.subheading")}</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { n: 1, key: "createAccount", icon: UserPlus },
-              { n: 2, key: "browseListings", icon: LayoutGrid },
-              { n: 3, key: "scheduleTour", icon: Settings2 },
-              { n: 4, key: "closeDeal", icon: FileCheck2 },
-            ].map((s) => (
-              <div key={s.n} className="relative rounded-2xl bg-card p-7 shadow-soft hover:shadow-elegant transition-all">
-                <div className="absolute -top-4 left-7 h-9 w-9 rounded-full bg-brand-gradient text-white font-bold flex items-center justify-center shadow-glow">
-                  {s.n}
-                </div>
-                <s.icon className="h-7 w-7 text-secondary mt-4 mb-3" />
-                <h3 className="font-semibold mb-1.5">{t(`steps.${s.key}.title`)}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{t(`steps.${s.key}.desc`)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Client Consultation */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("consultationSection.heading")}</h2>
-          <p className="text-muted-foreground text-lg">
-            {t("consultationSection.subheading")}
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { key: "personalized", icon: Users },
-            { key: "smartValuation", icon: Brain },
-            { key: "transparency", icon: Shield },
-          ].map((c) => (
-            <div key={c.key} className="rounded-2xl bg-card p-8 shadow-soft hover:shadow-elegant transition-all">
-              <div className="h-12 w-12 rounded-xl bg-brand-gradient flex items-center justify-center mb-4 shadow-glow">
-                <c.icon className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">{t(`consultationSection.${c.key}.title`)}</h3>
-              <p className="text-muted-foreground leading-relaxed">{t(`consultationSection.${c.key}.desc`)}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Why Choose Us */}
       <section className="bg-muted/30 py-20">
