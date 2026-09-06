@@ -30,8 +30,7 @@ import {
   Star,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import montCityImg from "@/assets/land-mont-city.jpg";
-import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
+import { PropertyTypesShowcaseGrid } from "@/components/PropertyTypeShowcase";
 
 export const Route = createFileRoute("/property-types")({
   head: () => ({
