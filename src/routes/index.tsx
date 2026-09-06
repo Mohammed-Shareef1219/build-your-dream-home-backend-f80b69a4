@@ -1,8 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
+  ChevronDown,
   HardHat,
+  MapPin,
+  Search,
+  TrendingUp,
   Sparkles,
   Shield,
   Zap,
@@ -28,6 +32,18 @@ import heroImg from "@/assets/hero-villa.jpg";
 import type { Database } from "@/integrations/supabase/types";
 
 type Property = Database["public"]["Tables"]["properties"]["Row"];
+
+const CITIES = ["fifthSettlement", "sheikhZayed", "northCoast", "giza", "cairo", "newCapital", "sixOctober"] as const;
+const DEVELOPERS = [
+  "Rooya Real Estate Investment",
+  "Ebn Beitak",
+  "Palm Hills Developments",
+  "SODIC",
+  "Emaar Misr",
+  "Tatweer Misr",
+  "Mountain View",
+  "Talaat Moustafa Group",
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
