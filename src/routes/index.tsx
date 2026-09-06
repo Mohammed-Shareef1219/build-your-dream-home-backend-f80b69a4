@@ -205,28 +205,17 @@ function IndexPage() {
         </div>
       </section>
 
-      {/* Real Estate Tips */}
-      <section className="bg-muted/30 py-20">
+      {/* Property Types showcase — shared with /property-types */}
+      <section className="bg-muted/20 border-y py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("tips.heading")}</h2>
-            <p className="text-muted-foreground text-lg">{t("tips.subheading")}</p>
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 text-secondary font-semibold text-sm uppercase tracking-wider">
+              {tPT("showcase.eyebrow")}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-3">{tPT("showcase.title")}</h2>
+            <p className="text-muted-foreground text-lg">{tPT("showcase.subtitle")}</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { key: "location", icon: MapPin },
-              { key: "valuation", icon: Wallet },
-              { key: "legal", icon: Hammer },
-            ].map((tip) => (
-              <div key={tip.key} className="rounded-2xl bg-card p-8 shadow-soft hover:shadow-elegant transition-all">
-                <div className="h-12 w-12 rounded-xl bg-accent/15 text-accent flex items-center justify-center mb-4">
-                  <tip.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{t(`tips.${tip.key}.title`)}</h3>
-                <p className="text-muted-foreground leading-relaxed">{t(`tips.${tip.key}.desc`)}</p>
-              </div>
-            ))}
-          </div>
+          <PropertyTypesShowcaseGrid />
         </div>
       </section>
 
