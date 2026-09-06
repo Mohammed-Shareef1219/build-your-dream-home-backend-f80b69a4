@@ -26,8 +26,6 @@ import {
   CheckCircle2,
   Calculator,
   LandPlot,
-  MapPin,
-  Star,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { PropertyTypesShowcaseGrid } from "@/components/PropertyTypeShowcase";
