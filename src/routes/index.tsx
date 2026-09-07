@@ -64,7 +64,24 @@ function IndexPage() {
   const { t: tPT } = useTranslation("propertyTypes");
   const [featured, setFeatured] = useState<Property[]>([]);
   const [favIds, setFavIds] = useState<Set<string>>(new Set());
+  const [deal, setDeal] = useState<"sale" | "rent">("sale");
+  const [category, setCategory] = useState<"residential" | "commercial">("residential");
+  const [city, setCity] = useState<string>("all");
+  const navigate = useNavigate();
   const { user } = useAuth();
+
+  const runSearch = () =>
+    navigate({
+      to: "/properties",
+      search: {
+        type: "all",
+        q: city === "all" ? "" : t(`hero.search.cities.${city}`),
+        beds: "any",
+        sort: "featured",
+        deal,
+        category,
+      },
+    });
 
   useEffect(() => {
     supabase
@@ -72,7 +89,7 @@ function IndexPage() {
       .select("*")
       .order("featured", { ascending: false })
       .order("created_at", { ascending: false })
-      .limit(6)
+      .limit(10)
       .then(({ data }) => setFeatured(data ?? []));
   }, []);
 
@@ -92,30 +109,136 @@ function IndexPage() {
         <div className="absolute inset-0 opacity-30">
           <img src={heroImg} alt="" className="h-full w-full object-cover" width={1920} height={1280} />
         </div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36">
-          <div className="max-w-3xl">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+          <div className="max-w-3xl mx-auto text-center">
             <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
               <Sparkles className="h-4 w-4 text-accent" /> {t("hero.badge")}
             </span>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-balance leading-tight">
               {t("hero.titleLine1")}{" "}
               <span className="font-display text-accent">{t("hero.titleLine2")}</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl">
+            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto">
               {t("hero.subtitle")}
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Button variant="hero" size="xl" asChild>
-                <Link to="/properties">
-                  {t("hero.browseProperties")} <ArrowRight className="ml-1" />
-                </Link>
-              </Button>
-              <Button variant="outlineHero" size="xl" asChild>
-                <Link to="/consultation">
-                  <HardHat /> {t("hero.freeConsultation")}
-                </Link>
+          </div>
+
+          {/* Advanced search bar */}
+          <div className="max-w-3xl mx-auto rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-4 md:p-5 shadow-elegant">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <div className="inline-flex rounded-full bg-black/25 p-1" role="group" aria-label={t("hero.search.dealLabel")}>
+                {(["sale", "rent"] as const).map((d) => (
+                  <button
+                    key={d}
+                    type="button"
+                    onClick={() => setDeal(d)}
+                    className={`rounded-full px-5 py-1.5 text-sm font-medium transition-all ${
+                      deal === d ? "bg-accent text-accent-foreground shadow" : "text-white/70 hover:text-white"
+                    }`}
+                  >
+                    {t(`hero.search.${d}`)}
+                  </button>
+                ))}
+              </div>
+              <div className="inline-flex rounded-full bg-black/25 p-1" role="group" aria-label={t("hero.search.categoryLabel")}>
+                {(["residential", "commercial"] as const).map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setCategory(c)}
+                    className={`rounded-full px-5 py-1.5 text-sm font-medium transition-all ${
+                      category === c ? "bg-accent text-accent-foreground shadow" : "text-white/70 hover:text-white"
+                    }`}
+                  >
+                    {t(`hero.search.${c}`)}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1">
+                <MapPin className="absolute start-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70 pointer-events-none" />
+                <select
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  aria-label={t("hero.search.cityLabel")}
+                  className="w-full h-12 appearance-none rounded-xl bg-black/25 border border-white/20 ps-10 pe-10 text-sm text-white focus:outline-none focus:border-accent [&>option]:text-foreground"
+                >
+                  <option value="all">{t("hero.search.allCities")}</option>
+                  {CITIES.map((c) => (
+                    <option key={c} value={c}>{t(`hero.search.cities.${c}`)}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute end-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70 pointer-events-none" />
+              </div>
+              <Button variant="accent" size="lg" onClick={runSearch} className="h-12 px-8">
+                <Search /> {t("hero.search.button")}
               </Button>
             </div>
+            <div className="flex flex-wrap justify-center gap-3 mt-5">
+              <Button variant="outlineHero" size="sm" asChild>
+                <Link to="/properties">{t("hero.browseProperties")} <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              </Button>
+              <Button variant="outlineHero" size="sm" asChild>
+                <Link to="/consultation"><HardHat className="h-4 w-4" /> {t("hero.freeConsultation")}</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trending properties + partner developers */}
+      <section className="border-b bg-background">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl md:text-2xl font-bold inline-flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-secondary" /> {t("trending.heading")}
+            </h2>
+            <Link to="/properties" className="text-sm text-secondary font-medium inline-flex items-center gap-1 hover:underline">
+              {t("trending.viewAll")} <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          {featured.length > 0 ? (
+            <div className="flex gap-4 overflow-x-auto pb-3 snap-x snap-mandatory">
+              {featured.map((p) => (
+                <Link
+                  key={p.id}
+                  to="/properties/$id"
+                  params={{ id: p.id }}
+                  className="snap-start shrink-0 w-64 rounded-2xl overflow-hidden bg-card shadow-soft hover:shadow-elegant hover:-translate-y-0.5 transition-all group"
+                >
+                  <div className="h-36 overflow-hidden">
+                    <img
+                      src={p.image_urls?.[0] || heroImg}
+                      alt={p.title}
+                      className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <p className="font-semibold truncate">{p.title}</p>
+                    <p className="text-xs text-muted-foreground truncate mt-0.5">{p.location}</p>
+                    <p className="text-secondary font-bold mt-1.5">
+                      {Number(p.price).toLocaleString()} {p.currency}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-sm">{t("featured.empty")}</p>
+          )}
+        </div>
+        <div className="border-t bg-muted/30 py-5 overflow-hidden">
+          <p className="text-center text-xs uppercase tracking-widest text-muted-foreground mb-4">
+            {t("partners.heading")}
+          </p>
+          <div className="flex w-max animate-marquee gap-14 px-6">
+            {[...DEVELOPERS, ...DEVELOPERS].map((d, i) => (
+              <span key={i} className="text-lg md:text-xl font-display font-semibold text-muted-foreground/70 whitespace-nowrap">
+                {d}
+              </span>
+            ))}
           </div>
         </div>
       </section>

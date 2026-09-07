@@ -5,7 +5,34 @@
     "titleLine2": "اعرف القيمة السوقية في دقيقة واحدة.",
     "subtitle": "من 80 إلى 300 متر مربع — فيلا أو شقة أو مساحة تجارية. امتلكها بخطوات بسيطة.",
     "browseProperties": "تصفح العقارات",
-    "freeConsultation": "استشارة مجانية"
+    "freeConsultation": "استشارة مجانية",
+    "search": {
+      "dealLabel": "بيع أو إيجار",
+      "categoryLabel": "فئة العقار",
+      "cityLabel": "المدينة أو المنطقة",
+      "sale": "للبيع",
+      "rent": "للإيجار",
+      "residential": "سكني",
+      "commercial": "تجاري",
+      "allCities": "كل المدن والمناطق",
+      "button": "ابحث",
+      "cities": {
+        "fifthSettlement": "التجمع الخامس",
+        "sheikhZayed": "الشيخ زايد",
+        "northCoast": "الساحل الشمالي",
+        "giza": "الجيزة",
+        "cairo": "القاهرة",
+        "newCapital": "العاصمة الإدارية الجديدة",
+        "sixOctober": "6 أكتوبر"
+      }
+    }
+  },
+  "trending": {
+    "heading": "عقارات رائجة",
+    "viewAll": "عرض الكل"
+  },
+  "partners": {
+    "heading": "موثوقون من كبار المطورين"
   },
   "valueProps": {
     "curated": {

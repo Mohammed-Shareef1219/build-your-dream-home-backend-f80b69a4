@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import type { Database } from "@/integrations/supabase/types";
 
 type Property = Database["public"]["Tables"]["properties"]["Row"];
-type SearchState = { type?: string; q?: string; beds?: string; sort?: string };
+type SearchState = { type?: string; q?: string; beds?: string; sort?: string; deal?: string; category?: string };
 
 export const Route = createFileRoute("/properties/")({
   validateSearch: (s: Record<string, unknown>): SearchState => ({
@@ -40,6 +40,8 @@ export const Route = createFileRoute("/properties/")({
     q: (s.q as string) || "",
     beds: (s.beds as string) || "any",
     sort: (s.sort as string) || "featured",
+    deal: (s.deal as string) || "all",
+    category: (s.category as string) || "all",
   }),
   head: () => ({
     meta: [
@@ -69,7 +71,7 @@ const MOOD_ICON_DEFS = [
 
 function ListingsPage() {
   const { t } = useTranslation("listings");
-  const { type, q, beds, sort } = Route.useSearch();
+  const { type, q, beds, sort, deal, category } = Route.useSearch();
   const navigate = Route.useNavigate();
   const [items, setItems] = useState<Property[]>([]);
   const [favIds, setFavIds] = useState<Set<string>>(new Set());
@@ -108,6 +110,8 @@ function ListingsPage() {
     const minBeds = beds && beds !== "any" ? Number(beds) : 0;
     const list = items.filter((p) => {
       if (type && type !== "all" && p.type !== type) return false;
+      if (deal && deal !== "all" && (p as Property & { listing_type?: string }).listing_type !== deal) return false;
+      if (category && category !== "all" && (p as Property & { category?: string }).category !== category) return false;
       if (minBeds && (p.bedrooms ?? 0) < minBeds) return false;
       if (qLower && !`${p.title} ${p.location ?? ""}`.toLowerCase().includes(qLower)) return false;
       return true;
@@ -118,7 +122,7 @@ function ListingsPage() {
     else if (sort === "newest")
       sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     return sorted;
-  }, [items, type, q, beds, sort]);
+  }, [items, type, q, beds, sort, deal, category]);
 
   const toggleFav = async (e: React.MouseEvent, propertyId: string) => {
     e.preventDefault();

@@ -28,6 +28,8 @@ const emptyForm = {
   title: "",
   description: "",
   type: "villa" as (typeof TYPES)[number],
+  listing_type: "sale",
+  category: "residential",
   price: "",
   currency: "AED",
   location: "",
@@ -69,6 +71,8 @@ function AdminPage() {
     setEditing(p);
     setForm({
       title: p.title, description: p.description ?? "", type: p.type,
+      listing_type: (p as Property & { listing_type?: string }).listing_type ?? "sale",
+      category: (p as Property & { category?: string }).category ?? "residential",
       price: String(p.price), currency: p.currency, location: p.location ?? "",
       area_sqm: p.area_sqm != null ? String(p.area_sqm) : "",
       bedrooms: p.bedrooms != null ? String(p.bedrooms) : "",
@@ -100,6 +104,8 @@ function AdminPage() {
       title: form.title.trim(),
       description: form.description.trim() || null,
       type: form.type,
+      listing_type: form.listing_type,
+      category: form.category,
       price: Number(form.price),
       currency: form.currency,
       location: form.location.trim() || null,
@@ -178,6 +184,26 @@ function AdminPage() {
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     {TYPES.map((typ) => <SelectItem key={typ} value={typ} className="capitalize">{t(`admin.form.types.${typ}`)}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>{t("admin.form.listingTypeLabel")}</Label>
+                <Select value={form.listing_type} onValueChange={(v) => setForm({ ...form, listing_type: v })}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sale">{t("admin.form.listingTypes.sale")}</SelectItem>
+                    <SelectItem value="rent">{t("admin.form.listingTypes.rent")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>{t("admin.form.categoryLabel")}</Label>
+                <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="residential">{t("admin.form.categories.residential")}</SelectItem>
+                    <SelectItem value="commercial">{t("admin.form.categories.commercial")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
