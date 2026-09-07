@@ -5,7 +5,34 @@
     "titleLine2": "Know the market value in a minute.",
     "subtitle": "From 80m² to 300m² — villa, apartment, or commercial space. Make it yours in a few simple steps.",
     "browseProperties": "Browse Properties",
-    "freeConsultation": "Free Consultation"
+    "freeConsultation": "Free Consultation",
+    "search": {
+      "dealLabel": "Sale or rent",
+      "categoryLabel": "Property category",
+      "cityLabel": "City or area",
+      "sale": "For Sale",
+      "rent": "For Rent",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "allCities": "All cities & areas",
+      "button": "Search",
+      "cities": {
+        "fifthSettlement": "Fifth Settlement",
+        "sheikhZayed": "Sheikh Zayed",
+        "northCoast": "North Coast",
+        "giza": "Giza",
+        "cairo": "Cairo",
+        "newCapital": "New Administrative Capital",
+        "sixOctober": "6th of October"
+      }
+    }
+  },
+  "trending": {
+    "heading": "Trending Properties",
+    "viewAll": "View all"
+  },
+  "partners": {
+    "heading": "Trusted by leading developers"
   },
   "valueProps": {
     "curated": {
