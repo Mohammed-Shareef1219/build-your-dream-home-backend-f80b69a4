@@ -187,6 +187,26 @@ function AdminPage() {
                   </SelectContent>
                 </Select>
               </div>
+              <div>
+                <Label>{t("admin.form.listingTypeLabel")}</Label>
+                <Select value={form.listing_type} onValueChange={(v) => setForm({ ...form, listing_type: v })}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sale">{t("admin.form.listingTypes.sale")}</SelectItem>
+                    <SelectItem value="rent">{t("admin.form.listingTypes.rent")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>{t("admin.form.categoryLabel")}</Label>
+                <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="residential">{t("admin.form.categories.residential")}</SelectItem>
+                    <SelectItem value="commercial">{t("admin.form.categories.commercial")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               <div><Label>{t("admin.form.priceLabel")}</Label><Input type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required /></div>
               <div><Label>{t("admin.form.currencyLabel")}</Label><Input value={form.currency} onChange={(e) => setForm({ ...form, currency: e.target.value })} /></div>
               <div><Label>{t("admin.form.locationLabel")}</Label><Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} /></div>
