@@ -64,7 +64,24 @@ function IndexPage() {
   const { t: tPT } = useTranslation("propertyTypes");
   const [featured, setFeatured] = useState<Property[]>([]);
   const [favIds, setFavIds] = useState<Set<string>>(new Set());
+  const [deal, setDeal] = useState<"sale" | "rent">("sale");
+  const [category, setCategory] = useState<"residential" | "commercial">("residential");
+  const [city, setCity] = useState<string>("all");
+  const navigate = useNavigate();
   const { user } = useAuth();
+
+  const runSearch = () =>
+    navigate({
+      to: "/properties",
+      search: {
+        type: "all",
+        q: city === "all" ? "" : t(`hero.search.cities.${city}`),
+        beds: "any",
+        sort: "featured",
+        deal,
+        category,
+      },
+    });
 
   useEffect(() => {
     supabase
@@ -72,7 +89,7 @@ function IndexPage() {
       .select("*")
       .order("featured", { ascending: false })
       .order("created_at", { ascending: false })
-      .limit(6)
+      .limit(10)
       .then(({ data }) => setFeatured(data ?? []));
   }, []);
 
