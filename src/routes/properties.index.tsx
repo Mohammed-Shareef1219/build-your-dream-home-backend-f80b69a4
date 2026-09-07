@@ -122,7 +122,7 @@ function ListingsPage() {
     else if (sort === "newest")
       sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     return sorted;
-  }, [items, type, q, beds, sort]);
+  }, [items, type, q, beds, sort, deal, category]);
 
   const toggleFav = async (e: React.MouseEvent, propertyId: string) => {
     e.preventDefault();
