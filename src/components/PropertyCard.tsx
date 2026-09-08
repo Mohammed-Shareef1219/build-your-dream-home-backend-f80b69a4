@@ -1,5 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, MapPin, BedDouble, Bath, Maximize } from "lucide-react";
+import { Heart, MapPin, Phone, MessageCircle } from "lucide-react";
+
+const CONTACT_PHONE = "01020010906";
+const CONTACT_WHATSAPP = "201020010906";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -47,6 +50,22 @@ export function PropertyCard({
     }
   };
 
+  const openTel = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = `tel:${CONTACT_PHONE}`;
+  };
+
+  const openWhatsapp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(
+      `https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent(property.title)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
+
   const img = property.image_urls?.[0] ?? "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop";
 
   return (
@@ -91,33 +110,41 @@ export function PropertyCard({
             <MapPin className="h-3.5 w-3.5" /> {property.location}
           </p>
         )}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-          {property.bedrooms != null && (
-            <span className="flex items-center gap-1">
-              <BedDouble className="h-4 w-4" /> {property.bedrooms}
-            </span>
-          )}
-          {property.bathrooms != null && (
-            <span className="flex items-center gap-1">
-              <Bath className="h-4 w-4" /> {property.bathrooms}
-            </span>
-          )}
-          {property.area_sqm != null && (
-            <span className="flex items-center gap-1">
-              <Maximize className="h-4 w-4" /> {property.area_sqm}m²
-            </span>
-          )}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground mb-4" dir="ltr">
+          {property.bedrooms != null && <span>🛌 {property.bedrooms}</span>}
+          {property.bathrooms != null && <span className="text-border">|</span>}
+          {property.bathrooms != null && <span>🛁 {property.bathrooms}</span>}
+          {property.area_sqm != null && <span className="text-border">|</span>}
+          {property.area_sqm != null && <span>📐 {property.area_sqm} m²</span>}
         </div>
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between gap-3">
           <div>
             <div className="text-xs text-muted-foreground">{t("propertyCard.startingFrom")}</div>
-            <div className="text-xl font-bold text-primary">
+            <div className="text-xl font-extrabold text-primary">
               {new Intl.NumberFormat("en-US").format(Number(property.price))} {property.currency}
             </div>
           </div>
-          <Button variant="secondary" size="sm" className="pointer-events-none">
-            {t("propertyCard.view")}
-          </Button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              aria-label={t("propertyCard.call")}
+              onClick={openTel}
+              className="h-9 w-9 rounded-full bg-muted flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-colors"
+            >
+              <Phone className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              aria-label={t("propertyCard.whatsapp")}
+              onClick={openWhatsapp}
+              className="h-9 w-9 rounded-full bg-muted flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-colors"
+            >
+              <MessageCircle className="h-4 w-4" />
+            </button>
+            <Button variant="secondary" size="sm" className="pointer-events-none">
+              {t("propertyCard.view")}
+            </Button>
+          </div>
         </div>
       </div>
     </Link>
