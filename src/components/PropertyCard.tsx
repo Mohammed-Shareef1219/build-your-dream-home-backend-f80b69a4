@@ -50,6 +50,22 @@ export function PropertyCard({
     }
   };
 
+  const openTel = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = `tel:${CONTACT_PHONE}`;
+  };
+
+  const openWhatsapp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(
+      `https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent(property.title)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
+
   const img = property.image_urls?.[0] ?? "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop";
 
   return (
