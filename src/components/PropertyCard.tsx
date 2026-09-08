@@ -1,5 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, MapPin, BedDouble, Bath, Maximize } from "lucide-react";
+import { Heart, MapPin, Phone, MessageCircle } from "lucide-react";
+
+const CONTACT_PHONE = "01020010906";
+const CONTACT_WHATSAPP = "201020010906";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
