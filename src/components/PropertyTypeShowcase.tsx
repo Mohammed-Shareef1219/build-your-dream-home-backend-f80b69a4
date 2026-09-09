@@ -12,6 +12,7 @@ import mountAgibaImg2 from "@/assets/land-mount-agiba-2.jpg";
 export interface ShowcaseCard {
   slug: string;
   image: string;
+  image2: string;
   rating: number;
   properties: number;
   builder: string;
@@ -24,6 +25,7 @@ export const SHOWCASE: ShowcaseCard[] = [
   {
     slug: "apartment",
     image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&auto=format&fit=crop",
     rating: 4.7,
     properties: 38,
     builder: "Aurora Developments",
@@ -33,6 +35,7 @@ export const SHOWCASE: ShowcaseCard[] = [
   {
     slug: "villa",
     image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&auto=format&fit=crop",
     rating: 4.9,
     properties: 21,
     builder: "Palm Crown Builders",
@@ -42,6 +45,7 @@ export const SHOWCASE: ShowcaseCard[] = [
   {
     slug: "duplex",
     image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&auto=format&fit=crop",
     rating: 4.6,
     properties: 27,
     builder: "Skyline Residences",
@@ -51,6 +55,7 @@ export const SHOWCASE: ShowcaseCard[] = [
   {
     slug: "country_house",
     image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900&auto=format&fit=crop",
     rating: 4.8,
     properties: 14,
     builder: "EarthForm Studio",
@@ -60,6 +65,7 @@ export const SHOWCASE: ShowcaseCard[] = [
   {
     slug: "studio",
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&auto=format&fit=crop",
     rating: 4.5,
     properties: 52,
     builder: "Nest Micro Homes",
@@ -69,6 +75,7 @@ export const SHOWCASE: ShowcaseCard[] = [
   {
     slug: "custom",
     image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&auto=format&fit=crop",
     rating: 5.0,
     properties: 0,
     builder: "BuildYourHome Atelier",
@@ -82,13 +89,14 @@ export interface LandProject {
   key: "mont_city" | "mount_agiba";
   code: string;
   image: string;
+  image2: string;
   rating: number;
   area: string;
 }
 
 export const LAND_PROJECTS: LandProject[] = [
-  { key: "mont_city", code: "IB-2026-A1", image: montCityImg, rating: 4.9, area: "200 m²" },
-  { key: "mount_agiba", code: "IB-2026-A2", image: mountAgibaImg, rating: 4.9, area: "200 m²" },
+  { key: "mont_city", code: "IB-2026-A1", image: montCityImg, image2: montCityImg2, rating: 4.9, area: "200 m²" },
+  { key: "mount_agiba", code: "IB-2026-A2", image: mountAgibaImg, image2: mountAgibaImg2, rating: 4.9, area: "200 m²" },
 ];
 
 export const LAND_CONTACTS = ["01020010906", "01020010905", "01155405831"];
@@ -107,13 +115,17 @@ export function ShowcaseCardView({ card }: { card: ShowcaseCard }) {
         isCustom ? "bg-secondary text-secondary-foreground" : "bg-card"
       }`}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-        <img
-          src={card.image}
-          alt={title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="relative grid grid-cols-2 gap-0.5 overflow-hidden bg-muted">
+        {[card.image, card.image2].map((src) => (
+          <img
+            key={src}
+            src={src}
+            alt={description}
+            title={description}
+            loading="lazy"
+            className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ))}
         <span className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-soft">
           {badge}
         </span>
@@ -197,15 +209,19 @@ export function LandShowcaseCard({ project }: { project: LandProject }) {
   const features = t("land.features", { returnObjects: true }) as string[];
   return (
     <article className="group rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 flex flex-col bg-card">
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-        <img
-          src={project.image}
-          alt={name}
-          loading="lazy"
-          width={1200}
-          height={900}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="relative grid grid-cols-2 gap-0.5 overflow-hidden bg-muted">
+        {[project.image, project.image2].map((src) => (
+          <img
+            key={src}
+            src={src}
+            alt={design}
+            title={design}
+            loading="lazy"
+            width={1200}
+            height={900}
+            className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ))}
         <span className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-soft">
           {t("land.badge")}
         </span>
