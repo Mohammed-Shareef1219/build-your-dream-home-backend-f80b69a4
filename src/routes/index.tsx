@@ -21,19 +21,36 @@ import {
   Target,
   Eye,
   Rocket,
+  CheckCircle2,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyTypesShowcaseGrid } from "@/components/PropertyTypeShowcase";
+import { PartnerDevelopers } from "@/components/PartnerDevelopers";
+import { PricingPackages } from "@/components/PricingPackages";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import heroImg from "@/assets/hero-villa.jpg";
+import heroImg from "@/assets/hero-home.jpg";
 import type { Database } from "@/integrations/supabase/types";
 
 type Property = Database["public"]["Tables"]["properties"]["Row"];
 
-const CITIES = ["fifthSettlement", "sheikhZayed", "northCoast", "giza", "cairo", "newCapital", "sixOctober"] as const;
+const CITIES = [
+  "fifthSettlement",
+  "sheikhZayed",
+  "sixOctober",
+  "giza",
+  "nasrCity",
+  "heliopolis",
+  "oldCairo",
+  "mohandessin",
+  "marsaMatrouh",
+  "northCoast",
+  "cairo",
+  "newCapital",
+] as const;
+const POPULAR = ["villa", "apartment", "duplex", "studio", "country_house", "smart_home"] as const;
 const DEVELOPERS = [
   "Rooya Real Estate Investment",
   "Ebn Beitak",
@@ -67,6 +84,7 @@ function IndexPage() {
   const [deal, setDeal] = useState<"sale" | "rent">("sale");
   const [category, setCategory] = useState<"residential" | "commercial">("residential");
   const [city, setCity] = useState<string>("all");
+  const [subTab, setSubTab] = useState<"popular" | "developers">("popular");
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -106,8 +124,8 @@ function IndexPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-hero-gradient text-white">
-        <div className="absolute inset-0 opacity-30">
-          <img src={heroImg} alt="" className="h-full w-full object-cover" width={1920} height={1280} />
+        <div className="absolute inset-0 opacity-40">
+          <img src={heroImg} alt="" className="h-full w-full object-cover" width={1920} height={1080} />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="max-w-3xl mx-auto text-center">
@@ -174,6 +192,45 @@ function IndexPage() {
               <Button variant="accent" size="lg" onClick={runSearch} className="h-12 px-8">
                 <Search /> {t("hero.search.button")}
               </Button>
+            </div>
+            {/* Subcategories inside the search */}
+            <div className="mt-5 border-t border-white/15 pt-4">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                {(["popular", "developers"] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setSubTab(tab)}
+                    className={`rounded-full px-4 py-1 text-xs font-semibold transition-all ${
+                      subTab === tab ? "bg-white/20 text-white" : "text-white/60 hover:text-white"
+                    }`}
+                  >
+                    {t(`hero.search.sub.${tab}`)}
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-2 overflow-x-auto pb-1 snap-x">
+                {subTab === "popular"
+                  ? POPULAR.map((typeKey) => (
+                      <Link
+                        key={typeKey}
+                        to="/properties"
+                        search={{ type: typeKey, q: "", beds: "any", sort: "featured", deal, category }}
+                        className="snap-start shrink-0 rounded-full border border-white/25 bg-white/5 px-4 py-1.5 text-xs text-white/85 hover:bg-white/15 transition-colors whitespace-nowrap"
+                      >
+                        {t(`hero.search.types.${typeKey}`)}
+                      </Link>
+                    ))
+                  : DEVELOPERS.map((d) => (
+                      <Link
+                        key={d}
+                        to="/property-types"
+                        className="snap-start shrink-0 rounded-full border border-white/25 bg-white/5 px-4 py-1.5 text-xs text-white/85 hover:bg-white/15 transition-colors whitespace-nowrap"
+                      >
+                        {d}
+                      </Link>
+                    ))}
+              </div>
             </div>
             <div className="flex flex-wrap justify-center gap-3 mt-5">
               <Button variant="outlineHero" size="sm" asChild>
@@ -242,6 +299,8 @@ function IndexPage() {
           </div>
         </div>
       </section>
+
+      <PartnerDevelopers />
 
       {/* Value props */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
@@ -349,9 +408,19 @@ function IndexPage() {
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-3">{tPT("showcase.title")}</h2>
             <p className="text-muted-foreground text-lg">{tPT("showcase.subtitle")}</p>
           </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {(["maps", "trend", "budget", "upload", "trial", "filtering", "portfolio"] as const).map((k) => (
+              <div key={k} className="rounded-2xl bg-card p-5 shadow-soft flex gap-3">
+                <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
+                <p className="text-sm text-muted-foreground leading-relaxed">{t(`tools.${k}`)}</p>
+              </div>
+            ))}
+          </div>
           <PropertyTypesShowcaseGrid />
         </div>
       </section>
+
+      <PricingPackages />
 
       {/* Featured properties */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
