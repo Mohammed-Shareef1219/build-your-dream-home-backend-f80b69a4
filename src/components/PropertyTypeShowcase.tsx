@@ -3,7 +3,9 @@ import { ArrowRight, CheckCircle2, MapPin, Ruler, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import montCityImg from "@/assets/land-mont-city.jpg";
+import montCityImg2 from "@/assets/land-mont-city-2.jpg";
 import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
+import mountAgibaImg2 from "@/assets/land-mount-agiba-2.jpg";
 
 /* ---------------- Shared showcase data (used by Home + Property Types) ---------------- */
 
