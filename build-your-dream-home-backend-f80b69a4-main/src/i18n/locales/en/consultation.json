@@ -1,0 +1,84 @@
+{
+  "hero": {
+    "title": "Free Consultation for Your Dream Home",
+    "subtitle": "Share your requirements and our team will reach out to transform your vision into a tailored proposal.",
+    "cta": "Start Consultation Now",
+    "imageAlt": "Your Dream Home"
+  },
+  "form": {
+    "heading": "Tell Us About Your Project",
+    "loadingAccount": "Loading your account…",
+    "signInTitle": "Sign in to request a consultation",
+    "signInText": "We link every request to your account so you can track it in your dashboard.",
+    "signInCta": "Sign in / Create account",
+    "name": "Your Name *",
+    "namePlaceholder": "Full name",
+    "email": "Email *",
+    "emailPlaceholder": "you@example.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+20 ...",
+    "company": "Company (optional)",
+    "companyPlaceholder": "Company name",
+    "service": "Service *",
+    "propertyType": "Property Type",
+    "budget": "Budget",
+    "timeline": "Timeline",
+    "description": "Project Description *",
+    "descriptionPlaceholder": "Describe your project, land, preferences, priorities…",
+    "notes": "Additional Notes",
+    "notesPlaceholder": "Anything else we should know?",
+    "submit": "Submit Consultation Request",
+    "submitting": "Submitting..."
+  },
+  "options": {
+    "service": {
+      "placeholder": "Select a service",
+      "architectural-design": "Architectural Design",
+      "interior-design": "Interior Design",
+      "property-purchase": "Property Purchase Advisory",
+      "investment-analysis": "Investment Analysis",
+      "construction": "Construction Management",
+      "other": "Other"
+    },
+    "propertyType": {
+      "placeholder": "Select property type",
+      "villa": "Villa",
+      "apartment": "Apartment",
+      "duplex": "Duplex",
+      "single-floor": "Single Floor House",
+      "two-floor": "Two Floor House"
+    },
+    "budget": {
+      "placeholder": "Select budget",
+      "<500k": "Under 500k EGP",
+      "500k-1m": "500k – 1M EGP",
+      "1m-3m": "1M – 3M EGP",
+      "3m-10m": "3M – 10M EGP",
+      "10m+": "Over 10M EGP"
+    },
+    "timeline": {
+      "placeholder": "Select timeline",
+      "asap": "As soon as possible",
+      "1-3-months": "1 – 3 months",
+      "3-6-months": "3 – 6 months",
+      "6-12-months": "6 – 12 months",
+      "flexible": "Flexible"
+    }
+  },
+  "toast": {
+    "signIn": "Please sign in to submit a consultation.",
+    "required": "Please fill in your name, email, service, and project description.",
+    "notSaved": "Submission was not saved. Please try again.",
+    "success": "Consultation submitted! We'll reach out shortly.",
+    "genericError": "Something went wrong"
+  },
+  "contact": {
+    "eyebrow": "Contact Us",
+    "title": "We're here to help",
+    "subtitle": "Our team combines artificial intelligence with real human support to guide you.",
+    "bookTitle": "Book Free Consultation",
+    "bookText": "Get free expert advice within 24 hours.",
+    "bookCta": "Get Started",
+    "directTitle": "Reach us directly"
+  }
+}

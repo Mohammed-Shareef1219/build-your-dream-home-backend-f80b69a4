@@ -1,0 +1,161 @@
+{
+  "dashboard": {
+    "signOut": "تسجيل الخروج",
+    "signedOutToast": "تم تسجيل الخروج",
+    "guest": "زائر",
+    "fullName": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "accountType": "نوع الحساب",
+    "customer": "عميل",
+    "joined": "تاريخ الانضمام",
+    "location": "الموقع",
+    "bio": "نبذة",
+    "loadingValue": "…",
+    "notAvailable": "—"
+  },
+  "profile": {
+    "loading": "جارٍ التحميل…",
+    "title": "ملفي الشخصي",
+    "subtitle": "أدر حسابك وجولاتك والعقارات المحفوظة وتفضيلاتك.",
+    "settings": {
+      "heading": "إعدادات الملف الشخصي",
+      "description": "المعلومات المستخدمة للتواصل معك بشأن الجولات والتنبيهات والاستشارات.",
+      "changePhoto": "تغيير الصورة",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "اسمك الكامل",
+      "email": "البريد الإلكتروني",
+      "emailLocked": "(مقفل)",
+      "phone": "رقم الهاتف",
+      "phoneRequired": "مطلوب",
+      "phonePlaceholder": "+20 111 639 205",
+      "propertyType": "نوع العقار المفضل",
+      "propertyTypeAny": "أي نوع",
+      "propertyTypeVilla": "فيلا",
+      "propertyTypeApartment": "شقة",
+      "propertyTypeDuplex": "دوبلكس",
+      "propertyTypeCommercial": "تجاري",
+      "budgetMin": "الحد الأدنى للميزانية",
+      "budgetMax": "الحد الأقصى للميزانية",
+      "saveChanges": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ..."
+    },
+    "toasts": {
+      "maxSize": "الحد الأقصى 4 ميجابايت",
+      "photoUpdated": "تم تحديث الصورة",
+      "profileSaved": "تم حفظ الملف الشخصي"
+    },
+    "validation": {
+      "minChars": "حرفان على الأقل",
+      "phoneRequired": "رقم الهاتف مطلوب"
+    },
+    "consultationTracker": {
+      "heading": "متتبع الاستشارة السريعة",
+      "description": "استشارة خبير مضمونة خلال 24 ساعة.",
+      "expertAssigned": "تم تعيين خبير",
+      "processing": "قيد المعالجة",
+      "pending": "قيد الانتظار",
+      "empty": "لا توجد طلبات بعد.",
+      "bookCta": "احجز استشارة مجانية ←",
+      "generalConsultation": "استشارة عامة",
+      "left": "متبقٍ",
+      "due": "مستحق"
+    },
+    "aiMatching": {
+      "heading": "قائمة المطابقة الذكية",
+      "description": "تقييم ذكي بناءً على أسلوبك وميزانيتك.",
+      "empty": "حدد تفضيلاتك أعلاه لعرض العقارات المطابقة.",
+      "matchBadge": "تطابق 100% مع أسلوبك وميزانيتك"
+    },
+    "tours": {
+      "heading": "الجولات المجدولة",
+      "description": "زيارات العقارات الافتراضية والحضورية القادمة.",
+      "empty": "لا توجد جولات مجدولة.",
+      "browseCta": "تصفح العقارات ←",
+      "virtual": "افتراضية 360°",
+      "physical": "حضورية"
+    },
+    "savedListings": {
+      "heading": "العقارات المحفوظة",
+      "description": "العقارات الموثقة المفضلة لديك.",
+      "viewAll": "عرض الكل",
+      "empty": "لا توجد عقارات محفوظة بعد."
+    }
+  },
+  "favorites": {
+    "loading": "جارٍ التحميل…",
+    "signInHeading": "سجّل الدخول لعرض المفضلة",
+    "signIn": "تسجيل الدخول",
+    "title": "المفضلة لديك",
+    "savedCountSingular": "عقار محفوظ",
+    "savedCountPlural": "عقارات محفوظة",
+    "emptyHeading": "لا توجد مفضلات بعد. ابدأ التصفح!",
+    "browseListings": "تصفح العقارات"
+  },
+  "admin": {
+    "loading": "جارٍ التحميل…",
+    "signInRequired": "يلزم تسجيل الدخول",
+    "signIn": "تسجيل الدخول",
+    "accessRequired": "صلاحية المسؤول مطلوبة",
+    "yourUserId": "معرّف المستخدم الخاص بك:",
+    "askDeveloper": "اطلب من المطوّر منحك صلاحية المسؤول.",
+    "heading": "لوحة تحكم المسؤول",
+    "tabs": {
+      "properties": "العقارات",
+      "inquiries": "الاستفسارات",
+      "consultations": "الاستشارات"
+    },
+    "form": {
+      "editProperty": "تعديل العقار",
+      "addProperty": "إضافة عقار جديد",
+      "cancel": "إلغاء",
+      "titleLabel": "العنوان *",
+      "typeLabel": "النوع *",
+      "priceLabel": "السعر *",
+      "currencyLabel": "العملة",
+      "locationLabel": "الموقع",
+      "areaLabel": "المساحة (م²)",
+      "bedroomsLabel": "غرف النوم",
+      "bathroomsLabel": "الحمامات",
+      "descriptionLabel": "الوصف",
+      "featuresLabel": "المميزات (مفصولة بفواصل)",
+      "featuresPlaceholder": "مسبح، إضاءة ذكية، حديقة...",
+      "featured": "عقار مميز",
+      "imagesLabel": "الصور",
+      "uploading": "جارٍ الرفع...",
+      "upload": "رفع",
+      "saving": "جارٍ الحفظ...",
+      "updateProperty": "تحديث العقار",
+      "createProperty": "إنشاء عقار",
+      "types": {
+        "villa": "فيلا",
+        "apartment": "شقة",
+        "duplex": "دوبلكس",
+        "country_house": "منزل ريفي",
+        "studio": "استوديو",
+        "smart_home": "منزل ذكي"
+      }
+    },
+    "toasts": {
+      "titlePriceRequired": "العنوان والسعر مطلوبان",
+      "propertyUpdated": "تم تحديث العقار",
+      "propertyCreated": "تم إنشاء العقار",
+      "deleted": "تم الحذف"
+    },
+    "confirm": {
+      "deleteProperty": "هل تريد حذف هذا العقار؟"
+    },
+    "propertiesList": {
+      "heading": "جميع العقارات",
+      "edit": "تعديل"
+    },
+    "inquiries": {
+      "empty": "لا توجد استفسارات بعد."
+    },
+    "consultations": {
+      "empty": "لا توجد طلبات استشارة بعد.",
+      "project": "المشروع:",
+      "budget": "الميزانية:"
+    }
+  }
+}

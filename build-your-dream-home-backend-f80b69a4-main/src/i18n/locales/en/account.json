@@ -1,0 +1,161 @@
+{
+  "dashboard": {
+    "signOut": "Sign out",
+    "signedOutToast": "Signed out",
+    "guest": "Guest",
+    "fullName": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "accountType": "Account type",
+    "customer": "Customer",
+    "joined": "Joined",
+    "location": "Location",
+    "bio": "Bio",
+    "loadingValue": "…",
+    "notAvailable": "—"
+  },
+  "profile": {
+    "loading": "Loading…",
+    "title": "My Profile",
+    "subtitle": "Manage your account, tours, saved listings and preferences.",
+    "settings": {
+      "heading": "Profile Settings",
+      "description": "Information used to contact you about tours, alerts and consultations.",
+      "changePhoto": "Change Photo",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Your full name",
+      "email": "Email",
+      "emailLocked": "(locked)",
+      "phone": "Phone",
+      "phoneRequired": "required",
+      "phonePlaceholder": "+20 111 639 205",
+      "propertyType": "Preferred Property Type",
+      "propertyTypeAny": "Any",
+      "propertyTypeVilla": "Villa",
+      "propertyTypeApartment": "Apartment",
+      "propertyTypeDuplex": "Duplex",
+      "propertyTypeCommercial": "Commercial",
+      "budgetMin": "Budget Min",
+      "budgetMax": "Budget Max",
+      "saveChanges": "Save Changes",
+      "saving": "Saving..."
+    },
+    "toasts": {
+      "maxSize": "Max 4MB",
+      "photoUpdated": "Photo updated",
+      "profileSaved": "Profile saved"
+    },
+    "validation": {
+      "minChars": "Min 2 chars",
+      "phoneRequired": "Phone required"
+    },
+    "consultationTracker": {
+      "heading": "Fast Consultation Tracker",
+      "description": "Expert advice guaranteed within 24 hours.",
+      "expertAssigned": "Expert Assigned",
+      "processing": "Processing",
+      "pending": "Pending",
+      "empty": "No requests yet.",
+      "bookCta": "Book a free consultation →",
+      "generalConsultation": "General consultation",
+      "left": "left",
+      "due": "Due"
+    },
+    "aiMatching": {
+      "heading": "AI Matching Feed",
+      "description": "Smart valuation based on your style & budget.",
+      "empty": "Set your preferences above to see matched listings.",
+      "matchBadge": "100% Match for Your Style & Budget"
+    },
+    "tours": {
+      "heading": "Scheduled Tours",
+      "description": "Upcoming virtual and in-person property visits.",
+      "empty": "No tours scheduled.",
+      "browseCta": "Browse listings →",
+      "virtual": "Virtual 360°",
+      "physical": "Physical"
+    },
+    "savedListings": {
+      "heading": "Saved Listings",
+      "description": "Your shortlisted verified properties.",
+      "viewAll": "View all",
+      "empty": "No saved properties yet."
+    }
+  },
+  "favorites": {
+    "loading": "Loading…",
+    "signInHeading": "Sign in to view favorites",
+    "signIn": "Sign in",
+    "title": "Your Favorites",
+    "savedCountSingular": "saved property",
+    "savedCountPlural": "saved properties",
+    "emptyHeading": "No favorites yet. Start browsing!",
+    "browseListings": "Browse listings"
+  },
+  "admin": {
+    "loading": "Loading…",
+    "signInRequired": "Sign in required",
+    "signIn": "Sign in",
+    "accessRequired": "Admin access required",
+    "yourUserId": "Your user ID:",
+    "askDeveloper": "Ask your developer to grant admin role.",
+    "heading": "Admin Dashboard",
+    "tabs": {
+      "properties": "Properties",
+      "inquiries": "Inquiries",
+      "consultations": "Consultations"
+    },
+    "form": {
+      "editProperty": "Edit property",
+      "addProperty": "Add new property",
+      "cancel": "Cancel",
+      "titleLabel": "Title *",
+      "typeLabel": "Type *",
+      "priceLabel": "Price *",
+      "currencyLabel": "Currency",
+      "locationLabel": "Location",
+      "areaLabel": "Area (m²)",
+      "bedroomsLabel": "Bedrooms",
+      "bathroomsLabel": "Bathrooms",
+      "descriptionLabel": "Description",
+      "featuresLabel": "Features (comma-separated)",
+      "featuresPlaceholder": "Pool, Smart lighting, Garden...",
+      "featured": "Featured property",
+      "imagesLabel": "Images",
+      "uploading": "Uploading...",
+      "upload": "Upload",
+      "saving": "Saving...",
+      "updateProperty": "Update property",
+      "createProperty": "Create property",
+      "types": {
+        "villa": "villa",
+        "apartment": "apartment",
+        "duplex": "duplex",
+        "country_house": "country house",
+        "studio": "studio",
+        "smart_home": "smart home"
+      }
+    },
+    "toasts": {
+      "titlePriceRequired": "Title and price required",
+      "propertyUpdated": "Property updated",
+      "propertyCreated": "Property created",
+      "deleted": "Deleted"
+    },
+    "confirm": {
+      "deleteProperty": "Delete this property?"
+    },
+    "propertiesList": {
+      "heading": "All properties",
+      "edit": "Edit"
+    },
+    "inquiries": {
+      "empty": "No inquiries yet."
+    },
+    "consultations": {
+      "empty": "No consultation requests yet.",
+      "project": "Project:",
+      "budget": "Budget:"
+    }
+  }
+}
