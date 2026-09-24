@@ -3,21 +3,12 @@
 > vite dev
 
 
-  [32m[1mVITE[22m v7.3.2[39m  [2mready in [0m[1m166766[22m[2m[0m ms[22m
+  [32m[1mVITE[22m v7.3.2[39m  [2mready in [0m[1m31892[22m[2m[0m ms[22m
 
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m8080[22m/[39m
-  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.28.0.1:[1m8080[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.30.112.1:[1m8080[22m/[39m
   [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.1.14:[1m8080[22m/[39m
 [vite] connected.
-[2m٦:٣٣:٠٣ م[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/components/RotatingShowcase.tsx[22m
-[2m٦:٣٣:٠٣ م[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/components/RotatingShowcase.tsx[22m
+[2m٧:٢٣:١٤ ص[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/__root.tsx[22m
+[2m٧:٢٣:١٤ ص[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/styles.css[22m
 [vite] program reload
-[2m٦:٣٣:٠٥ م[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/hooks/useLanguage.tsx[22m
-[2m٦:٣٣:٠٥ م[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/i18n/locales/ar/propertyTypes.json[22m
-[vite] program reload
-[2m٦:٣٣:٠٥ م[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/hooks/useLanguage.tsx[22m
-[2m٦:٣٣:٠٥ م[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/i18n/locales/en/propertyTypes.json[22m
-[2m٦:٣٣:٠٦ م[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/property-types.tsx, /src/routes/property-types.tsx?tsr-split=component[22m
-[2m٦:٣٣:٠٦ م[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/property-types.tsx[22m
-[2m٦:٣٣:٠٩ م[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useLanguage.tsx[22m Could not Fast Refresh ("useLanguage" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
-[2m٦:٣٣:٠٩ م[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/routes/__root.tsx, /src/components/Navbar.tsx, /src/components/ProfilePanel.tsx, /src/routes/properties.index.tsx?tsr-split=component[22m

@@ -1,0 +1,53 @@
+rules_version = '2';
+
+// ============================================================
+//  BuildYourHome — Firestore security rules
+//
+//  Paste into: Firebase console → Firestore Database → Rules
+//
+//  Model:
+//   - The PUBLIC WEBSITE may CREATE inquiries & consultations only
+//     (visitors submit leads; nobody can read them from the client).
+//   - ONLY the admin email (you) may read or write anything.
+//   - Public read of properties is OPTIONAL: swap the `properties`
+//     read rule between "admin only" and "public read" depending on
+//     whether your live site loads listings straight from Firestore
+//     (if your site uses its own backend, keep it admin-only).
+// ============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Your admin identity — must match the email in app.js exactly.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'buildyourhom@gmail.com';
+    }
+
+    // Properties: readable by the admin always.
+    // Set `true` instead of isAdmin() if your public site reads them client-side.
+    match /properties/{id} {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Inquiries: anyone on the site can SUBMIT (create), nobody reads except admin.
+    match /inquiries/{id} {
+      allow create: if request.resource.data.keys().size() <= 15
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() <= 120;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Consultations: same public-create / admin-read pattern.
+    match /consultations/{id} {
+      allow create: if request.resource.data.keys().size() <= 15;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Anything else: fully locked.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

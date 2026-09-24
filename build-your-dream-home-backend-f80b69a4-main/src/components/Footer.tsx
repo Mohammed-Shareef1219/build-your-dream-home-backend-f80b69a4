@@ -1,6 +1,24 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, Facebook, Instagram, Twitter, Linkedin, Send, MessageCircle, Music2, Shield, BadgeCheck, ArrowRight, UserPlus, Search, CalendarCheck, Handshake } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Send,
+  MessageCircle,
+  Music2,
+  Shield,
+  BadgeCheck,
+  ArrowRight,
+  UserPlus,
+  Search,
+  CalendarCheck,
+  Handshake,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { FooterResources } from "@/components/FooterResources";
 import logo from "@/assets/logo.png";
 
 const tickerKeys = [
@@ -59,7 +77,14 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <img src={logo} alt={t("brand")} width={40} height={40} className="h-10 w-10 object-contain" loading="lazy" />
+              <img
+                src={logo}
+                alt={t("brand")}
+                width={40}
+                height={40}
+                className="h-10 w-10 object-contain"
+                loading="lazy"
+              />
               <span className="font-display text-2xl font-bold tracking-tight">{t("brand")}</span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
@@ -77,8 +102,14 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">{t("footer.contact.title")}</h3>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4" /><span>buildyourhom@gmail.com</span></li>
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4" /><span>+20111639205</span></li>
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                <span>buildyourhom@gmail.com</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                <span>+20111639205</span>
+              </li>
             </ul>
           </div>
 
@@ -153,6 +184,9 @@ export function Footer() {
           </FooterCol>
         </div>
 
+        {/* Resources deep-dive: pillars + property types (investment & sustainability) */}
+        <FooterResources />
+
         {/* Onboarding steps */}
         <section className="rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 p-6">
           <h3 className="font-semibold text-lg mb-5">{t("footer.steps.title")}</h3>
@@ -163,7 +197,9 @@ export function Footer() {
                   <s.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-xs text-primary-foreground/60">{t("footer.steps.step", { number: i + 1 })}</div>
+                  <div className="text-xs text-primary-foreground/60">
+                    {t("footer.steps.step", { number: i + 1 })}
+                  </div>
                   <div className="font-medium">{t(`footer.steps.${s.key}`)}</div>
                 </div>
               </li>
@@ -175,9 +211,7 @@ export function Footer() {
         <section className="grid gap-6 md:grid-cols-2 items-center">
           <div className="rounded-2xl bg-accent/10 border border-accent/30 p-6">
             <h3 className="font-semibold text-lg">{t("footer.cta.title")}</h3>
-            <p className="text-sm text-primary-foreground/75 mt-1">
-              {t("footer.cta.desc")}
-            </p>
+            <p className="text-sm text-primary-foreground/75 mt-1">{t("footer.cta.desc")}</p>
             <Link
               to="/consultation"
               className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
@@ -203,9 +237,15 @@ export function Footer() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-primary-foreground/70">
           <p>{t("footer.bottom.copyright")}</p>
           <div className="flex gap-5">
-            <Link to="/privacy" className="hover:text-secondary transition-colors">{t("footer.bottom.privacy")}</Link>
-            <Link to="/terms" className="hover:text-secondary transition-colors">{t("footer.bottom.terms")}</Link>
-            <Link to="/cookies" className="hover:text-secondary transition-colors">{t("footer.bottom.cookies")}</Link>
+            <Link to="/privacy" className="hover:text-secondary transition-colors">
+              {t("footer.bottom.privacy")}
+            </Link>
+            <Link to="/terms" className="hover:text-secondary transition-colors">
+              {t("footer.bottom.terms")}
+            </Link>
+            <Link to="/cookies" className="hover:text-secondary transition-colors">
+              {t("footer.bottom.cookies")}
+            </Link>
           </div>
         </div>
       </div>
@@ -225,7 +265,9 @@ function FooterCol({ title, children }: { title: string; children: React.ReactNo
 function FooterLink({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link to={to} className="hover:text-secondary transition-colors">{children}</Link>
+      <Link to={to} className="hover:text-secondary transition-colors">
+        {children}
+      </Link>
     </li>
   );
 }

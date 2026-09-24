@@ -91,7 +91,8 @@
       "guides": "أدلة العقارات",
       "egyptianMarket": "السوق المصري",
       "valuationTips": "نصائح التقييم",
-      "smartBudgeting": "التخطيط المالي الذكي"
+      "smartBudgeting": "التخطيط المالي الذكي",
+      "byType": "حسب نوع العقار"
     },
     "neighborhoods": {
       "title": "الأحياء",

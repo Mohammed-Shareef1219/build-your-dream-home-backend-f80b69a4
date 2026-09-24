@@ -9,6 +9,7 @@
     },
     "filters": {
       "searchPlaceholder": "Search by location, title, area...",
+      "anyCity": "Any City",
       "matchingListings": "{{count}} matching properties",
       "reset": "Reset filters",
       "resetToStart": "Reset filters to start over",
@@ -34,6 +35,17 @@
       "smart_home": "Smart Home",
       "land_montcity": "Land — Mont City",
       "land_agiba": "Land — Mont Agiba"
+    },
+    "cities": {
+      "new_cairo": "New Cairo",
+      "october": "6th of October City",
+      "sheikh_zayed": "Sheikh Zayed",
+      "maadi": "Maadi",
+      "heliopolis": "Heliopolis",
+      "old_cairo": "Old Cairo",
+      "nasr_city": "Nasr City",
+      "north_coast": "North Coast",
+      "marsa_matrouh": "Marsa Matrouh"
     },
     "beds": {
       "any": "Any Beds",
@@ -168,11 +180,36 @@
     "notFoundText": "That property type doesn't exist.",
     "errorTitle": "Something went wrong",
     "categories": {
-      "apartment": { "title": "Smart Apartments", "arabicTitle": "شقق ذكية", "subtitle": "Luxury Apartment Models Catalogue", "directoryLine": "Vision 2026 — Smart Apartments" },
-      "villa": { "title": "Luxury Villas", "arabicTitle": "فيلات فاخرة", "subtitle": "Luxury Villa Collection Catalogue", "directoryLine": "Vision 2026 — Luxury Villas" },
-      "duplex": { "title": "Duplex Designs", "arabicTitle": "تصميمات دوبليكس", "subtitle": "Luxury Duplex Models Catalogue", "directoryLine": "Vision 2026 — Duplex Units" },
-      "country_house": { "title": "Country Houses", "arabicTitle": "البيوت الريفية", "subtitle": "Country & Countryside Homes Catalogue", "directoryLine": "Vision 2026 — Country Houses" },
-      "studio": { "title": "Studios", "arabicTitle": "استديوهات", "subtitle": "Smart Studios Catalogue", "directoryLine": "2026 Studio Directory" }
+      "apartment": {
+        "title": "Smart Apartments",
+        "arabicTitle": "شقق ذكية",
+        "subtitle": "Luxury Apartment Models Catalogue",
+        "directoryLine": "Vision 2026 — Smart Apartments"
+      },
+      "villa": {
+        "title": "Luxury Villas",
+        "arabicTitle": "فيلات فاخرة",
+        "subtitle": "Luxury Villa Collection Catalogue",
+        "directoryLine": "Vision 2026 — Luxury Villas"
+      },
+      "duplex": {
+        "title": "Duplex Designs",
+        "arabicTitle": "تصميمات دوبليكس",
+        "subtitle": "Luxury Duplex Models Catalogue",
+        "directoryLine": "Vision 2026 — Duplex Units"
+      },
+      "country_house": {
+        "title": "Country Houses",
+        "arabicTitle": "البيوت الريفية",
+        "subtitle": "Country & Countryside Homes Catalogue",
+        "directoryLine": "Vision 2026 — Country Houses"
+      },
+      "studio": {
+        "title": "Studios",
+        "arabicTitle": "استديوهات",
+        "subtitle": "Smart Studios Catalogue",
+        "directoryLine": "2026 Studio Directory"
+      }
     }
   },
   "catalogDetail": {
@@ -223,33 +260,72 @@
     "backTo": "Back to {{title}}",
     "boards": {
       "apartment": {
-        "kitchen": { "label": "Kitchen", "caption": "Open-plan smart kitchen with energy-efficient appliances." },
-        "living": { "label": "Living Room", "caption": "Spacious living area with voice-controlled lighting." },
-        "bath": { "label": "Bathroom", "caption": "Super-lux finishing with smart mirror and rain shower." },
-        "bedroom": { "label": "Bedrooms", "caption": "Three private bedrooms with ambient climate zoning." },
-        "balcony": { "label": "Balcony / Garden", "caption": "Floor-to-ceiling windows opening to a green skyline." }
+        "kitchen": {
+          "label": "Kitchen",
+          "caption": "Open-plan smart kitchen with energy-efficient appliances."
+        },
+        "living": {
+          "label": "Living Room",
+          "caption": "Spacious living area with voice-controlled lighting."
+        },
+        "bath": {
+          "label": "Bathroom",
+          "caption": "Super-lux finishing with smart mirror and rain shower."
+        },
+        "bedroom": {
+          "label": "Bedrooms",
+          "caption": "Three private bedrooms with ambient climate zoning."
+        },
+        "balcony": {
+          "label": "Balcony / Garden",
+          "caption": "Floor-to-ceiling windows opening to a green skyline."
+        }
       },
       "villa": {
         "exterior": { "label": "Exterior", "caption": "Panoramic facade with absolute privacy." },
-        "reception": { "label": "Reception", "caption": "Grand reception with double-height ceilings." },
+        "reception": {
+          "label": "Reception",
+          "caption": "Grand reception with double-height ceilings."
+        },
         "kitchen": { "label": "Kitchen", "caption": "Chef's kitchen with island and pantry." },
         "master": { "label": "Master Rooms", "caption": "Master suites with dressing rooms." },
         "garden": { "label": "Garden", "caption": "Private garden with infinity pool." }
       },
       "duplex": {
-        "ground": { "label": "Ground Floor", "caption": "Guest-area ground floor with privacy zoning." },
-        "first": { "label": "First Floor", "caption": "Family bedrooms upstairs for total separation." },
-        "stairs": { "label": "Internal Stairs", "caption": "Sculptural glass-walled internal staircase." },
+        "ground": {
+          "label": "Ground Floor",
+          "caption": "Guest-area ground floor with privacy zoning."
+        },
+        "first": {
+          "label": "First Floor",
+          "caption": "Family bedrooms upstairs for total separation."
+        },
+        "stairs": {
+          "label": "Internal Stairs",
+          "caption": "Sculptural glass-walled internal staircase."
+        },
         "terrace": { "label": "Terrace", "caption": "Wide terrace and private garden." }
       },
       "studio": {
-        "sleeping": { "label": "Sleeping Area", "caption": "Smart furnishing maximises every square meter." },
-        "kitchen": { "label": "American Kitchen", "caption": "Open American kitchen, energy-efficient." },
+        "sleeping": {
+          "label": "Sleeping Area",
+          "caption": "Smart furnishing maximises every square meter."
+        },
+        "kitchen": {
+          "label": "American Kitchen",
+          "caption": "Open American kitchen, energy-efficient."
+        },
         "bath": { "label": "Bathroom", "caption": "Compact spa-style bathroom." }
       },
       "country_house": {
-        "landscape": { "label": "Landscape", "caption": "Tranquility of nature with open green spaces." },
-        "reception": { "label": "Rustic Reception", "caption": "Natural stone meets warm wooden tones." },
+        "landscape": {
+          "label": "Landscape",
+          "caption": "Tranquility of nature with open green spaces."
+        },
+        "reception": {
+          "label": "Rustic Reception",
+          "caption": "Natural stone meets warm wooden tones."
+        },
         "rooms": { "label": "Wooden Rooms", "caption": "Wooden rooms with fresh air & quietness." },
         "bbq": { "label": "BBQ Area", "caption": "Outdoor seating around the BBQ pavilion." }
       },

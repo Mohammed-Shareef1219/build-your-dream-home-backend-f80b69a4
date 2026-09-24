@@ -230,3 +230,34 @@ html[dir="rtl"] body {
 html[dir="rtl"] .font-display {
   font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
 }
+
+/*
+ * Hero search native dropdowns (<select><option>) — dark-mode skin.
+ * The select itself stays transparent (the pill field underneath shows
+ * through); only the popup list is skinned. Chromium and Firefox both accept
+ * `background-color` on <option>; on Windows Chrome additionally honors it
+ * once `color-scheme: dark` is set on the document. Colors use design-system
+ * variables so the palette stays in sync with the dark theme.
+ */
+.dark {
+  color-scheme: dark;
+}
+
+.dark select option,
+.dark select optgroup {
+  background-color: oklch(0.22 0.025 230 / 0.97); /* --card, near-opaque */
+  color: oklch(0.97 0.005 100); /* --foreground: light gray-white */
+}
+
+.dark select option:checked,
+.dark select option:hover,
+.dark select option:focus {
+  background-color: oklch(0.3 0.03 225 / 0.97); /* --secondary */
+  color: oklch(0.97 0.005 100);
+}
+
+/* Light mode keeps its native look; only normalize text against the pill. */
+html:not(.dark) select option {
+  background-color: #fff;
+  color: var(--color-foreground);
+}

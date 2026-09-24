@@ -114,12 +114,21 @@ const MOOD_ICON_DEFS = [
   { Icon: Trees, key: "garden" },
 ];
 
-const DEFAULTS = { type: "all", q: "", beds: "any", sort: "featured", priceMin: "", priceMax: "", sizeMin: "", sizeMax: "" };
+const DEFAULTS = {
+  type: "all",
+  q: "",
+  beds: "any",
+  sort: "featured",
+  priceMin: "",
+  priceMax: "",
+  sizeMin: "",
+  sizeMax: "",
+};
 
 function ListingsPage() {
   const { t } = useTranslation("listings");
   const { lang } = useLanguage();
-  const { type, q, beds, sort, priceMin = "", priceMax = "" } = Route.useSearch();
+  const { type, q, beds, sort, priceMin = "", priceMax = "", city = "" } = Route.useSearch();
   const navigate = Route.useNavigate();
   const [items, setItems] = useState<Property[]>([]);
   const [favIds, setFavIds] = useState<Set<string>>(new Set());
@@ -129,10 +138,60 @@ function ListingsPage() {
   const { user } = useAuth();
 
   const TYPES = TYPE_VALUES.map((value) => ({ value, label: t(`properties.types.${value}`) }));
+  // Grouped hero-search types expand to the concrete listing types they cover.
+  const TYPE_EXPAND: Record<string, string[]> = {
+    land: ["land_montcity", "land_agiba"],
+    coastal_home: ["coastal_home", "studio", "apartment"],
+  };
+  const expandedTypes = TYPE_EXPAND[type ?? "all"] ?? [type ?? "all"];
+  const CITIES = [
+    "new_cairo",
+    "october",
+    "sheikh_zayed",
+    "maadi",
+    "heliopolis",
+    "old_cairo",
+    "nasr_city",
+    "north_coast",
+    "marsa_matrouh",
+  ].map((key) => ({
+    value: key,
+    label: t(`properties.cities.${key}`),
+  }));
+  // Match a listing against the selected city key (city names are localized).
+  const matchesCity = (listing: UnifiedListing) => {
+    if (!city) return true;
+    const loc = listing.location.toLowerCase();
+    switch (city) {
+      case "new_cairo":
+        return /new cairo|القاهرة الجديدة|fifth settlement|التجمع الخامس/.test(loc);
+      case "october":
+        return /october|أكتوبر/.test(loc);
+      case "sheikh_zayed":
+        return /sheikh zayed|الشيخ زايد/.test(loc);
+      case "maadi":
+        return /maadi|المعادي/.test(loc);
+      case "heliopolis":
+        return /heliopolis|مصر الجديدة/.test(loc);
+      case "old_cairo":
+        return /old cairo|مصر القديمة/.test(loc);
+      case "nasr_city":
+        return /nasr city|مدينة نصر/.test(loc);
+      case "north_coast":
+        return /north coast|الساحل الشمالي/.test(loc);
+      case "marsa_matrouh":
+        return /matrouh|مطروح/.test(loc);
+      default:
+        return true;
+    }
+  };
   const BEDS = BED_VALUES.map((value) => ({ value, label: t(`properties.beds.${value}`) }));
   const SORTS = SORT_VALUES.map((value) => ({ value, label: t(`properties.sorts.${value}`) }));
   const TABS = TAB_IDS.map((id) => ({ id, label: t(`properties.tabs.${id}`) }));
-  const MOOD_ICONS = MOOD_ICON_DEFS.map(({ Icon, key }) => ({ Icon, label: t(`properties.moodIcons.${key}`) }));
+  const MOOD_ICONS = MOOD_ICON_DEFS.map(({ Icon, key }) => ({
+    Icon,
+    label: t(`properties.moodIcons.${key}`),
+  }));
 
   const setSearch = (patch: Partial<SearchState> & Partial<typeof DEFAULTS>) => {
     if ("sizeMin" in patch) setSizeMin(patch.sizeMin ?? "");
@@ -196,6 +255,7 @@ function ListingsPage() {
   const isFiltering =
     (q ?? "") !== "" ||
     (type ?? "all") !== "all" ||
+    (city ?? "") !== "" ||
     (beds ?? "any") !== "any" ||
     (sort ?? "featured") !== "featured" ||
     priceMin !== "" ||
@@ -211,14 +271,16 @@ function ListingsPage() {
     const minPrice = priceMin !== "" ? Number(priceMin) : null;
     const maxPrice = priceMax !== "" ? Number(priceMax) : null;
     const list = unified.filter((p) => {
-      if (type && type !== "all" && p.type !== type) return false;
+      if (type && type !== "all" && !expandedTypes.includes(p.type)) return false;
+      if (!matchesCity(p)) return false;
       if (minBeds && (p.bedrooms ?? 0) < minBeds) return false;
       if (minPrice !== null && p.price < minPrice) return false;
       if (maxPrice !== null && p.price > maxPrice) return false;
       if (sizeMin !== "" && (p.size ?? 0) < Number(sizeMin)) return false;
       if (sizeMax !== "" && (p.size ?? 0) > Number(sizeMax)) return false;
       if (qLower) {
-        const hay = `${p.title} ${p.location} ${p.size != null ? `${p.size} m²` : ""}`.toLowerCase();
+        const hay =
+          `${p.title} ${p.location} ${p.size != null ? `${p.size} m²` : ""}`.toLowerCase();
         const textMatch = hay.includes(qLower);
         const sizeMatch = !Number.isNaN(qArea) && p.size != null && Math.abs(p.size - qArea) <= 1;
         if (!textMatch && !sizeMatch) return false;
@@ -231,12 +293,19 @@ function ListingsPage() {
     else if (sort === "newest") sorted.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     else sorted.sort((a, b) => Number(b.featured) - Number(a.featured));
     return sorted;
-  }, [unified, type, q, beds, sort, priceMin, priceMax, sizeMin, sizeMax]);
+  }, [unified, type, q, beds, sort, priceMin, priceMax, sizeMin, sizeMax, city, lang]);
 
   const resetFilters = () => {
     setSizeMin("");
     setSizeMax("");
-    setSearch({ type: "all", q: "", beds: "any", sort: "featured", priceMin: undefined, priceMax: undefined });
+    setSearch({
+      type: "all",
+      q: "",
+      beds: "any",
+      sort: "featured",
+      priceMin: undefined,
+      priceMax: undefined,
+    });
   };
 
   const toggleFav = async (e: React.MouseEvent, propertyId: string) => {
@@ -245,12 +314,20 @@ function ListingsPage() {
     if (!user) return toast.error(t("properties.signInFavorites"));
     const isFav = favIds.has(propertyId);
     if (isFav) {
-      const { error } = await supabase.from("favorites").delete()
-        .eq("user_id", user.id).eq("property_id", propertyId);
+      const { error } = await supabase
+        .from("favorites")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("property_id", propertyId);
       if (error) return toast.error(error.message);
-      setFavIds((prev) => { const n = new Set(prev); n.delete(propertyId); return n; });
+      setFavIds((prev) => {
+        const n = new Set(prev);
+        n.delete(propertyId);
+        return n;
+      });
     } else {
-      const { error } = await supabase.from("favorites")
+      const { error } = await supabase
+        .from("favorites")
         .insert({ user_id: user.id, property_id: propertyId });
       if (error) return toast.error(error.message);
       setFavIds((prev) => new Set(prev).add(propertyId));
@@ -315,22 +392,66 @@ function ListingsPage() {
                     className="w-full h-11 pl-9 pr-3 rounded-xl bg-white/5 border border-white/10 text-sm placeholder:text-slate-400 focus:outline-none focus:border-cyan-400/60"
                   />
                 </div>
-                <GlassSelect className="md:col-span-3" value={type ?? "all"} onChange={(v) => setSearch({ type: v })} options={TYPES} />
-                <GlassSelect className="md:col-span-2" value={beds ?? "any"} onChange={(v) => setSearch({ beds: v })} options={BEDS} />
-                <GlassSelect className="md:col-span-2" value={sort ?? "featured"} onChange={(v) => setSearch({ sort: v })} options={SORTS} />
+                <GlassSelect
+                  className="md:col-span-2"
+                  value={type ?? "all"}
+                  onChange={(v) => setSearch({ type: v })}
+                  options={TYPES}
+                />
+                <GlassSelect
+                  className="md:col-span-2"
+                  value={city ?? ""}
+                  onChange={(v) => setSearch({ city: v || undefined })}
+                  options={[{ value: "", label: t("properties.filters.anyCity") }, ...CITIES]}
+                />
+                <GlassSelect
+                  className="md:col-span-2"
+                  value={beds ?? "any"}
+                  onChange={(v) => setSearch({ beds: v })}
+                  options={BEDS}
+                />
+                <GlassSelect
+                  className="md:col-span-2"
+                  value={sort ?? "featured"}
+                  onChange={(v) => setSearch({ sort: v })}
+                  options={SORTS}
+                />
               </div>
               <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
-                <NumInput label={t("properties.filters.priceFrom")} value={priceMin} onChange={(v) => setSearch({ priceMin: v })} />
-                <NumInput label={t("properties.filters.priceTo")} value={priceMax} onChange={(v) => setSearch({ priceMax: v })} />
-                <NumInput label={t("properties.filters.sizeFrom")} value={sizeMin} onChange={(v) => setSizeMin(v)} min={0} max={500} />
-                <NumInput label={t("properties.filters.sizeTo")} value={sizeMax} onChange={(v) => setSizeMax(v)} min={0} max={500} />
+                <NumInput
+                  label={t("properties.filters.priceFrom")}
+                  value={priceMin}
+                  onChange={(v) => setSearch({ priceMin: v })}
+                />
+                <NumInput
+                  label={t("properties.filters.priceTo")}
+                  value={priceMax}
+                  onChange={(v) => setSearch({ priceMax: v })}
+                />
+                <NumInput
+                  label={t("properties.filters.sizeFrom")}
+                  value={sizeMin}
+                  onChange={(v) => setSizeMin(v)}
+                  min={0}
+                  max={500}
+                />
+                <NumInput
+                  label={t("properties.filters.sizeTo")}
+                  value={sizeMax}
+                  onChange={(v) => setSizeMax(v)}
+                  min={0}
+                  max={500}
+                />
               </div>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 px-1">
                 <span className="font-semibold text-cyan-300">
                   {t("properties.filters.matchingListings", { count: filtered.length })}
                 </span>
                 {isFiltering && (
-                  <button onClick={resetFilters} className="inline-flex items-center gap-1.5 text-rose-300 hover:text-rose-200 underline underline-offset-4">
+                  <button
+                    onClick={resetFilters}
+                    className="inline-flex items-center gap-1.5 text-rose-300 hover:text-rose-200 underline underline-offset-4"
+                  >
                     <RotateCcw className="h-3.5 w-3.5" /> {t("properties.filters.reset")}
                   </button>
                 )}
@@ -341,7 +462,9 @@ function ListingsPage() {
             {filtered.length === 0 ? (
               /* No results — show similar images (size/price guide) instead */
               <div className="rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-10 text-center mb-10">
-                <p className="text-lg font-semibold text-slate-300">{t("properties.filters.noResults")}</p>
+                <p className="text-lg font-semibold text-slate-300">
+                  {t("properties.filters.noResults")}
+                </p>
                 <button
                   onClick={resetFilters}
                   className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white/10 border border-white/15 hover:bg-white/15 px-5 h-11 text-sm font-semibold transition"
@@ -447,7 +570,9 @@ function NumInput({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-[10px] uppercase tracking-[0.14em] text-slate-400">{label}</span>
+      <span className="mb-1 block text-[10px] uppercase tracking-[0.14em] text-slate-400">
+        {label}
+      </span>
       <input
         type="number"
         inputMode="numeric"
@@ -481,7 +606,9 @@ function GlassSelect({
         className="w-full h-11 px-3 rounded-xl bg-white/5 border border-white/10 text-sm text-slate-100 focus:outline-none focus:border-cyan-400/60 [&>option]:bg-[#0a1230] [&>option]:text-slate-100"
       >
         {options.map((o) => (
-          <option key={o.value} value={o.value}>{o.label}</option>
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
         ))}
       </select>
     </div>
@@ -526,8 +653,12 @@ function GuideBoard({ onPick }: { onPick: (type: string) => void }) {
             </div>
           </div>
           <div className="p-3 text-[11px] leading-5" dir={lang === "ar" ? "rtl" : "ltr"}>
-            <p className="text-cyan-300">📐 {t("properties.filters.guideSize")}: {lang === "ar" ? cat.size_ar : cat.size_en}</p>
-            <p className="text-emerald-300 font-semibold">💰 {t("properties.filters.guidePrice")}: {lang === "ar" ? cat.price_ar : cat.price_en}</p>
+            <p className="text-cyan-300">
+              📐 {t("properties.filters.guideSize")}: {lang === "ar" ? cat.size_ar : cat.size_en}
+            </p>
+            <p className="text-emerald-300 font-semibold">
+              💰 {t("properties.filters.guidePrice")}: {lang === "ar" ? cat.price_ar : cat.price_en}
+            </p>
             <span className="mt-2 block border-t border-white/10 pt-1.5 text-slate-400">
               💡 {lang === "ar" ? cat.note_ar : cat.note_en}
             </span>
@@ -558,15 +689,23 @@ function ListingCard({
   const code = `EBK-${String(2024 + (index % 3)).padStart(4, "0")}`;
   const views = 1250 + index * 137;
   const arabicLabelKey =
-    listing.type === "villa" ? "villa"
-    : listing.type === "apartment" ? "apartment"
-    : listing.type === "duplex" ? "duplex"
-    : listing.type === "studio" ? "studio"
-    : listing.type === "country_house" ? "country_house"
-    : listing.type === "smart_home" ? "smart_home"
-    : listing.type === "land_montcity" ? "land_montcity"
-    : listing.type === "land_agiba" ? "land_agiba"
-    : "default";
+    listing.type === "villa"
+      ? "villa"
+      : listing.type === "apartment"
+        ? "apartment"
+        : listing.type === "duplex"
+          ? "duplex"
+          : listing.type === "studio"
+            ? "studio"
+            : listing.type === "country_house"
+              ? "country_house"
+              : listing.type === "smart_home"
+                ? "smart_home"
+                : listing.type === "land_montcity"
+                  ? "land_montcity"
+                  : listing.type === "land_agiba"
+                    ? "land_agiba"
+                    : "default";
 
   const body = (
     <>
@@ -582,9 +721,12 @@ function ListingCard({
 
         {/* Top-left: code + views */}
         <div className="absolute top-3 left-3 rounded-xl border border-amber-300/40 bg-[#060b1a]/70 backdrop-blur px-3 py-1.5 text-[11px]">
-          <div className="text-amber-300 font-semibold">{t("properties.card.propertyCode", { code })}</div>
+          <div className="text-amber-300 font-semibold">
+            {t("properties.card.propertyCode", { code })}
+          </div>
           <div className="flex items-center gap-1 text-slate-200 mt-0.5">
-            <Eye className="h-3 w-3" /> {t("properties.card.views", { count: views.toLocaleString() })}
+            <Eye className="h-3 w-3" />{" "}
+            {t("properties.card.views", { count: views.toLocaleString() })}
           </div>
         </div>
 
@@ -599,7 +741,9 @@ function ListingCard({
           aria-label={t("properties.toggleFavorite")}
           className="absolute top-16 right-3 h-9 w-9 rounded-full bg-[#060b1a]/70 backdrop-blur border border-white/15 flex items-center justify-center hover:scale-110 transition"
         >
-          <Heart className={`h-4 w-4 ${isFavorite ? "fill-rose-400 text-rose-400" : "text-slate-200"}`} />
+          <Heart
+            className={`h-4 w-4 ${isFavorite ? "fill-rose-400 text-rose-400" : "text-slate-200"}`}
+          />
         </button>
 
         {/* Mood-board strip */}
@@ -617,9 +761,7 @@ function ListingCard({
 
       {/* Body */}
       <div className="p-5">
-        <h3 className="font-semibold text-lg leading-tight line-clamp-1 mb-1">
-          {listing.title}
-        </h3>
+        <h3 className="font-semibold text-lg leading-tight line-clamp-1 mb-1">{listing.title}</h3>
         {listing.location && (
           <p className="flex items-center gap-1 text-xs text-slate-400 mb-1">
             <MapPin className="h-3 w-3" /> {listing.location}
@@ -630,18 +772,26 @@ function ListingCard({
         )}
         <div className="flex items-center gap-4 text-xs text-slate-300 mb-4">
           {(listing.bedrooms ?? 0) > 0 && (
-            <span className="flex items-center gap-1"><BedDouble className="h-3.5 w-3.5 text-cyan-300" /> {listing.bedrooms}</span>
+            <span className="flex items-center gap-1">
+              <BedDouble className="h-3.5 w-3.5 text-cyan-300" /> {listing.bedrooms}
+            </span>
           )}
           {listing.bathrooms != null && listing.bathrooms > 0 && (
-            <span className="flex items-center gap-1"><Bath className="h-3.5 w-3.5 text-cyan-300" /> {listing.bathrooms}</span>
+            <span className="flex items-center gap-1">
+              <Bath className="h-3.5 w-3.5 text-cyan-300" /> {listing.bathrooms}
+            </span>
           )}
           {listing.size != null && (
-            <span className="flex items-center gap-1"><Maximize className="h-3.5 w-3.5 text-cyan-300" /> {listing.size}m²</span>
+            <span className="flex items-center gap-1">
+              <Maximize className="h-3.5 w-3.5 text-cyan-300" /> {listing.size}m²
+            </span>
           )}
         </div>
         <div className="flex items-end justify-between pt-3 border-t border-white/10">
           <div>
-            <div className="text-[10px] uppercase tracking-wider text-slate-500">{t("properties.card.startingFrom")}</div>
+            <div className="text-[10px] uppercase tracking-wider text-slate-500">
+              {t("properties.card.startingFrom")}
+            </div>
             <div className="text-xl font-bold text-cyan-300">
               {new Intl.NumberFormat("en-US").format(listing.price)}{" "}
               <span className="text-xs text-slate-400">{currencyLabel}</span>
@@ -703,11 +853,23 @@ function TabIntro({ tab }: { tab: string }) {
         <div className="inline-flex items-center gap-2 self-start rounded-full border border-cyan-300/30 bg-cyan-500/10 px-3 py-1 text-[11px] tracking-[0.2em] text-cyan-300 mb-4">
           <Icon className="h-3.5 w-3.5" /> {t(`properties.tabIntros.${key}.badge`)}
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">{t(`properties.tabIntros.${key}.title`)}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-3">
+          {t(`properties.tabIntros.${key}.title`)}
+        </h1>
         <p className="text-slate-300 mb-4">{t(`properties.tabIntros.${key}.content`)}</p>
         <ul className="space-y-2 text-sm text-slate-300">
-          <li className="flex gap-2"><span className="text-cyan-300 font-semibold">{t("properties.tabIntros.detailsLabel")}</span> {t(`properties.tabIntros.${key}.details`)}</li>
-          <li className="flex gap-2"><span className="text-amber-300 font-semibold">{t("properties.tabIntros.objectiveLabel")}</span> {t(`properties.tabIntros.${key}.objective`)}</li>
+          <li className="flex gap-2">
+            <span className="text-cyan-300 font-semibold">
+              {t("properties.tabIntros.detailsLabel")}
+            </span>{" "}
+            {t(`properties.tabIntros.${key}.details`)}
+          </li>
+          <li className="flex gap-2">
+            <span className="text-amber-300 font-semibold">
+              {t("properties.tabIntros.objectiveLabel")}
+            </span>{" "}
+            {t(`properties.tabIntros.${key}.objective`)}
+          </li>
         </ul>
       </div>
       <div className="md:col-span-2 relative rounded-3xl overflow-hidden border border-white/10 min-h-[240px] shadow-[0_15px_60px_-20px_rgba(34,211,238,0.45)]">
@@ -729,8 +891,7 @@ const INVEST_DEALS = [
     roi: "14% / yr",
     plan: "8 years · 5% down",
     growth: "+32% projected (3 yr)",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop",
   },
   {
     key: "capital",
@@ -745,8 +906,7 @@ const INVEST_DEALS = [
     roi: "9% / yr",
     plan: "5 years · 15% down",
     growth: "+18% projected (3 yr)",
-    image:
-      "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1400&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1400&auto=format&fit=crop",
   },
 ];
 
@@ -760,7 +920,12 @@ function InvestPanel() {
           className="group rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl overflow-hidden hover:border-amber-300/40 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.7)]"
         >
           <div className="relative aspect-[16/10] overflow-hidden">
-            <img src={d.image} alt={t(`properties.invest.deals.${d.key}.name`)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img
+              src={d.image}
+              alt={t(`properties.invest.deals.${d.key}.name`)}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-[#060b1a]/95 via-[#060b1a]/20 to-transparent" />
             <div className="absolute top-3 left-3 rounded-full border border-amber-300/40 bg-[#060b1a]/70 backdrop-blur px-3 py-1 text-[11px] text-amber-300 font-semibold flex items-center gap-1">
               <BadgePercent className="h-3 w-3" /> {t("properties.invest.roiLabel", { roi: d.roi })}
@@ -770,13 +935,19 @@ function InvestPanel() {
             <div className="flex items-center gap-1.5 text-[11px] tracking-[0.18em] text-cyan-300 mb-1">
               <Building2 className="h-3.5 w-3.5" /> {t("properties.invest.offPlan")}
             </div>
-            <h3 className="text-lg font-semibold mb-1">{t(`properties.invest.deals.${d.key}.name`)}</h3>
+            <h3 className="text-lg font-semibold mb-1">
+              {t(`properties.invest.deals.${d.key}.name`)}
+            </h3>
             <p className="flex items-center gap-1 text-xs text-slate-400 mb-4">
               <MapPin className="h-3 w-3" /> {t(`properties.invest.deals.${d.key}.location`)}
             </p>
             <div className="space-y-2 text-xs text-slate-300 border-t border-white/10 pt-3">
-              <div className="flex items-center gap-2"><CalendarClock className="h-3.5 w-3.5 text-cyan-300" /> {d.plan}</div>
-              <div className="flex items-center gap-2"><TrendingUp className="h-3.5 w-3.5 text-emerald-300" /> {d.growth}</div>
+              <div className="flex items-center gap-2">
+                <CalendarClock className="h-3.5 w-3.5 text-cyan-300" /> {d.plan}
+              </div>
+              <div className="flex items-center gap-2">
+                <TrendingUp className="h-3.5 w-3.5 text-emerald-300" /> {d.growth}
+              </div>
             </div>
             <button className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 text-sm font-semibold h-10 transition">
               {t("properties.invest.requestMemo")} <ArrowRight className="h-4 w-4" />
@@ -816,7 +987,12 @@ function VRPanel() {
           className="group relative rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl overflow-hidden hover:border-cyan-400/50 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.7)]"
         >
           <div className="relative aspect-[4/3] overflow-hidden">
-            <img src={tour.image} alt={t(`properties.vr.tours.${tour.key}.name`)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img
+              src={tour.image}
+              alt={t(`properties.vr.tours.${tour.key}.name`)}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-[#060b1a]/95 via-[#060b1a]/30 to-transparent" />
             <div className="absolute top-3 left-3 rounded-full border border-cyan-300/40 bg-[#060b1a]/70 backdrop-blur px-3 py-1 text-[11px] text-cyan-300 font-semibold flex items-center gap-1">
               <Compass className="h-3 w-3" /> {t("properties.vr.badge")}
@@ -830,8 +1006,12 @@ function VRPanel() {
           </div>
           <div className="p-5 flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold">{t(`properties.vr.tours.${tour.key}.name`)}</h3>
-              <p className="text-xs text-slate-400 mt-0.5">{t(`properties.vr.tours.${tour.key}.rooms`)}</p>
+              <h3 className="text-base font-semibold">
+                {t(`properties.vr.tours.${tour.key}.name`)}
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                {t(`properties.vr.tours.${tour.key}.rooms`)}
+              </p>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-500/90 hover:bg-cyan-400 text-slate-900 text-xs font-semibold px-3 py-2 transition">
               <Glasses className="h-3.5 w-3.5" /> {t("properties.vr.enter")}

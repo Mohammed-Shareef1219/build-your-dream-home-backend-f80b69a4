@@ -91,7 +91,8 @@
       "guides": "Real Estate Guides",
       "egyptianMarket": "Egyptian Market",
       "valuationTips": "Valuation Tips",
-      "smartBudgeting": "Smart Budgeting"
+      "smartBudgeting": "Smart Budgeting",
+      "byType": "by property type"
     },
     "neighborhoods": {
       "title": "Neighborhoods",

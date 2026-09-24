@@ -9,6 +9,10 @@
     "cta": "View Gallery",
     "badge": "60 designs · 6 collections"
   },
+  "heroSlides": {
+    "montCity": "Mont City Real Estate",
+    "mountAgiba": "Mount Agiba Resort"
+  },
   "controls": {
     "scrollLeft": "Scroll left",
     "scrollRight": "Scroll right",

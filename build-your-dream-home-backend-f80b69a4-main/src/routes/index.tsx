@@ -113,21 +113,23 @@ function IndexPage() {
   return (
     <>
       {/* ===== Hero: project artwork beside the headline + advanced search bar ===== */}
-      <section className="relative overflow-hidden text-white">
+      <section className="relative overflow-hidden text-foreground dark:text-white">
         <HeroBackdrop />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-14 md:pt-14 md:pb-20">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             {/* Copy + search — its own clear zone for reading and interaction */}
             <div>
               <div className="text-center lg:text-start mb-8">
-                <span className="inline-flex items-center gap-2 bg-black/25 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5 text-sm font-medium mb-6 shadow-md">
+                <span className="inline-flex items-center gap-2 bg-white/55 dark:bg-black/25 backdrop-blur-sm border border-black/15 dark:border-white/25 rounded-full px-4 py-1.5 text-sm font-medium mb-6 shadow-md">
                   <Sparkles className="h-4 w-4 text-accent" /> {t("hero.badge")}
                 </span>
-                <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-5 text-balance leading-tight [text-shadow:0_2px_28px_rgba(0,0,0,0.65),0_1px_4px_rgba(0,0,0,0.55)]">
+                <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-5 text-balance leading-tight [text-shadow:0_1px_20px_rgba(255,255,255,0.55)] dark:[text-shadow:0_2px_28px_rgba(0,0,0,0.65),0_1px_4px_rgba(0,0,0,0.55)]">
                   {t("hero.titleLine1")}{" "}
-                  <span className="font-display text-accent [text-shadow:0_2px_28px_rgba(0,0,0,0.65),0_1px_4px_rgba(0,0,0,0.55)]">{t("hero.titleLine2")}</span>
+                  <span className="font-display text-accent dark:[text-shadow:0_2px_28px_rgba(0,0,0,0.65),0_1px_4px_rgba(0,0,0,0.55)]">
+                    {t("hero.titleLine2")}
+                  </span>
                 </h1>
-                <p className="text-lg md:text-xl text-white/95 max-w-2xl mx-auto lg:mx-0 [text-shadow:0_1px_18px_rgba(0,0,0,0.7),0_1px_3px_rgba(0,0,0,0.6)]">
+                <p className="text-lg md:text-xl text-foreground/95 dark:text-white/95 max-w-2xl mx-auto lg:mx-0 [text-shadow:0_1px_16px_rgba(255,255,255,0.5)] dark:[text-shadow:0_1px_18px_rgba(0,0,0,0.7),0_1px_3px_rgba(0,0,0,0.6)]">
                   {t("hero.subtitle")}
                 </p>
               </div>
@@ -147,7 +149,9 @@ function IndexPage() {
             <span className="inline-flex items-center gap-2 text-secondary font-semibold mb-3">
               <BadgeCheck className="h-4 w-4" /> {t("partnerDevelopers.badge")}
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("partnerDevelopers.heading")}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              {t("partnerDevelopers.heading")}
+            </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               {t("partnerDevelopers.subheading")}
             </p>
@@ -159,18 +163,28 @@ function IndexPage() {
                 {
                   key: "mountCity",
                   Icon: Mountain,
+                  ownerKey: "rooya",
                   // Keep Mount City physically on the RIGHT and Agiba on the LEFT in both languages
                   order: isRtl ? "md:order-1" : "md:order-2",
                   images: [
-                    { src: partnerMountCity, alt: t("partnerDevelopers.mountCity.image1Alt"), caption: t("partnerDevelopers.mountCity.image1Caption") },
+                    {
+                      src: partnerMountCity,
+                      alt: t("partnerDevelopers.mountCity.image1Alt"),
+                      caption: t("partnerDevelopers.mountCity.image1Caption"),
+                    },
                   ],
                 },
                 {
                   key: "mountAgiba",
                   Icon: TreePine,
+                  ownerKey: "royal",
                   order: isRtl ? "md:order-2" : "md:order-1",
                   images: [
-                    { src: partnerMountAgiba, alt: t("partnerDevelopers.mountAgiba.image1Alt"), caption: t("partnerDevelopers.mountAgiba.image1Caption") },
+                    {
+                      src: partnerMountAgiba,
+                      alt: t("partnerDevelopers.mountAgiba.image1Alt"),
+                      caption: t("partnerDevelopers.mountAgiba.image1Caption"),
+                    },
                   ],
                 },
               ] as const
@@ -198,10 +212,14 @@ function IndexPage() {
 
                 <div className="p-6 md:p-7">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 mb-3">
-                    <BadgeCheck className="h-3.5 w-3.5" /> {t("partnerDevelopers.verifiedOwner")}
+                    <BadgeCheck className="h-3.5 w-3.5" />{" "}
+                    {t("partnerDevelopers.verifiedOwner", {
+                      owner: t(`partnerDevelopers.owners.${dev.ownerKey}`),
+                    })}
                   </span>
                   <h3 className="text-xl font-bold flex items-center gap-2">
-                    <dev.Icon className="h-5 w-5 text-secondary" /> {t(`partnerDevelopers.${dev.key}.name`)}
+                    <dev.Icon className="h-5 w-5 text-secondary" />{" "}
+                    {t(`partnerDevelopers.${dev.key}.name`)}
                   </h3>
                   <p className="text-sm font-medium text-muted-foreground mt-1">
                     {t(`partnerDevelopers.${dev.key}.owner`)}
@@ -225,9 +243,14 @@ function IndexPage() {
                         <Icon className="h-4 w-4 mt-0.5 text-secondary shrink-0" />
                         <div>
                           <dt className="sr-only">{field}</dt>
-                          <dd className="text-muted-foreground">
-                            {t(`partnerDevelopers.${dev.key}.details.${field}`)}
-                          </dd>
+                          {/* "|"-separated locale values render as stacked lines (e.g. price + per-meter) */}
+                          {t(`partnerDevelopers.${dev.key}.details.${field}`)
+                            .split("|")
+                            .map((line) => (
+                              <dd key={line} className="text-muted-foreground leading-snug">
+                                {line}
+                              </dd>
+                            ))}
                         </div>
                       </div>
                     ))}
@@ -273,7 +296,9 @@ function IndexPage() {
                 <div className="h-11 w-11 rounded-xl bg-brand-gradient flex items-center justify-center mb-3 shadow-glow">
                   <pt.Icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="font-semibold text-lg mb-1.5">{t(`propertyTypes.${pt.key}.title`)}</h3>
+                <h3 className="font-semibold text-lg mb-1.5">
+                  {t(`propertyTypes.${pt.key}.title`)}
+                </h3>
                 <p className="text-sm text-muted-foreground line-clamp-2">
                   {t(`propertyTypes.${pt.key}.desc`)}
                 </p>
@@ -311,7 +336,9 @@ function IndexPage() {
               <Wallet className="h-4 w-4" /> {t("budget.badge")}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("budget.heading")}</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("budget.subheading")}</p>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              {t("budget.subheading")}
+            </p>
           </div>
           <BudgetPlanner properties={featured} />
         </div>
@@ -446,10 +473,26 @@ function IndexPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {(
             [
-              { src: mountCitySea, alt: t("partnerDevelopers.mountCity.image1Alt"), caption: t("partnerDevelopers.mountCity.image1Caption") },
-              { src: mountCityDev, alt: t("partnerDevelopers.mountCity.image2Alt"), caption: t("partnerDevelopers.mountCity.image2Caption") },
-              { src: mountAgibaResort, alt: t("partnerDevelopers.mountAgiba.image1Alt"), caption: t("partnerDevelopers.mountAgiba.image1Caption") },
-              { src: mountAgibaSea, alt: t("partnerDevelopers.mountAgiba.image2Alt"), caption: t("partnerDevelopers.mountAgiba.image2Caption") },
+              {
+                src: mountCitySea,
+                alt: t("partnerDevelopers.mountCity.image1Alt"),
+                caption: t("partnerDevelopers.mountCity.image1Caption"),
+              },
+              {
+                src: mountCityDev,
+                alt: t("partnerDevelopers.mountCity.image2Alt"),
+                caption: t("partnerDevelopers.mountCity.image2Caption"),
+              },
+              {
+                src: mountAgibaResort,
+                alt: t("partnerDevelopers.mountAgiba.image1Alt"),
+                caption: t("partnerDevelopers.mountAgiba.image1Caption"),
+              },
+              {
+                src: mountAgibaSea,
+                alt: t("partnerDevelopers.mountAgiba.image2Alt"),
+                caption: t("partnerDevelopers.mountAgiba.image2Caption"),
+              },
             ] as const
           ).map((g) => (
             <Link
@@ -555,17 +598,27 @@ function PackageCard({
         </span>
       )}
       <h3 className={`text-xl font-bold mb-1.5 ${highlighted ? "text-white" : ""}`}>{name}</h3>
-      <p className={`text-sm mb-5 ${highlighted ? "text-white/80" : "text-muted-foreground"}`}>{tagline}</p>
+      <p className={`text-sm mb-5 ${highlighted ? "text-white/80" : "text-muted-foreground"}`}>
+        {tagline}
+      </p>
       <div className="mb-6">
-        <span className={`text-4xl font-bold ${highlighted ? "text-white" : "text-primary"}`}>{price}</span>{" "}
-        <span className={`text-sm ${highlighted ? "text-white/75" : "text-muted-foreground"}`}>{priceNote}</span>
+        <span className={`text-4xl font-bold ${highlighted ? "text-white" : "text-primary"}`}>
+          {price}
+        </span>{" "}
+        <span className={`text-sm ${highlighted ? "text-white/75" : "text-muted-foreground"}`}>
+          {priceNote}
+        </span>
       </div>
       <ul className="space-y-3 mb-8 flex-1">
         {features.map((f) => {
           const meta = PACKAGE_FEATURES[f];
           return (
             <li key={f} className="flex items-start gap-2.5 text-sm">
-              {meta && <meta.icon className={`h-4 w-4 mt-0.5 shrink-0 ${highlighted ? "text-accent" : "text-secondary"}`} />}
+              {meta && (
+                <meta.icon
+                  className={`h-4 w-4 mt-0.5 shrink-0 ${highlighted ? "text-accent" : "text-secondary"}`}
+                />
+              )}
               <span className={highlighted ? "text-white/90" : "text-muted-foreground"}>
                 {t(`packages.features.${f}`)}
               </span>

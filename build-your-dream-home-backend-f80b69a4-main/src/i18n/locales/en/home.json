@@ -31,29 +31,49 @@
     "budget": "Budget",
     "searchBtn": "Search homes",
     "cities": {
-      "cairo": "Cairo",
-      "fifth_settlement": "Fifth Settlement",
+      "new_cairo": "New Cairo",
+      "october": "6th of October City",
       "sheikh_zayed": "Sheikh Zayed",
-      "october": "6th of October",
-      "giza": "Giza",
-      "nasr_city": "Nasr City",
+      "maadi": "Maadi",
       "heliopolis": "Heliopolis",
       "old_cairo": "Old Cairo",
-      "mohandessin": "Mohandessin",
-      "marsa_matrouh": "Marsa Matrouh",
-      "north_coast": "North Coast"
+      "nasr_city": "Nasr City",
+      "north_coast": "North Coast",
+      "marsa_matrouh": "Marsa Matrouh"
+    },
+    "types": {
+      "apartment": "Apartments",
+      "villa": "Villas",
+      "duplex": "Duplexes",
+      "studio": "Studios",
+      "smart_home": "Smart Homes",
+      "coastal_home": "Coastal Homes",
+      "country_house": "Country Homes",
+      "land": "Land"
     },
     "budgets": {
       "any": "Any budget",
-      "under_2m": "Under 2M EGP",
-      "2m_5m": "2M – 5M EGP",
-      "5m_10m": "5M – 10M EGP",
-      "10m_20m": "10M – 20M EGP",
-      "over_20m": "Over 20M EGP"
+      "b40k": "40,000 EGP",
+      "b75k": "75,000 EGP",
+      "b800k": "800,000 EGP",
+      "b1m": "1,000,000 EGP",
+      "b2_5m": "2,500,000 EGP",
+      "b3_5m": "3,500,000 EGP",
+      "b6m": "6,000,000 EGP",
+      "b12m": "12,000,000 EGP",
+      "b18m": "18,000,000 EGP",
+      "b22m": "22,000,000 EGP",
+      "b30m": "30,000,000 EGP",
+      "b35m": "35,000,000 EGP",
+      "b40m": "40,000,000 EGP",
+      "b50m": "50,000,000 EGP"
     }
   },
   "valueProps": {
-    "curated": { "title": "Curated Listings", "desc": "Hand-picked properties across every style and budget." },
+    "curated": {
+      "title": "Curated Listings",
+      "desc": "Hand-picked properties across every style and budget."
+    },
     "trusted": { "title": "Trusted Broker", "desc": "Verified listings with transparent pricing." },
     "fast": { "title": "Fast Consultation", "desc": "Free expert advice within 24 hours." }
   },
@@ -62,28 +82,44 @@
     "titlePrefix": "Brokers + programmers, powered by",
     "titleHighlight": "Technology",
     "description": "We are a team of real estate experts and programmers specializing in transforming your property search into a fast and smart experience, using the latest <em>artificial intelligence technologies</em>.",
-    "goal": { "title": "Our Goal", "desc": "Make buying, selling, or renting your property easier, faster, and clearer than ever before." },
-    "vision": { "title": "Our Vision", "desc": "A future where everyone can find their perfect property effortlessly." },
-    "futureVision": { "title": "Vision for the Future", "desc": "Integrity of brokers, speed of technology — for everyone." },
-    "aspiration": { "title": "Our Aspiration", "desc": "The leading Arab platform for smart real estate marketing in minutes." }
+    "goal": {
+      "title": "Our Goal",
+      "desc": "Make buying, selling, or renting your property easier, faster, and clearer than ever before."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "desc": "A future where everyone can find their perfect property effortlessly."
+    },
+    "futureVision": {
+      "title": "Vision for the Future",
+      "desc": "Integrity of brokers, speed of technology — for everyone."
+    },
+    "aspiration": {
+      "title": "Our Aspiration",
+      "desc": "The leading Arab platform for smart real estate marketing in minutes."
+    }
   },
   "partnerDevelopers": {
     "badge": "Trusted Development Partners",
     "heading": "Trusted development partners.",
     "subheading": "Direct land opportunities with clear ownership — presented with verified project imagery.",
-    "verifiedOwner": "Land owned by Roya Real Estate Investment",
-    "explore": "Explore listings",
+    "verifiedOwner": "Land owned by {{owner}}",
+    "explore": "Explore offers",
+    "owners": {
+      "rooya": "Rooya Real Estate Investment Company",
+      "royal": "Royal Real Estate Investment Company"
+    },
     "mountCity": {
-      "name": "Mount City",
-      "owner": "Mount City — Roya Real Estate Investment",
-      "desc": "A coastal land opportunity near Agiba Beach with clear ownership and a practical path to build.",
+      "name": "Mont City",
+      "owner": "Mont City — Rooya Real Estate Investment Company",
+      "desc": "Create your own enchanting sea view and build the chalet of your dreams at the highest point in Marsa Matrouh, within the Mont City compound at the Om El Rakham Plateau.",
       "details": {
-        "location": "Marsa Matrouh — near Agiba Beach",
+        "location": "Marsa Matrouh",
         "type": "Coastal residential land",
-        "area": "From 300m² per plot",
-        "price": "Starting from 1,850,000 EGP",
-        "payment": "10% down payment · installments up to 6 years",
-        "status": "Clear ownership — ready to build"
+        "area": "Starting from 200 m² per plot",
+        "price": "Starts at 75,000 EGP|Price per meter starts at 1,000 EGP",
+        "payment": "Monthly installments starting from 3,000 EGP|10% down payment; installments up to 2 years|25% cash discount",
+        "status": "Clear title — ready for construction"
       },
       "image1Alt": "Coastal land by the sea at Mount City, Marsa Matrouh",
       "image2Alt": "Seaside land development plot at Mount City",
@@ -91,16 +127,16 @@
       "image2Caption": "Land development near Agiba Beach"
     },
     "mountAgiba": {
-      "name": "Mount Agiba Resort",
-      "owner": "Mount Agiba Resort — Roya Real Estate Investment",
-      "desc": "A resort-focused land destination in Marsa Matrouh, presented with the same verified project imagery.",
+      "name": "Resort Mont Agiba",
+      "owner": "Resort Mont Agiba — Royal Real Estate Investment Company",
+      "desc": "Invest in the future and enjoy a captivating panoramic view of Marsa Matrouh's most beautiful beaches from your own land within the enchanting Mont Agiba Resort.",
       "details": {
-        "location": "Marsa Matrouh — 10 minutes from the sea",
-        "type": "Resort land destination",
-        "area": "From 200m² per plot",
-        "price": "Starting from 1,200,000 EGP",
-        "payment": "15% down payment · installments up to 8 years",
-        "status": "Resort zoning — hotel & chalet eligible"
+        "location": "Marsa Matrouh",
+        "type": "Resort-zoned land — 20 minutes from the sea",
+        "area": "Starting from 150 m² per plot",
+        "price": "Starts from 40,000 EGP|Price per square meter starts from 1,500 EGP",
+        "payment": "Monthly installments starting from 1,500 EGP|10% down payment; installments over up to 2 years|25% cash discount",
+        "status": "Resort development — suitable for hotels and chalets"
       },
       "image1Alt": "Seaside resort plot at Mount Agiba Resort, 10 minutes from the sea",
       "image2Alt": "Resort-style land development at Mount Agiba",
@@ -112,14 +148,38 @@
     "heading": "Explore all types of properties",
     "subheading": "Click Explore to view actual properties, prices, ratings, and the team behind each project.",
     "explore": "Explore",
-    "land": { "title": "Land in Mount City", "desc": "Verified coastal plots owned by Roya Real Estate Investment." },
-    "resortLand": { "title": "Mount Agiba Land", "desc": "Resort-focused land destinations in Marsa Matrouh." },
-    "apartments": { "title": "Apartments", "desc": "Practical and beautiful apartments of every size for families and individuals." },
-    "duplexes": { "title": "Duplexes", "desc": "Two levels of comfort and privacy with separate family areas." },
-    "villas": { "title": "Villas", "desc": "Luxurious and modern villas with spacious areas in prime locations." },
-    "smartHomes": { "title": "Smart Homes", "desc": "Connected living with app-controlled lighting, AC, and security." },
-    "studios": { "title": "Studios", "desc": "Smart solutions for compact living — perfect investor units." },
-    "countryHouses": { "title": "Country Houses", "desc": "The tranquility of nature with stone, wood, and open green spaces." }
+    "land": {
+      "title": "Land in Mont City",
+      "desc": "Verified coastal plots owned by Rooya Real Estate Investment."
+    },
+    "resortLand": {
+      "title": "Mount Agiba Land",
+      "desc": "Resort-focused land destinations in Marsa Matrouh."
+    },
+    "apartments": {
+      "title": "Apartments",
+      "desc": "Practical and beautiful apartments of every size for families and individuals."
+    },
+    "duplexes": {
+      "title": "Duplexes",
+      "desc": "Two levels of comfort and privacy with separate family areas."
+    },
+    "villas": {
+      "title": "Villas",
+      "desc": "Luxurious and modern villas with spacious areas in prime locations."
+    },
+    "smartHomes": {
+      "title": "Smart Homes",
+      "desc": "Connected living with app-controlled lighting, AC, and security."
+    },
+    "studios": {
+      "title": "Studios",
+      "desc": "Smart solutions for compact living — perfect investor units."
+    },
+    "countryHouses": {
+      "title": "Country Houses",
+      "desc": "The tranquility of nature with stone, wood, and open green spaces."
+    }
   },
   "gallery": {
     "heading": "Property Gallery",
@@ -130,13 +190,34 @@
     "badge": "Platform Features",
     "heading": "Everything you need, built in.",
     "subheading": "Smart tools for clients, brokers, and freelancers — from first search to signed deal.",
-    "maps": { "title": "Accurate Google Maps linking", "desc": "See every property's exact location and its proximity to services around it." },
-    "trend": { "title": "Area price trend graph", "desc": "A simple chart shows whether prices in the area are rising or falling before you commit." },
-    "budget": { "title": "Budget slider matching", "desc": "Slide your down payment and installment period — matching properties appear instantly." },
-    "upload": { "title": "Two-minute property upload", "desc": "List a new property in under two minutes with a guided, streamlined flow." },
-    "trial": { "title": "Free trial for brokers", "desc": "A 7-day free package lets brokers experience the full quality of the platform firsthand." },
-    "filtering": { "title": "Advanced smart filtering", "desc": "Ensures callers are genuinely interested in the property type — like smart homes." },
-    "portfolio": { "title": "Professional broker portfolio", "desc": "Showcase client reviews and each broker's expertise right on their profile." }
+    "maps": {
+      "title": "Accurate Google Maps linking",
+      "desc": "See every property's exact location and its proximity to services around it."
+    },
+    "trend": {
+      "title": "Area price trend graph",
+      "desc": "A simple chart shows whether prices in the area are rising or falling before you commit."
+    },
+    "budget": {
+      "title": "Budget slider matching",
+      "desc": "Slide your down payment and installment period — matching properties appear instantly."
+    },
+    "upload": {
+      "title": "Two-minute property upload",
+      "desc": "List a new property in under two minutes with a guided, streamlined flow."
+    },
+    "trial": {
+      "title": "Free trial for brokers",
+      "desc": "A 7-day free package lets brokers experience the full quality of the platform firsthand."
+    },
+    "filtering": {
+      "title": "Advanced smart filtering",
+      "desc": "Ensures callers are genuinely interested in the property type — like smart homes."
+    },
+    "portfolio": {
+      "title": "Professional broker portfolio",
+      "desc": "Showcase client reviews and each broker's expertise right on their profile."
+    }
   },
   "trend": {
     "badge": "Price Trend",
@@ -169,9 +250,18 @@
   "tips": {
     "heading": "Real Estate Tips",
     "subheading": "Learn from our experts the best practices in buying and investing in real estate.",
-    "location": { "title": "Choosing Property Location", "desc": "The right location maximizes investment value. Study the neighborhood and future growth carefully." },
-    "valuation": { "title": "Market Valuation", "desc": "Set a realistic budget and check market prices to get the best deal without overpaying." },
-    "legal": { "title": "Legal Verification", "desc": "Ensure all property documents and ownership titles are clear and legally sound." }
+    "location": {
+      "title": "Choosing Property Location",
+      "desc": "The right location maximizes investment value. Study the neighborhood and future growth carefully."
+    },
+    "valuation": {
+      "title": "Market Valuation",
+      "desc": "Set a realistic budget and check market prices to get the best deal without overpaying."
+    },
+    "legal": {
+      "title": "Legal Verification",
+      "desc": "Ensure all property documents and ownership titles are clear and legally sound."
+    }
   },
   "featured": {
     "heading": "Featured Properties",
@@ -254,27 +344,66 @@
   "steps": {
     "heading": "Start Searching",
     "subheading": "Follow these simple steps to find your dream property.",
-    "createAccount": { "title": "Create Account", "desc": "Create your personal account on our platform." },
-    "browseListings": { "title": "Browse Listings", "desc": "Explore the property gallery and use smart filters." },
-    "scheduleTour": { "title": "Schedule a Tour", "desc": "Book a physical or virtual tour with our experts." },
-    "closeDeal": { "title": "Close the Deal", "desc": "Get full legal support to complete your purchase safely." }
+    "createAccount": {
+      "title": "Create Account",
+      "desc": "Create your personal account on our platform."
+    },
+    "browseListings": {
+      "title": "Browse Listings",
+      "desc": "Explore the property gallery and use smart filters."
+    },
+    "scheduleTour": {
+      "title": "Schedule a Tour",
+      "desc": "Book a physical or virtual tour with our experts."
+    },
+    "closeDeal": {
+      "title": "Close the Deal",
+      "desc": "Get full legal support to complete your purchase safely."
+    }
   },
   "consultationSection": {
     "heading": "Client Consultation",
     "subheading": "Our team combines artificial intelligence with real human support to guide you through every step of your real estate journey.",
-    "personalized": { "title": "Personalized Support", "desc": "Real brokers ready to help you at every step — completely free of charge." },
-    "smartValuation": { "title": "Smart Valuation", "desc": "Answer simple questions and receive property recommendations that speak to your style and budget." },
-    "transparency": { "title": "Price Transparency", "desc": "No hidden fees. Real-time market prices for all properties." }
+    "personalized": {
+      "title": "Personalized Support",
+      "desc": "Real brokers ready to help you at every step — completely free of charge."
+    },
+    "smartValuation": {
+      "title": "Smart Valuation",
+      "desc": "Answer simple questions and receive property recommendations that speak to your style and budget."
+    },
+    "transparency": {
+      "title": "Price Transparency",
+      "desc": "No hidden fees. Real-time market prices for all properties."
+    }
   },
   "whyChooseUs": {
     "heading": "Why Choose Us?",
     "subheading": "Because we're truly different. We combine Technology with human expertise for your perfect real estate experience.",
-    "technology": { "title": "Technology-Powered", "desc": "Latest artificial intelligence for accurate property matching." },
-    "humanSupport": { "title": "Human Support", "desc": "Real certified experts to guide you personally." },
-    "saveTime": { "title": "Save Time", "desc": "Find your perfect property in minutes, not weeks." },
-    "saveMoney": { "title": "Save Money", "desc": "Best market deals with zero hidden commissions." },
-    "uniqueExperience": { "title": "Unique Experience", "desc": "Simple interface anyone can use." },
-    "verifiedListings": { "title": "Verified Listings", "desc": "Properties of all sizes with full price transparency and free consultation." },
+    "technology": {
+      "title": "Technology-Powered",
+      "desc": "Latest artificial intelligence for accurate property matching."
+    },
+    "humanSupport": {
+      "title": "Human Support",
+      "desc": "Real certified experts to guide you personally."
+    },
+    "saveTime": {
+      "title": "Save Time",
+      "desc": "Find your perfect property in minutes, not weeks."
+    },
+    "saveMoney": {
+      "title": "Save Money",
+      "desc": "Best market deals with zero hidden commissions."
+    },
+    "uniqueExperience": {
+      "title": "Unique Experience",
+      "desc": "Simple interface anyone can use."
+    },
+    "verifiedListings": {
+      "title": "Verified Listings",
+      "desc": "Properties of all sizes with full price transparency and free consultation."
+    },
     "quote": "\"You won't find all of this anywhere else, because we work to achieve one goal: for you to invest or buy your dream property with confidence, without wasting time or money.\""
   },
   "cta": {

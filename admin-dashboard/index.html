@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BuildYourHome — Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<!-- ============================= FIREBASE v10 (modular, CDN — no build tools) ============================= -->
+<script type="module" src="./app.js"></script>
+
+<style>
+  :root {
+    --bg: #0a1a26;
+    --surface: #0f2536;
+    --surface-2: #142c40;
+    --border: rgba(255,255,255,0.08);
+    --text: #f3f6f8;
+    --text-muted: #93a5b3;
+    --primary: #0f2a3d;
+    --secondary: #17b384;
+    --accent: #f0b429;
+    --danger: #e6564a;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-display { font-family: 'Outfit', 'Inter', sans-serif; }
+  svg.ic { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+  /* ============ Login gate ============ */
+  #gate {
+    position: fixed; inset: 0; z-index: 100;
+    background: radial-gradient(1200px 600px at 20% 0%, #123247 0%, var(--bg) 60%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #gate.hidden { display: none; }
+  .gate-card {
+    width: min(400px, 90vw);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 32px; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    animation: fadeInUp 500ms var(--ease) both;
+  }
+  .gate-card h1 { font-family: 'Outfit', sans-serif; font-size: 22px; margin: 14px 0 4px; }
+  .gate-card p { color: var(--text-muted); font-size: 13px; margin: 0 0 20px; }
+  .gate-field { margin-bottom: 14px; }
+  .gate-field label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .gate-field input {
+    width: 100%; padding: 11px 14px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+    font-size: 14px; outline: none; transition: border-color 150ms;
+  }
+  .gate-field input:focus { border-color: var(--secondary); }
+  .gate-btn {
+    width: 100%; padding: 12px; border: none; border-radius: 10px;
+    background: var(--secondary); color: #06231a; font-weight: 700; font-size: 14px;
+    cursor: pointer; transition: filter 150ms; margin-top: 6px;
+  }
+  .gate-btn:hover { filter: brightness(1.08); }
+  .gate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .gate-error {
+    display: none; margin-top: 14px; padding: 10px 12px; border-radius: 10px;
+    background: rgba(230,86,74,0.12); border: 1px solid rgba(230,86,74,0.35);
+    color: #ff9d94; font-size: 12.5px;
+  }
+  .gate-error.show { display: block; }
+  .gate-success {
+    display: none; margin-top: 10px; padding: 10px 12px; border-radius: 10px;
+    background: rgba(23,179,132,0.12); border: 1px solid rgba(23,179,132,0.35);
+    color: #4ce0ac; font-size: 12.5px;
+  }
+  .gate-success.show { display: block; }
+  .gate-link {
+    display: block; margin-top: 14px; width: 100%; background: none; border: none;
+    color: var(--text-muted); font-size: 12.5px; cursor: pointer; text-align: center;
+    text-decoration: underline; text-underline-offset: 3px; padding: 4px;
+  }
+  .gate-link:hover { color: var(--secondary); }
+  .reset-panel { display: none; }
+  .reset-panel.show { display: block; animation: fadeInUp 300ms var(--ease) both; }
+  .reset-title { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .reset-hint { color: var(--text-muted); font-size: 12px; margin: 0 0 16px; }
+  .gate-brand { display: flex; align-items: center; gap: 10px; }
+  .gate-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(23,179,132,0.4);
+  }
+
+  /* ============ App shell ============ */
+  #app { display: none; }
+  #app.ready { display: block; }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+  .sidebar {
+    background: var(--primary);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    animation: slideInLeft 600ms var(--ease) both;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 28px; }
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(23,179,132,0.4);
+  }
+  .brand-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 17px; }
+  .brand-sub { font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .nav-section { margin-bottom: 24px; }
+  .nav-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); padding: 0 12px 8px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 10px;
+    color: var(--text-muted); font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all 180ms var(--ease); margin-bottom: 2px;
+    position: relative;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+  .nav-item.active { background: rgba(23,179,132,0.14); color: #4ce0ac; }
+  .nav-item.active::before {
+    content: ''; position: absolute; left: -16px; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 20px; background: var(--secondary); border-radius: 0 4px 4px 0;
+  }
+  .nav-badge {
+    margin-inline-start: auto; background: var(--accent); color: #21160a;
+    font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 999px;
+  }
+
+  .main { padding: 28px 32px 60px; max-width: 1400px; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; gap: 16px; flex-wrap: wrap;
+    animation: fadeInUp 600ms var(--ease) both;
+  }
+  .page-title { font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; }
+  .page-sub { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+  .topbar-actions { display: flex; align-items: center; gap: 10px; }
+  .search {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 8px 14px; width: 260px; color: var(--text-muted); font-size: 13px;
+  }
+  .search input {
+    background: transparent; border: none; outline: none; color: var(--text);
+    font-size: 13px; width: 100%;
+  }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: #10202b;
+  }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 10px; background: var(--surface);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); cursor: pointer; transition: all 180ms var(--ease); position: relative;
+  }
+  .icon-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .dot { position: absolute; top: 7px; right: 8px; width: 7px; height: 7px; border-radius: 999px; background: var(--danger); }
+  .btn-signout {
+    padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text-muted); font-size: 12.5px; font-weight: 600;
+    cursor: pointer; transition: all 180ms var(--ease);
+  }
+  .btn-signout:hover { color: var(--danger); border-color: var(--danger); }
+
+  /* Views (SPA sections) */
+  .view { display: none; }
+  .view.active { display: block; animation: fadeInUp 400ms var(--ease) both; }
+
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px; opacity: 0; transform: translateY(16px);
+    transition: opacity 600ms var(--ease), transform 600ms var(--ease), border-color 200ms;
+  }
+  .kpi-card.revealed { opacity: 1; transform: translateY(0); }
+  .kpi-card:hover { border-color: rgba(23,179,132,0.4); transform: translateY(-3px); }
+  .kpi-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+  .kpi-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .kpi-trend { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 3px; }
+  .kpi-trend svg { width: 13px; height: 13px; }
+  .kpi-trend.up { color: #4ce0ac; }
+  .kpi-trend.down { color: var(--danger); }
+  .kpi-value { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 700; line-height: 1; }
+  .kpi-label { color: var(--text-muted); font-size: 13px; margin-top: 6px; }
+  .kpi-live {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; color: #4ce0ac; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .kpi-live::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: #4ce0ac; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  .panel-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 1100px) { .panel-grid { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+  }
+  .panel.revealed { opacity: 1; transform: translateY(0); }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .panel-title { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; }
+  .panel-sub { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+  .pill-toggle { display: flex; background: var(--surface-2); border-radius: 8px; padding: 3px; font-size: 12px; }
+  .pill-toggle span { padding: 5px 12px; border-radius: 6px; color: var(--text-muted); cursor: pointer; }
+  .pill-toggle span.active { background: var(--secondary); color: #06231a; font-weight: 600; }
+
+  .bottom-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  @media (max-width: 1100px) { .bottom-grid { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--text-muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; padding: 0 10px 10px; }
+  td { padding: 12px 10px; border-top: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .status-pill { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; display: inline-block; }
+  .status-new { background: rgba(240,180,41,0.15); color: var(--accent); }
+  .status-progress { background: rgba(23,179,132,0.15); color: #4ce0ac; }
+  .status-done { background: rgba(255,255,255,0.08); color: var(--text-muted); }
+  .row-name { font-weight: 600; }
+  .row-sub { color: var(--text-muted); font-size: 11px; margin-top: 1px; }
+  .empty-row { color: var(--text-muted); font-style: italic; padding: 18px 10px; }
+
+  .prop-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }
+  .prop-item:first-child { border-top: none; padding-top: 0; }
+  .prop-thumb { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: var(--surface-2); }
+  .prop-name { font-size: 13px; font-weight: 600; }
+  .prop-meta { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .prop-price { margin-inline-start: auto; font-size: 13px; font-weight: 700; color: var(--accent); font-family: 'Outfit', sans-serif; }
+
+  /* Full-page views: Properties / Inquiries tables */
+  .table-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+  .props-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .prop-card {
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    transition: transform 180ms var(--ease), border-color 180ms;
+  }
+  .prop-card:hover { transform: translateY(-3px); border-color: rgba(23,179,132,0.4); }
+  .prop-card img { width: 100%; height: 130px; object-fit: cover; display: block; background: var(--surface); }
+  .prop-card-body { padding: 12px 14px; }
+  .prop-card-title { font-weight: 600; font-size: 13.5px; }
+  .prop-card-meta { color: var(--text-muted); font-size: 11.5px; margin-top: 3px; }
+  .prop-card-price { color: var(--accent); font-family: 'Outfit', sans-serif; font-weight: 700; margin-top: 8px; font-size: 14px; }
+
+  .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; max-width: 640px; }
+  .settings-row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-top: 1px solid var(--border); font-size: 13px; }
+  .settings-row:first-of-type { border-top: none; }
+  .settings-k { color: var(--text-muted); }
+  .settings-v { font-weight: 600; text-align: end; word-break: break-all; }
+  .conn-ok { color: #4ce0ac; }
+  .conn-bad { color: #ff9d94; }
+
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideInLeft { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: translateX(0); } }
+</style>
+</head>
+<body>
+
+<!-- ======================= LOGIN GATE (Firebase Auth) ======================= -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-brand">
+      <div class="gate-mark"><svg class="ic" style="color:white" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+      <div class="brand-name">BuildYourHome</div>
+    </div>
+    <h1>Admin sign-in</h1>
+    <p>This dashboard is restricted to a single authorized administrator.</p>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="gate-field">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" required placeholder="admin@example.com" />
+      </div>
+      <div class="gate-field">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" required placeholder="••••••••" />
+      </div>
+      <button class="gate-btn" id="loginBtn" type="submit">Sign in</button>
+    </form>
+    <button class="gate-link" id="forgotLink" type="button">Forgot password?</button>
+
+    <!-- Hidden until "Forgot password?" is clicked -->
+    <div id="resetPanel" class="reset-panel">
+      <div class="reset-title">Reset your password</div>
+      <p class="reset-hint" id="resetHint">
+        We'll email a reset link to the admin address. Click the link in the
+        email, then come back here to set the new password.
+      </p>
+      <div class="gate-field">
+        <label for="resetEmail">Email</label>
+        <input id="resetEmail" type="email" placeholder="buildyourhom@gmail.com" />
+      </div>
+      <div id="setNewPasswordFields" style="display:none">
+        <div class="gate-field">
+          <label for="newPassword">New password</label>
+          <input id="newPassword" type="password" placeholder="At least 6 characters" />
+        </div>
+        <button class="gate-btn" id="saveNewPasswordBtn" type="button">Set new password</button>
+      </div>
+      <button class="gate-btn" id="sendResetBtn" type="button">Send reset link</button>
+      <button class="gate-link" id="backToLoginBtn" type="button">← Back to sign in</button>
+    </div>
+
+    <div class="gate-error" id="gateError"></div>
+    <div class="gate-success" id="gateSuccess"></div>
+  </div>
+</div>
+
+<!-- ======================= APP SHELL ======================= -->
+<div id="app">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><svg class="ic" style="color:white" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+        <div>
+          <div class="brand-name">BuildYourHome</div>
+          <div class="brand-sub">Admin</div>
+        </div>
+      </div>
+
+      <nav class="nav-section">
+        <div class="nav-label">Overview</div>
+        <div class="nav-item active" data-view="dashboard"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Dashboard</div>
+        <div class="nav-item" data-view="analytics"><svg class="ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Analytics</div>
+      </nav>
+      <nav class="nav-section">
+        <div class="nav-label">Manage</div>
+        <div class="nav-item" data-view="properties"><svg class="ic" viewBox="0 0 24 24"><path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18Z"/><path d="M6 12H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2"/><path d="M18 9h2a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg>Properties<span class="nav-badge" id="navPropBadge" style="display:none">0</span></div>
+        <div class="nav-item" data-view="inquiries"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Inquiries<span class="nav-badge" id="navInqBadge">0</span></div>
+        <div class="nav-item" data-view="consultations"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16h4"/></svg>Consultations<span class="nav-badge" id="navConsBadge">0</span></div>
+        <div class="nav-item" data-view="customers"><svg class="ic" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Customers</div>
+      </nav>
+      <nav class="nav-section">
+        <div class="nav-label">System</div>
+        <div class="nav-item" data-view="roles"><svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Roles &amp; access</div>
+        <div class="nav-item" data-view="settings"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>Settings</div>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="page-title font-display" id="pageTitle">Overview</div>
+          <div class="page-sub" id="pageSub">Welcome back — here's what's happening today.</div>
+        </div>
+        <div class="topbar-actions">
+          <div class="search">
+            <svg class="ic" style="width:16px;height:16px" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="searchInput" type="text" placeholder="Search properties, leads…" />
+          </div>
+          <button class="btn-signout" id="signOutBtn" title="Sign out">Sign out</button>
+          <div class="avatar" id="userAvatar">A</div>
+        </div>
+      </div>
+
+      <!-- ============ VIEW: DASHBOARD ============ -->
+      <section class="view active" id="view-dashboard">
+        <div class="kpi-grid" id="kpiGrid">
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon" style="background:rgba(23,179,132,0.15)"><svg class="ic" style="color:#4ce0ac" viewBox="0 0 24 24"><path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18Z"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg></div>
+              <span class="kpi-live">live</span>
+            </div>
+            <div class="kpi-value" id="kpiListings">—</div>
+            <div class="kpi-label">Active listings</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon" style="background:rgba(240,180,41,0.15)"><svg class="ic" style="color:#f0b429" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+              <span class="kpi-live">live</span>
+            </div>
+            <div class="kpi-value" id="kpiInquiries">—</div>
+            <div class="kpi-label">New inquiries (30d)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon" style="background:rgba(59,130,246,0.15)"><svg class="ic" style="color:#60a5fa" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16h4"/></svg></div>
+              <span class="kpi-live">live</span>
+            </div>
+            <div class="kpi-value" id="kpiConsultations">—</div>
+            <div class="kpi-label">Consultations (30d)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon" style="background:rgba(230,86,74,0.15)"><svg class="ic" style="color:#e6564a" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <span class="kpi-live">live</span>
+            </div>
+            <div class="kpi-value" id="kpiCustomers">—</div>
+            <div class="kpi-label">Total customers</div>
+          </div>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel" id="panelChart">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Inquiries &amp; consultations</div>
+                <div class="panel-sub" id="trendSub">Last 6 months — live from Firestore</div>
+              </div>
+              <div class="pill-toggle" id="trendToggle">
+                <span class="active" data-range="monthly">Monthly</span>
+                <span data-range="weekly">Weekly</span>
+              </div>
+            </div>
+            <div style="position:relative; height:260px;">
+              <canvas id="trendChart"></canvas>
+            </div>
+          </div>
+
+          <div class="panel" id="panelDonut">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Listings by type</div>
+                <div class="panel-sub" id="donutSub">— active properties</div>
+              </div>
+            </div>
+            <div style="position:relative; height:200px;">
+              <canvas id="typeChart"></canvas>
+            </div>
+            <div id="typeLegend" style="display:flex; flex-direction:column; gap:8px; margin-top:14px; font-size:12px;"></div>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="panel" id="panelTable">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Recent inquiries</div>
+                <div class="panel-sub">Latest activity across all listings</div>
+              </div>
+            </div>
+            <table>
+              <thead><tr><th>Contact</th><th>Property</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody id="inquiryRows"></tbody>
+            </table>
+          </div>
+
+          <div class="panel" id="panelProps">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Newest listings</div>
+                <div class="panel-sub">Most recently added properties</div>
+              </div>
+            </div>
+            <div id="propList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: ANALYTICS ============ -->
+      <section class="view" id="view-analytics">
+        <div class="panel-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Inquiries &amp; consultations</div>
+                <div class="panel-sub">Full history — live from Firestore</div>
+              </div>
+            </div>
+            <div style="position:relative; height:320px;">
+              <canvas id="analyticsTrend"></canvas>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Listings by type</div>
+                <div class="panel-sub">Share of active inventory</div>
+              </div>
+            </div>
+            <div style="position:relative; height:320px;">
+              <canvas id="analyticsDonut"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: PROPERTIES ============ -->
+      <section class="view" id="view-properties">
+        <div class="table-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">All properties</div>
+              <div class="panel-sub"><span id="propsCount">—</span> live documents in the collection</div>
+            </div>
+          </div>
+          <div class="props-grid" id="propsGrid"></div>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: INQUIRIES ============ -->
+      <section class="view" id="view-inquiries">
+        <div class="table-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">All inquiries</div>
+              <div class="panel-sub">Newest first — live from Firestore</div>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Contact</th><th>Property</th><th>Message</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="allInquiryRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: CONSULTATIONS ============ -->
+      <section class="view" id="view-consultations">
+        <div class="table-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Consultation requests</div>
+              <div class="panel-sub">Newest first — live from Firestore</div>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Contact</th><th>Topic</th><th>Date</th></tr></thead>
+            <tbody id="consultationRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: CUSTOMERS ============ -->
+      <section class="view" id="view-customers">
+        <div class="table-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Customers</div>
+              <div class="panel-sub">People who contacted you — live from Firestore</div>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Inquiries</th></tr></thead>
+            <tbody id="customerRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: ROLES ============ -->
+      <section class="view" id="view-roles">
+        <div class="settings-card">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Roles &amp; access</div>
+              <div class="panel-sub">Enforced in code AND by Firestore security rules</div>
+            </div>
+          </div>
+          <div class="settings-row"><span class="settings-k">Authorized admin</span><span class="settings-v conn-ok" id="rolesAdmin">—</span></div>
+          <div class="settings-row"><span class="settings-k">Signed in as</span><span class="settings-v" id="rolesUser">—</span></div>
+          <div class="settings-row"><span class="settings-k">Access level</span><span class="settings-v conn-ok">Full (sole admin)</span></div>
+          <div class="settings-row"><span class="settings-k">Other accounts</span><span class="settings-v conn-bad">Rejected at login + blocked by security rules</span></div>
+        </div>
+      </section>
+
+      <!-- ============ VIEW: SETTINGS ============ -->
+      <section class="view" id="view-settings">
+        <div class="settings-card">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Settings</div>
+              <div class="panel-sub">Connection &amp; runtime diagnostics</div>
+            </div>
+          </div>
+          <div class="settings-row"><span class="settings-k">Firebase project</span><span class="settings-v" id="setProject">—</span></div>
+          <div class="settings-row"><span class="settings-k">Database status</span><span class="settings-v" id="setFirestore">—</span></div>
+          <div class="settings-row"><span class="settings-k">Realtime listeners</span><span class="settings-v conn-ok" id="setListeners">0 active</span></div>
+          <div class="settings-row"><span class="settings-k">Server binding</span><span class="settings-v conn-ok">127.0.0.1 (localhost only)</span></div>
+          <div class="settings-row"><span class="settings-k">Authorized admin email</span><span class="settings-v" id="setAdmin">—</span></div>
+          <div class="settings-row"><span class="settings-k">Last sync</span><span class="settings-v" id="setSync">—</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

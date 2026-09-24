@@ -2,14 +2,29 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUp, ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
+import heroApartments from "@/assets/type-hero/apartments.jpg";
+import heroVillas from "@/assets/type-hero/villas.jpg";
+import heroDuplex from "@/assets/type-hero/duplex.jpg";
+import heroCountryHouses from "@/assets/type-hero/country-houses.jpg";
+import heroStudios from "@/assets/type-hero/studios.jpg";
+import heroMontCity from "@/assets/type-hero/mont-city.jpg";
+import heroMountAgiba from "@/assets/type-hero/mount-agiba.jpg";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
       { title: "Design Gallery — BuildYourHome" },
-      { name: "description", content: "Explore residential apartments, villas, duplexes, country houses, studios, and custom home designs." },
+      {
+        name: "description",
+        content:
+          "Explore residential apartments, villas, duplexes, country houses, studios, and custom home designs.",
+      },
       { property: "og:title", content: "Design Gallery — BuildYourHome" },
-      { property: "og:description", content: "Explore residential apartments, villas, duplexes, country houses, studios, and custom home designs." },
+      {
+        property: "og:description",
+        content:
+          "Explore residential apartments, villas, duplexes, country houses, studios, and custom home designs.",
+      },
     ],
   }),
   component: GalleryPage,
@@ -18,7 +33,7 @@ export const Route = createFileRoute("/gallery")({
 type CardText = { alt: string; short: string; title: string; features: string[] };
 
 const SECTION_IMAGES: Record<string, string[]> = {
-  "apartments": [
+  apartments: [
     "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop",
@@ -28,9 +43,9 @@ const SECTION_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&auto=format&fit=crop",
   ],
-  "villas": [
+  villas: [
     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=800&auto=format&fit=crop",
@@ -40,9 +55,9 @@ const SECTION_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600566752229-250db9f8c2b9?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600566753475-d6b5c7dc4e33?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566752371-8d8b7d572d51?w=800&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1600566752371-8d8b7d572d51?w=800&auto=format&fit=crop",
   ],
-  "duplexes": [
+  duplexes: [
     "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=800&auto=format&fit=crop",
@@ -52,7 +67,7 @@ const SECTION_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1600210491726-7a8c9b6b5a5d?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600210492220-9b5b6b7d1b0a?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600210491366-e465dfb15b38?w=800&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1600210491366-e465dfb15b38?w=800&auto=format&fit=crop",
   ],
   "country-houses": [
     "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&auto=format&fit=crop",
@@ -64,9 +79,9 @@ const SECTION_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1600566753475-d6b5c7dc4e33?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600566752371-8d8b7d572d51?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600566752229-250db9f8c2b9?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566752371-8d8b7d572d51?w=800&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1600566752371-8d8b7d572d51?w=800&auto=format&fit=crop",
   ],
-  "studios": [
+  studios: [
     "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop",
@@ -76,7 +91,7 @@ const SECTION_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600210491366-e465dfb15b38?w=800&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1600210491366-e465dfb15b38?w=800&auto=format&fit=crop",
   ],
   "custom-designs": [
     "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&auto=format&fit=crop",
@@ -88,11 +103,18 @@ const SECTION_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600566752371-8d8b7d572d51?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&auto=format&fit=crop"
-  ]
+    "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&auto=format&fit=crop",
+  ],
 };
 
-const SLUGS = ["apartments", "villas", "duplexes", "country-houses", "studios", "custom-designs"] as const;
+const SLUGS = [
+  "apartments",
+  "villas",
+  "duplexes",
+  "country-houses",
+  "studios",
+  "custom-designs",
+] as const;
 
 /** Varied tile heights drive the masonry rhythm (cycled per card). */
 const MASONRY_HEIGHTS = [
@@ -104,11 +126,36 @@ const MASONRY_HEIGHTS = [
   "h-80 sm:h-[28rem]",
 ] as const;
 
+/** Full-screen hero slides — same imagery as the property-types hero. */
+const HERO_SLIDES = [
+  { src: heroApartments, altKey: "sections.apartments.title" },
+  { src: heroVillas, altKey: "sections.villas.title" },
+  { src: heroDuplex, altKey: "sections.duplexes.title" },
+  { src: heroCountryHouses, altKey: "sections.country-houses.title" },
+  { src: heroStudios, altKey: "sections.studios.title" },
+  { src: heroMontCity, altKey: "heroSlides.montCity" },
+  { src: heroMountAgiba, altKey: "heroSlides.mountAgiba" },
+] as const;
+
+/** Image rotation interval in milliseconds (5 seconds). */
+const ROTATE_INTERVAL = 5000;
+
 function GalleryPage() {
   const { t } = useTranslation("gallery");
   const [activeSlug, setActiveSlug] = useState<string>(SLUGS[0]);
   const [showTop, setShowTop] = useState(false);
+  const [heroIndex, setHeroIndex] = useState(0);
   const navRefs = useRef<Partial<Record<(typeof SLUGS)[number], HTMLAnchorElement | null>>>({});
+
+  // Hero rotates every 5 seconds; heroIndex in deps restarts the timer after a
+  // manual dot jump so a freshly chosen slide always gets its full 5 seconds.
+  useEffect(() => {
+    const id = setInterval(
+      () => setHeroIndex((i) => (i + 1) % HERO_SLIDES.length),
+      ROTATE_INTERVAL,
+    );
+    return () => clearInterval(id);
+  }, [heroIndex]);
 
   // Scroll-spy: highlight the collection currently under the sticky nav.
   useEffect(() => {
@@ -138,24 +185,75 @@ function GalleryPage() {
 
   return (
     <div className="bg-background">
-      {/* ===== Editorial hero ===== */}
-      <section className="relative bg-hero-gradient text-primary-foreground overflow-hidden">
-        <div className="pointer-events-none absolute -end-32 -top-32 h-96 w-96 rounded-full border-[3rem] border-white/10" aria-hidden />
-        <div className="pointer-events-none absolute -start-24 bottom-0 h-64 w-64 rounded-full bg-white/5 blur-2xl" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium mb-6">
+      {/* ===== Full-screen hero with rotating imagery ===== */}
+      <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden text-primary-foreground">
+        {/* Full-screen rotating imagery — the hero's own backdrop, advancing every 5 seconds */}
+        <div
+          className="absolute inset-0"
+          aria-roledescription="carousel"
+          aria-label={t("hero.badge")}
+        >
+          {HERO_SLIDES.map((slide, i) => (
+            <div
+              key={slide.altKey}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                i === heroIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
+              aria-hidden={i !== heroIndex}
+            >
+              <img
+                src={slide.src}
+                alt={i === heroIndex ? t(slide.altKey) : ""}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+                draggable={false}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ))}
+          {/* Subtle scrim so the headline stays readable over any slide */}
+          <div
+            className="absolute inset-0 z-20 bg-gradient-to-b from-black/65 via-black/35 to-black/65"
+            aria-hidden="true"
+          />
+        </div>
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium mb-6 backdrop-blur">
             {t("hero.badge")}
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 max-w-3xl text-balance leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 max-w-3xl text-balance leading-tight [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]">
             {t("hero.title")}
           </h1>
-          <p className="text-lg md:text-xl opacity-90 max-w-2xl mb-8">{t("hero.subtitle")}</p>
+          <p className="text-lg md:text-xl opacity-90 max-w-2xl mb-8 [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]">
+            {t("hero.subtitle")}
+          </p>
           <a
             href={`#${SLUGS[0]}`}
             className="inline-block bg-accent text-accent-foreground px-6 py-3 rounded-lg font-bold hover:-translate-y-0.5 transition shadow-soft"
           >
             {t("hero.cta")}
           </a>
+        </div>
+
+        <div
+          className="absolute inset-x-0 bottom-6 z-20 flex items-center justify-center gap-2"
+          role="tablist"
+          aria-label={t("hero.badge")}
+        >
+          {HERO_SLIDES.map((slide, i) => (
+            <button
+              key={slide.altKey}
+              type="button"
+              role="tab"
+              aria-selected={i === heroIndex}
+              aria-label={t(slide.altKey)}
+              onClick={() => setHeroIndex(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === heroIndex ? "w-7 bg-accent" : "w-2 bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          ))}
         </div>
       </section>
 
@@ -167,7 +265,9 @@ function GalleryPage() {
               <a
                 key={slug}
                 href={`#${slug}`}
-                ref={(el) => { navRefs.current[slug] = el; }}
+                ref={(el) => {
+                  navRefs.current[slug] = el;
+                }}
                 aria-current={activeSlug === slug ? "true" : undefined}
                 className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   activeSlug === slug
@@ -175,7 +275,9 @@ function GalleryPage() {
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
-                <span className="opacity-50 me-1.5 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                <span className="opacity-50 me-1.5 tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 {t(`sections.${slug}.title`)}
               </a>
             ))}
@@ -245,7 +347,9 @@ function GallerySection({ slug }: { slug: string }) {
             {String(index).padStart(2, "0")}
           </span>
           <div className="relative">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">{t(`sections.${slug}.title`)}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">
+              {t(`sections.${slug}.title`)}
+            </h2>
             <p className="text-muted-foreground mt-1">{t(`sections.${slug}.subtitle`)}</p>
           </div>
         </div>
@@ -297,7 +401,9 @@ function GallerySection({ slug }: { slug: string }) {
             {/* Prev / next — logical order mirrors in RTL */}
             <button
               type="button"
-              onClick={() => setLightbox((v) => (v === null ? v : (v - (isRtl ? -1 : 1) + total) % total))}
+              onClick={() =>
+                setLightbox((v) => (v === null ? v : (v - (isRtl ? -1 : 1) + total) % total))
+              }
               aria-label={t("controls.scrollLeft")}
               className="absolute start-2 sm:-start-5 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-primary shadow-md hover:bg-white transition"
             >
@@ -305,7 +411,9 @@ function GallerySection({ slug }: { slug: string }) {
             </button>
             <button
               type="button"
-              onClick={() => setLightbox((v) => (v === null ? v : (v + (isRtl ? -1 : 1) + total) % total))}
+              onClick={() =>
+                setLightbox((v) => (v === null ? v : (v + (isRtl ? -1 : 1) + total) % total))
+              }
               aria-label={t("controls.scrollRight")}
               className="absolute end-2 sm:-end-5 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-primary shadow-md hover:bg-white transition"
             >
