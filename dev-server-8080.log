@@ -1,0 +1,13 @@
+
+> dev
+> vite dev --port 8080
+
+
+  [32m[1mVITE[22m v7.3.2[39m  [2mready in [0m[1m25385[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m8080[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.17.80.1:[1m8080[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.100.102:[1m8080[22m/[39m
+[vite] connected.
+[2m٧:٠٩:١١ م[22m [36m[1m[vite][22m[39m changed tsconfig file detected: C:/Users/Administrator/Downloads/187a9ce5e_build-your-dream-home-backend-f80b69a4-main2/build-your-dream-home-backend-f80b69a4-main2/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[vite] program reload
