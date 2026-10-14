@@ -1,0 +1,245 @@
+{
+  "types": {
+    "studio": {
+      "name": "Smart Studio",
+      "tagline": "Compact intelligence — every square meter earns its keep.",
+      "idealFamily": "1 person",
+      "maintenance": "Low",
+      "liquidity": "High",
+      "acStrategy": "Single split unit with smart zoning",
+      "sustainability": ["LED-only lighting", "Compact thermal envelope", "Low water fixtures"],
+      "spaceTrick": "Convertible furniture + mezzanine = 28m² feels like 42m².",
+      "zones": {
+        "livingSleep": "Living / Sleep",
+        "kitchen": "Kitchen",
+        "bath": "Bath",
+        "storage": "Storage"
+      }
+    },
+    "apartment": {
+      "name": "Smart Apartment",
+      "tagline": "Vertical living, optimized for modern households.",
+      "idealFamily": "2–4 people",
+      "maintenance": "Low",
+      "liquidity": "High",
+      "acStrategy": "Central VRF with per-room thermostats",
+      "sustainability": ["Shared building insulation", "Greywater recycling", "Smart metering"],
+      "spaceTrick": "Open-plan + concealed storage walls turn 100m² into perceived 130m².",
+      "zones": {
+        "livingDining": "Living / Dining",
+        "bedrooms": "Bedrooms",
+        "kitchen": "Kitchen",
+        "bathUtility": "Bath / Utility"
+      }
+    },
+    "duplex": {
+      "name": "Duplex Design",
+      "tagline": "Two floors, one family — privacy by vertical zoning.",
+      "idealFamily": "4–6 people",
+      "maintenance": "Medium",
+      "liquidity": "Medium",
+      "acStrategy": "Two-zone central AC, upper/lower independent",
+      "sustainability": ["Stacked plumbing core", "Cross-ventilation stairwell", "Roof PV ready"],
+      "spaceTrick": "Stairwell as light-well doubles daylight reach across both floors.",
+      "zones": {
+        "groundSocial": "Ground Social",
+        "upperPrivate": "Upper Private",
+        "serviceCore": "Service Core"
+      }
+    },
+    "villa": {
+      "name": "Luxury Villa",
+      "tagline": "Detached freedom — land, garden, full architectural control.",
+      "idealFamily": "5–8 people",
+      "maintenance": "High",
+      "liquidity": "Medium",
+      "acStrategy": "Zoned ducted system + ceiling fans, mashrabiya shading",
+      "sustainability": ["Double-skin walls", "Solar water heating", "Greywater garden irrigation"],
+      "spaceTrick": "Courtyard plan cools internal rooms passively, reducing AC by ~30%.",
+      "zones": {
+        "livingMajlis": "Living / Majlis",
+        "bedrooms": "Bedrooms",
+        "gardenCourt": "Garden / Court",
+        "service": "Service"
+      }
+    },
+    "country_house": {
+      "name": "Country House",
+      "tagline": "Off-grid sensibility, rooted in landscape.",
+      "idealFamily": "3–6 people",
+      "maintenance": "Medium",
+      "liquidity": "Low",
+      "acStrategy": "Passive cooling + minimal split units; thermal mass walls",
+      "sustainability": ["Rammed-earth or stone walls", "Rainwater harvesting", "Solar PV array"],
+      "spaceTrick": "Deep verandas extend living space outdoors 6 months a year.",
+      "zones": {
+        "indoorLiving": "Indoor Living",
+        "verandaOutdoor": "Veranda / Outdoor",
+        "bedrooms": "Bedrooms",
+        "service": "Service"
+      }
+    },
+    "smart_home": {
+      "name": "Fully Smart Home",
+      "tagline": "AI-orchestrated comfort — the building thinks with you.",
+      "idealFamily": "2–5 people",
+      "maintenance": "Low",
+      "liquidity": "High",
+      "acStrategy": "AI-driven HVAC reacting to occupancy + weather forecasts",
+      "sustainability": ["Net-zero ready", "Battery storage", "Auto-tinting glazing"],
+      "spaceTrick": "Sensor-driven lighting & motorized partitions adapt rooms by time of day.",
+      "zones": {
+        "adaptiveLiving": "Adaptive Living",
+        "smartBedrooms": "Smart Bedrooms",
+        "techCore": "Tech Core",
+        "service": "Service"
+      }
+    }
+  },
+  "hero": {
+    "badge": "Architectural Consultant",
+    "titlePart1": "Find the structural design that fits your",
+    "titleHighlight": "life, land & budget",
+    "subtitle": "Not just images — a property matchmaking engine that compares cost, maintenance, investment value and sustainability across every type of home.",
+    "features": {
+      "spaceAnalysis": "Smart space analysis",
+      "investmentOutlook": "Investment outlook",
+      "sustainabilityBrief": "Sustainability brief",
+      "budgetCalculator": "Budget calculator"
+    }
+  },
+  "conceptStrip": {
+    "function": {
+      "title": "Function",
+      "body": "Square meters, layouts, structural systems, mechanical fit. The math of living."
+    },
+    "feeling": {
+      "title": "Feeling",
+      "body": "Light, privacy, flow, identity. How a home behaves at 7am and 7pm."
+    },
+    "future": {
+      "title": "Future",
+      "body": "Resale, yield, sustainability, technology longevity. The asset behind the home."
+    }
+  },
+  "comparison": {
+    "eyebrow": "Smart Comparison",
+    "title": "Compare types side-by-side",
+    "subtitle": "Cost, maintenance, family fit and yield — at a glance.",
+    "headers": {
+      "type": "Type",
+      "startsAt": "Starts at",
+      "minSize": "Min size",
+      "familyFit": "Family fit",
+      "maintenance": "Maintenance",
+      "rentYield": "Rent yield",
+      "liquidity": "Liquidity"
+    }
+  },
+  "showcase": {
+    "eyebrow": "Discover by Type",
+    "title": "Explore every property style",
+    "subtitle": "Tap Explore to view real listings, prices, ratings and the team behind each project.",
+    "ratingLabel": "Rating",
+    "listingsLabel": "Listings",
+    "verified": "Verified",
+    "builderLabel": "Builder",
+    "sellerLabel": "Seller",
+    "contactLabel": "Contact",
+    "startDesigning": "Start Designing",
+    "explore": "Explore",
+    "cards": {
+      "apartment": {
+        "badge": "Apartment",
+        "title": "Smart Apartments",
+        "description": "Innovative solutions for small spaces with integrated technology",
+        "features": ["Smart lighting and energy control", "Multi-functional design", "Integrated security systems"],
+        "price": "Starting from 250,000 AED"
+      },
+      "villa": {
+        "badge": "Villa",
+        "title": "Luxury Villas",
+        "description": "Elegant homes with innovative designs and spacious areas",
+        "features": ["Private outdoor spaces", "Integrated entertainment systems", "Sustainable designs"],
+        "price": "Starting from 1,200,000 AED"
+      },
+      "duplex": {
+        "badge": "Duplex",
+        "title": "Duplex Designs",
+        "description": "Practical family spaces with perfect privacy",
+        "features": ["Multi-floor design", "Shared family spaces", "Perfect privacy"],
+        "price": "Starting from 450,000 AED"
+      },
+      "country_house": {
+        "badge": "Country House",
+        "title": "Country Houses",
+        "description": "Connection with nature with modern living luxury",
+        "features": ["Natural building materials", "Sustainable energy systems", "Nature-harmonious design"],
+        "price": "Starting from 350,000 AED"
+      },
+      "studio": {
+        "badge": "Studio",
+        "title": "Studios",
+        "description": "Compact spaces with smart and innovative designs",
+        "features": ["Multi-functional furniture", "Innovative storage solutions", "Space-expanding designs"],
+        "price": "Starting from 180,000 AED"
+      },
+      "custom": {
+        "badge": "Custom",
+        "title": "Custom Design",
+        "description": "Design your own home from scratch according to your vision and needs",
+        "features": ["Unique and innovative design", "Material and finishing selection", "Complete design flexibility"],
+        "price": "Custom Pricing"
+      }
+    }
+  },
+  "floorPlans": {
+    "eyebrow": "Space Layouts",
+    "title": "Smart floor-plan logic",
+    "subtitle": "See how each type allocates space — and the trick that makes it feel larger.",
+    "spacePerceptionTrick": "Space-perception trick",
+    "exploreListings": "Explore {{name}} listings",
+    "indicativeZoning": "Indicative zoning — {{size}}+ m²",
+    "architecturalSchematic": "Architectural schematic"
+  },
+  "calculator": {
+    "eyebrow": "Estimate Calculator",
+    "title": "Which property type suits you?",
+    "subtitle": "Tell us your budget, family size and land — get a matched recommendation.",
+    "yourInputs": "Your inputs",
+    "budget": "Budget",
+    "familySize": "Family size",
+    "peopleUnit": "{{count}} people",
+    "availableLand": "Available land (m²) — optional",
+    "landPlaceholder": "e.g. 250",
+    "landHint": "Leave blank if buying a finished unit.",
+    "bestMatch": "Best match",
+    "yieldSuffix": "% yield",
+    "matchLabel": "match",
+    "bookConsultation": "Book a free architectural consultation"
+  },
+  "investment": {
+    "eyebrow": "Investment Aspect",
+    "title": "The asset behind the home",
+    "subtitle": "Each typology behaves differently on the market. Here's how.",
+    "metrics": {
+      "annualRoi": "Annual ROI",
+      "appreciation": "Appreciation / yr",
+      "rentYield": "Rent yield",
+      "liquidity": "Liquidity"
+    }
+  },
+  "sustainability": {
+    "eyebrow": "Building Sustainability",
+    "title": "Smart by structure, not by sticker",
+    "subtitle": "Insulation, AC strategy and natural lighting — designed into the bones of each typology.",
+    "insulation": "Insulation",
+    "naturalLight": "Natural light"
+  },
+  "cta": {
+    "title": "Still deciding? Talk to an architect, not a sales agent.",
+    "subtitle": "We'll review your land, family and budget — then return with two structural options and a sustainability brief, free of charge.",
+    "bookConsultation": "Book consultation",
+    "browseProperties": "Browse properties"
+  }
+}

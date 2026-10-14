@@ -1,0 +1,347 @@
+{
+  "hero": {
+    "badge": "Smart real estate marketing",
+    "titleLine1": "Find Your Dream Property Smartly.",
+    "titleLine2": "Know the market value in a minute.",
+    "subtitle": "From 80m² to 300m² — villa, apartment, or commercial space. Make it yours in a few simple steps.",
+    "showcase": {
+      "label": "Project showcase",
+      "prev": "Previous slide",
+      "next": "Next slide",
+      "goto": "Go to slide {{index}}"
+    },
+    "browseProperties": "Browse Properties",
+    "freeConsultation": "Free Consultation",
+    "search": {
+      "dealLabel": "Sale or rent",
+      "categoryLabel": "Property category",
+      "cityLabel": "City or area",
+      "budgetLabel": "Budget",
+      "sale": "For Sale",
+      "rent": "For Rent",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "allCities": "All cities & areas",
+      "budgets": {
+        "any": "Any budget",
+        "under300": "Under 300,000 EGP",
+        "300to700": "300,000 – 700,000 EGP",
+        "700to1500": "700,000 – 1,500,000 EGP",
+        "over1500": "Over 1,500,000 EGP"
+      },
+      "button": "Search",
+      "sub": {
+        "popular": "Most popular",
+        "developers": "Top developers"
+      },
+      "types": {
+        "villa": "Villa",
+        "apartment": "Apartment",
+        "duplex": "Duplex",
+        "studio": "Studio",
+        "country_house": "Country house",
+        "smart_home": "Smart home"
+      },
+      "cities": {
+        "fifthSettlement": "Fifth Settlement",
+        "sheikhZayed": "Sheikh Zayed",
+        "northCoast": "North Coast",
+        "giza": "Giza",
+        "cairo": "Cairo",
+        "newCapital": "New Administrative Capital",
+        "sixOctober": "6th of October"
+      }
+    }
+  },
+  "trustedPartners": {
+    "partner": "Rooya Al-Mustaqbal for Real Estate Investment",
+    "heading": "Trusted Development Partners",
+    "sub": "Direct opportunities for land with clear title, featuring verified project photos.",
+    "ownerLine": "Land owned by Rooya Al-Mustaqbal for Real Estate Investment",
+    "cta": "Explore Offers",
+    "labels": {
+      "location": "Location",
+      "type": "Type",
+      "area": "Area",
+      "price": "Price",
+      "payment": "Payment",
+      "status": "Status"
+    },
+    "montCity": {
+      "title": "Coastal Land on the Sea — Monte City",
+      "tradeName": "Monte City — Rooya Al-Mustaqbal for Real Estate Investment",
+      "desc": "Create your charming sea view and build your dream chalet on the highest peak in Marsa Matrouh, inside Monte City Compound, Umm Al-Rakham Plateau.",
+      "location": "Marsa Matrouh",
+      "type": "Coastal Residential Land",
+      "area": "Starting from 200 m² per plot",
+      "price": "Starting from 75,000 EGP | 700 EGP / m²",
+      "payment": "Monthly installment from 2,000 EGP | 10% down payment — installments up to 5 years | 25% cash discount",
+      "status": "Clear ownership — Ready for construction"
+    },
+    "mountAgiba": {
+      "title": "Resort Land Plot Minutes Away from the Sea",
+      "tradeName": "Monte Agiba Resort — Rooya Al-Mustaqbal for Real Estate Investment",
+      "desc": "Invest in the future and enjoy a breathtaking panoramic view of the most beautiful beaches of Marsa Matrouh from your land inside the charming Monte Agiba Resort.",
+      "location": "Marsa Matrouh",
+      "type": "Land minutes away from the sea",
+      "area": "Starting from 150 m² per plot",
+      "price": "Starting from 40,000 EGP | 500 EGP / m²",
+      "payment": "Monthly installment from 1,000 EGP | 10% down payment — installments up to 5 years | 25% cash discount",
+      "status": "Resort development — Suitable for hotels and chalets"
+    }
+  },
+  "partnerCards": {
+    "eyebrow": "Featured projects",
+    "heading": "Invest in our flagship communities",
+    "badge": "Featured",
+    "explore": "Explore project",
+    "montCity": {
+      "title": "Mont City",
+      "desc": "A fully-serviced urban community with prime land plots, minutes from the regional road."
+    },
+    "mountAgiba": {
+      "title": "Mount Agiba",
+      "desc": "Seaside plots in a gated resort community — invest today, build tomorrow."
+    },
+    "prestige": {
+      "title": "Prestige Compound",
+      "desc": "A prime residential compound plot ready for development in a fast-growing area."
+    }
+  },
+  "partners": {
+    "heading": "Trusted by leading developers"
+  },
+  "valueProps": {
+    "curated": {
+      "title": "Curated Listings",
+      "desc": "Hand-picked properties across every style and budget."
+    },
+    "trusted": {
+      "title": "Trusted Broker",
+      "desc": "Verified listings with transparent pricing."
+    },
+    "fast": {
+      "title": "Fast Consultation",
+      "desc": "Free expert advice within 24 hours."
+    }
+  },
+  "whoWeAre": {
+    "badge": "Who We Are",
+    "titlePrefix": "Brokers + programmers, powered by",
+    "titleHighlight": "Technology",
+    "description": "We are a team of real estate experts and programmers specializing in transforming your property search into a fast and smart experience, using the latest <em>artificial intelligence technologies</em>.",
+    "goal": {
+      "title": "Our Goal",
+      "desc": "Make buying, selling, or renting your property easier, faster, and clearer than ever before."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "desc": "A future where everyone can find their perfect property effortlessly."
+    },
+    "futureVision": {
+      "title": "Vision for the Future",
+      "desc": "Integrity of brokers, speed of technology — for everyone."
+    },
+    "aspiration": {
+      "title": "Our Aspiration",
+      "desc": "The leading Arab platform for smart real estate marketing in minutes."
+    }
+  },
+  "propertyTypes": {
+    "heading": "Property Types",
+    "subheading": "Choose from a variety of verified properties and styles.",
+    "explore": "Explore",
+    "villas": {
+      "title": "Villas",
+      "desc": "Luxurious and modern villas with spacious areas in prime locations."
+    },
+    "apartments": {
+      "title": "Apartments",
+      "desc": "Practical and beautiful apartments of every size for families and individuals."
+    },
+    "commercial": {
+      "title": "Commercial Properties",
+      "desc": "Innovative spaces for shops, offices, and businesses."
+    }
+  },
+  "gallery": {
+    "heading": "Property Gallery",
+    "subheading": "Get inspired by high-quality virtual tours of our properties.",
+    "openGallery": "Open gallery"
+  },
+  "market": {
+    "eyebrow": "Real estate exchange & marketing",
+    "heading": "Price Trend",
+    "sub": "A simple graph of average price per m² — so you always know the direction before you buy.",
+    "avgLabel": "avg EGP / m²",
+    "unit": "EGP / m²",
+    "period": "Last 12 months",
+    "rising": "Prices rising",
+    "falling": "Prices falling",
+    "cities": {
+      "newCairo": "New Cairo",
+      "fifthSettlement": "Fifth Settlement",
+      "sixOctober": "6th of October",
+      "sheikhZayed": "Sheikh Zayed",
+      "maadi": "Maadi",
+      "nasrCity": "Nasr City",
+      "misrAlqadima": "Misr Al-Qadima",
+      "misrAljadida": "Misr Al-Jadida",
+      "northCoast": "North Coast",
+      "marsaMatrouh": "Marsa Matrouh"
+    }
+  },
+  "budget": {
+    "heading": "Budget Planner",
+    "sub": "See what fits your budget instantly. Slide to set your down payment and installment period — properties that fit appear right away.",
+    "totalBudget": "Your total budget",
+    "downPayment": "Down payment",
+    "installmentPeriod": "Installment period",
+    "years": "years",
+    "monthly": "Your estimated monthly payment",
+    "cta": "Show matching properties",
+    "searching": "Searching…",
+    "hint": "Set your budget, down payment and installment period, then tap “Show matching properties” — listings that fit your plan appear here.",
+    "matchCount": "properties match your budget",
+    "noMatchTitle": "0 properties match your budget",
+    "noMatchHint": "No properties match this plan yet — try a longer installment period.",
+    "browseAll": "Browse matching properties"
+  },
+  "addProperty": {
+    "loading": "Checking your session…",
+    "signInTitle": "Sign in required",
+    "signInDesc": "You need an account to list your property. Sign in to continue — if you don't have an account yet, creating one takes a minute.",
+    "signInCta": "Sign in",
+    "createAccount": "Create account",
+    "formTitle": "List your property",
+    "formSub": "Enter your property details, description and photos, then publish your listing.",
+    "title": "Property title",
+    "type": "Property type",
+    "deal": "Listing type",
+    "sale": "For Sale",
+    "rent": "For Rent",
+    "price": "Price (EGP)",
+    "area": "Area (m²)",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "location": "Location",
+    "description": "Description",
+    "descPlaceholder": "Design: ultra-modern glass facade, floor-to-ceiling windows, smart climate zoning, concierge floor…",
+    "photos": "Photos",
+    "photosHint": "Click to add photos (up to 8)",
+    "submit": "Publish listing",
+    "submitting": "Publishing…",
+    "success": "Your property is published",
+    "requiredError": "Please fill in the title, price and location.",
+    "subsError": "You need an active subscription to publish listings. Choose a package first.",
+    "types": {
+      "apartment": "Apartment",
+      "villa": "Villa",
+      "duplex": "Duplex",
+      "smart_home": "Smart home",
+      "country_house": "Country house",
+      "land": "Land",
+      "studio": "Studio"
+    }
+  },
+  "featured": {
+    "heading": "Featured Properties",
+    "subheading": "Hand-picked homes ready to view.",
+    "viewAll": "View all",
+    "empty": "No properties listed yet.",
+    "addFirst": "Add your first property"
+  },
+  "whyChooseUs": {
+    "heading": "Why Choose Us?",
+    "subheading": "Because we're truly different. We combine Technology with human expertise for your perfect real estate experience.",
+    "technology": {
+      "title": "Technology-Powered",
+      "desc": "Latest artificial intelligence for accurate property matching."
+    },
+    "humanSupport": {
+      "title": "Human Support",
+      "desc": "Real certified experts to guide you personally."
+    },
+    "saveTime": {
+      "title": "Save Time",
+      "desc": "Find your perfect property in minutes, not weeks."
+    },
+    "saveMoney": {
+      "title": "Save Money",
+      "desc": "Best market deals with zero hidden commissions."
+    },
+    "uniqueExperience": {
+      "title": "Unique Experience",
+      "desc": "Simple interface anyone can use."
+    },
+    "verifiedListings": {
+      "title": "Verified Listings",
+      "desc": "Properties of all sizes with full price transparency and free consultation."
+    },
+    "quote": "\"You won't find all of this anywhere else, because we work to achieve one goal: for you to invest or buy your dream property with confidence, without wasting time or money.\""
+  },
+  "cta": {
+    "heading": "Free Consultation",
+    "subheading": "Get a free consultation from our experts to help you find your dream property.",
+    "book": "Book Free Consultation"
+  },
+  "packages": {
+    "eyebrow": "Packages",
+    "heading": "Packages for Brokers & Property Owners",
+    "subheading": "Publish your properties to thousands of buyers. Choose a plan, click Start, and our team will approve your subscription within 24 hours. Your listings stay online even after expiry.",
+    "popular": "Most popular",
+    "states": {
+      "signIn": "Sign in to subscribe",
+      "start": "Start",
+      "renew": "Renew",
+      "processing": "Submitting…",
+      "pending": "Awaiting approval",
+      "active": "Active ✓"
+    },
+    "toasts": {
+      "requestSent": "Request sent! Your package will be activated after admin approval.",
+      "requestError": "Could not submit your request. Please try again."
+    },
+    "7_days": {
+      "name": "Trial",
+      "tagline": "Try the platform risk-free",
+      "price": "Free",
+      "period": "for 7 days",
+      "cta": "Start",
+      "features": [
+        "Publish up to 5 property listings",
+        "Listings visible to all visitors",
+        "Inquiries and contact requests",
+        "Full dashboard access"
+      ]
+    },
+    "3_months": {
+      "name": "Growth",
+      "tagline": "For active brokers and agencies",
+      "price": "199 EGP",
+      "period": "per 3 months",
+      "cta": "Start",
+      "features": [
+        "Unlimited property listings",
+        "Priority placement in search results",
+        "Featured listing eligibility",
+        "Listings stay online even after expiry",
+        "Priority support"
+      ]
+    },
+    "6_months": {
+      "name": "Professional",
+      "tagline": "Best value for serious sellers",
+      "price": "349 EGP",
+      "period": "per 6 months",
+      "cta": "Start",
+      "features": [
+        "Everything in Growth",
+        "Save 30% vs quarterly billing",
+        "Dedicated account manager",
+        "Performance insights for your listings",
+        "Listings stay online even after expiry"
+      ]
+    }
+  }
+}

@@ -1,0 +1,774 @@
+{
+  "meta": {
+    "title": "Design Gallery — BuildYourHome",
+    "description": "Explore residential apartments, villas, duplexes, country houses, studios, and custom home designs."
+  },
+  "hero": {
+    "title": "Explore Our Design Gallery",
+    "subtitle": "Discover inspiring home designs across every style — from compact studios to luxurious villas.",
+    "cta": "View Gallery"
+  },
+  "controls": {
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right",
+    "more": "More..."
+  },
+  "sections": {
+    "apartments": {
+      "title": "Residential Apartments",
+      "subtitle": "Where Elegance Meets Comfort",
+      "cards": [
+        {
+          "alt": "Modern apartment living room",
+          "short": "Modern Living Room",
+          "title": "Elegant Living Space",
+          "features": [
+            "Spacious open-concept design",
+            "Premium quality furnishings",
+            "Abundant natural light",
+            "Modern aesthetic with warm touches",
+            "Perfect for entertaining"
+          ]
+        },
+        {
+          "alt": "Elegant apartment kitchen",
+          "short": "Gourmet Kitchen",
+          "title": "Chef's Dream Kitchen",
+          "features": [
+            "Stainless steel appliances",
+            "Quartz countertops",
+            "Ample cabinet space",
+            "Breakfast bar seating",
+            "Modern backsplash"
+          ]
+        },
+        {
+          "alt": "Stylish apartment bedroom",
+          "short": "Luxury Bedroom",
+          "title": "Serene Sleeping Quarters",
+          "features": [
+            "Spacious master suite",
+            "Walk-in closet",
+            "Premium carpeting",
+            "Large windows",
+            "Ensuite bathroom"
+          ]
+        },
+        {
+          "alt": "Contemporary apartment dining area",
+          "short": "Formal Dining",
+          "title": "Elegant Dining Space",
+          "features": [
+            "Seats 6-8 comfortably",
+            "Modern chandelier",
+            "Adjacent to kitchen",
+            "Open to living room",
+            "Perfect for hosting"
+          ]
+        },
+        {
+          "alt": "Luxury apartment balcony",
+          "short": "Private Balcony",
+          "title": "Outdoor Oasis",
+          "features": [
+            "City skyline views",
+            "Space for seating",
+            "Morning coffee spot",
+            "Evening relaxation",
+            "Fresh air retreat"
+          ]
+        },
+        {
+          "alt": "City view apartment",
+          "short": "Panoramic Views",
+          "title": "Stunning Cityscape",
+          "features": [
+            "Floor-to-ceiling windows",
+            "Daytime and nighttime views",
+            "Natural light",
+            "Urban lifestyle",
+            "High-rise living"
+          ]
+        },
+        {
+          "alt": "Minimalist apartment design",
+          "short": "Minimalist Design",
+          "title": "Clean & Contemporary",
+          "features": [
+            "Streamlined aesthetic",
+            "Neutral color palette",
+            "Functional spaces",
+            "Quality over quantity",
+            "Calming atmosphere"
+          ]
+        },
+        {
+          "alt": "Comfortable apartment lounge",
+          "short": "Cozy Lounge",
+          "title": "Relaxation Space",
+          "features": [
+            "Plush furnishings",
+            "Reading nook",
+            "Entertainment center",
+            "Warm lighting",
+            "Personal retreat"
+          ]
+        },
+        {
+          "alt": "Modern apartment workspace",
+          "short": "Home Office",
+          "title": "Productive Workspace",
+          "features": [
+            "Ergonomic design",
+            "Ample natural light",
+            "Built-in storage",
+            "Quiet environment",
+            "Professional setup"
+          ]
+        },
+        {
+          "alt": "Apartment with open floor plan",
+          "short": "Open Concept",
+          "title": "Spacious Layout",
+          "features": [
+            "Seamless flow",
+            "Multi-functional areas",
+            "Entertainer's dream",
+            "Family-friendly",
+            "Modern living"
+          ]
+        }
+      ]
+    },
+    "villas": {
+      "title": "Luxury Villas",
+      "subtitle": "Spacious Living with Refined Luxury",
+      "cards": [
+        {
+          "alt": "Modern luxury villa exterior",
+          "short": "Grand Entrance",
+          "title": "Stunning Villa Exterior",
+          "features": [
+            "Contemporary architecture",
+            "Lush landscaping",
+            "Circular driveway",
+            "Double-height entry",
+            "Premium materials"
+          ]
+        },
+        {
+          "alt": "Villa with infinity pool",
+          "short": "Infinity Pool",
+          "title": "Resort-Style Pool",
+          "features": [
+            "Edge-less design",
+            "Panoramic views",
+            "Sun deck",
+            "Pool house",
+            "Outdoor shower"
+          ]
+        },
+        {
+          "alt": "Luxury villa living area",
+          "short": "Great Room",
+          "title": "Expansive Living Space",
+          "features": [
+            "Vaulted ceilings",
+            "Floor-to-ceiling windows",
+            "Designer furnishings",
+            "Fireplace",
+            "Indoor-outdoor flow"
+          ]
+        },
+        {
+          "alt": "Villa master bedroom",
+          "short": "Master Suite",
+          "title": "Luxurious Retreat",
+          "features": [
+            "King-sized bedroom",
+            "Sitting area",
+            "Walk-in closets",
+            "Private balcony",
+            "Spa-like bathroom"
+          ]
+        },
+        {
+          "alt": "Villa gourmet kitchen",
+          "short": "Gourmet Kitchen",
+          "title": "Chef's Paradise",
+          "features": [
+            "Professional-grade appliances",
+            "Large island",
+            "Custom cabinetry",
+            "Walk-in pantry",
+            "Butler's kitchen"
+          ]
+        },
+        {
+          "alt": "Villa outdoor dining",
+          "short": "Al Fresco Dining",
+          "title": "Outdoor Entertaining",
+          "features": [
+            "Covered patio",
+            "Seating for 12",
+            "Outdoor kitchen",
+            "Ambient lighting",
+            "Garden views"
+          ]
+        },
+        {
+          "alt": "Villa spa bathroom",
+          "short": "Spa Bathroom",
+          "title": "Luxury Wellness",
+          "features": [
+            "Freestanding tub",
+            "Steam shower",
+            "Heated floors",
+            "Dual vanities",
+            "Premium finishes"
+          ]
+        },
+        {
+          "alt": "Villa home theater",
+          "short": "Home Theater",
+          "title": "Cinema Experience",
+          "features": [
+            "Plush seating",
+            "4K projection",
+            "Surround sound",
+            "Acoustic treatment",
+            "Concession area"
+          ]
+        },
+        {
+          "alt": "Villa wine cellar",
+          "short": "Wine Cellar",
+          "title": "Connoisseur's Collection",
+          "features": [
+            "Climate-controlled",
+            "Custom racking",
+            "Tasting area",
+            "Secure storage",
+            "Display lighting"
+          ]
+        },
+        {
+          "alt": "Villa landscaped garden",
+          "short": "Landscaped Gardens",
+          "title": "Botanical Oasis",
+          "features": [
+            "Professional design",
+            "Mature trees",
+            "Water features",
+            "Outdoor lighting",
+            "Privacy hedging"
+          ]
+        }
+      ]
+    },
+    "duplexes": {
+      "title": "Duplex Homes",
+      "subtitle": "Two Levels of Comfort and Privacy",
+      "cards": [
+        {
+          "alt": "Modern duplex exterior",
+          "short": "Contemporary Facade",
+          "title": "Modern Duplex Design",
+          "features": [
+            "Clean architectural lines",
+            "Mixed materials",
+            "Private entrance",
+            "Two-car garage",
+            "Low-maintenance exterior"
+          ]
+        },
+        {
+          "alt": "Duplex open living area",
+          "short": "Open Living",
+          "title": "Spacious Common Area",
+          "features": [
+            "Vaulted ceiling",
+            "Natural light",
+            "Modern fireplace",
+            "Entertainment space",
+            "Designer finishes"
+          ]
+        },
+        {
+          "alt": "Duplex staircase design",
+          "short": "Designer Staircase",
+          "title": "Architectural Centerpiece",
+          "features": [
+            "Floating treads",
+            "Glass railings",
+            "Modern design",
+            "Space-saving",
+            "Premium materials"
+          ]
+        },
+        {
+          "alt": "Duplex upper level bedroom",
+          "short": "Private Bedroom",
+          "title": "Upper Level Retreat",
+          "features": [
+            "Quiet location",
+            "Walk-in closet",
+            "Ensuite bathroom",
+            "Balcony access",
+            "Plush carpeting"
+          ]
+        },
+        {
+          "alt": "Duplex kitchen and dining",
+          "short": "Gourmet Space",
+          "title": "Chef's Kitchen & Dining",
+          "features": [
+            "Stainless appliances",
+            "Large island",
+            "Breakfast bar",
+            "Formal dining area",
+            "Pantry storage"
+          ]
+        },
+        {
+          "alt": "Duplex home office",
+          "short": "Home Office",
+          "title": "Professional Workspace",
+          "features": [
+            "Quiet location",
+            "Built-in shelving",
+            "Natural light",
+            "Ergonomic design",
+            "Tech ready"
+          ]
+        },
+        {
+          "alt": "Duplex private balcony",
+          "short": "Private Balcony",
+          "title": "Outdoor Escape",
+          "features": [
+            "Upper level privacy",
+            "City views",
+            "Morning coffee spot",
+            "Evening relaxation",
+            "Small garden space"
+          ]
+        },
+        {
+          "alt": "Duplex entertainment room",
+          "short": "Entertainment Room",
+          "title": "Media Lounge",
+          "features": [
+            "Home theater setup",
+            "Comfortable seating",
+            "Sound system",
+            "Game area",
+            "Wet bar"
+          ]
+        },
+        {
+          "alt": "Duplex modern bathroom",
+          "short": "Spa Bathroom",
+          "title": "Luxurious Bath",
+          "features": [
+            "Soaking tub",
+            "Separate shower",
+            "Dual vanities",
+            "Heated floors",
+            "Premium fixtures"
+          ]
+        },
+        {
+          "alt": "Duplex rooftop terrace",
+          "short": "Rooftop Terrace",
+          "title": "Skyline Views",
+          "features": [
+            "Panoramic cityscape",
+            "Outdoor kitchen",
+            "Lounge area",
+            "Dining space",
+            "Evening lighting"
+          ]
+        }
+      ]
+    },
+    "country-houses": {
+      "title": "Country Houses",
+      "subtitle": "Nature and Tranquility Combined",
+      "cards": [
+        {
+          "alt": "Rustic country house exterior",
+          "short": "Rustic Charm",
+          "title": "Classic Country Home",
+          "features": [
+            "Wood and stone exterior",
+            "Wraparound porch",
+            "Mature trees",
+            "Private driveway",
+            "Rural setting"
+          ]
+        },
+        {
+          "alt": "Country house with porch",
+          "short": "Front Porch",
+          "title": "Relaxing Veranda",
+          "features": [
+            "Rocking chairs",
+            "Swing bench",
+            "Ceiling fans",
+            "Evening lighting",
+            "Country views"
+          ]
+        },
+        {
+          "alt": "Country house fireplace",
+          "short": "Stone Fireplace",
+          "title": "Cozy Hearth",
+          "features": [
+            "Floor-to-ceiling stone",
+            "Wood storage",
+            "Mantel display",
+            "Living room centerpiece",
+            "Winter warmth"
+          ]
+        },
+        {
+          "alt": "Country kitchen with island",
+          "short": "Farmhouse Kitchen",
+          "title": "Country Cooking",
+          "features": [
+            "Large island",
+            "Farmhouse sink",
+            "Open shelving",
+            "Breakfast nook",
+            "Pantry space"
+          ]
+        },
+        {
+          "alt": "Country house dining room",
+          "short": "Family Dining",
+          "title": "Gathering Space",
+          "features": [
+            "Large farm table",
+            "Bench seating",
+            "China cabinet",
+            "Family meals",
+            "Holiday hosting"
+          ]
+        },
+        {
+          "alt": "Country house master suite",
+          "short": "Master Retreat",
+          "title": "Private Sanctuary",
+          "features": [
+            "Four-poster bed",
+            "Sitting area",
+            "Walk-in closet",
+            "Ensuite bathroom",
+            "Garden views"
+          ]
+        },
+        {
+          "alt": "Country house garden view",
+          "short": "Garden Views",
+          "title": "Natural Beauty",
+          "features": [
+            "Flowering plants",
+            "Vegetable garden",
+            "Stone pathways",
+            "Water feature",
+            "Seasonal colors"
+          ]
+        },
+        {
+          "alt": "Country house sunroom",
+          "short": "Sunroom",
+          "title": "Year-Round Enjoyment",
+          "features": [
+            "Three-season room",
+            "Natural light",
+            "Indoor plants",
+            "Reading nook",
+            "Garden views"
+          ]
+        },
+        {
+          "alt": "Country house library",
+          "short": "Home Library",
+          "title": "Book Lover's Retreat",
+          "features": [
+            "Floor-to-ceiling shelves",
+            "Ladder access",
+            "Reading chairs",
+            "Study desk",
+            "Quiet atmosphere"
+          ]
+        },
+        {
+          "alt": "Country house backyard",
+          "short": "Backyard Oasis",
+          "title": "Outdoor Living",
+          "features": [
+            "Patio seating",
+            "Fire pit",
+            "Outdoor kitchen",
+            "Play area",
+            "Natural landscaping"
+          ]
+        }
+      ]
+    },
+    "studios": {
+      "title": "Studios",
+      "subtitle": "Smart Solutions for Compact Living",
+      "cards": [
+        {
+          "alt": "Modern studio apartment",
+          "short": "Efficient Layout",
+          "title": "Smart Studio Design",
+          "features": [
+            "Space-saving solutions",
+            "Multi-functional areas",
+            "Built-in storage",
+            "Modern finishes",
+            "Natural light"
+          ]
+        },
+        {
+          "alt": "Studio with convertible furniture",
+          "short": "Convertible Furniture",
+          "title": "Transformative Living",
+          "features": [
+            "Murphy bed",
+            "Fold-down desk",
+            "Nesting tables",
+            "Storage ottoman",
+            "Space optimization"
+          ]
+        },
+        {
+          "alt": "Efficient studio kitchen",
+          "short": "Compact Kitchen",
+          "title": "Efficient Cooking Space",
+          "features": [
+            "Two-burner cooktop",
+            "Under-counter fridge",
+            "Pull-out pantry",
+            "Stackable washer/dryer",
+            "Vertical storage"
+          ]
+        },
+        {
+          "alt": "Studio sleeping area",
+          "short": "Sleeping Nook",
+          "title": "Cozy Bed Area",
+          "features": [
+            "Loft bed",
+            "Room divider",
+            "Bedside storage",
+            "Blackout curtains",
+            "Reading lights"
+          ]
+        },
+        {
+          "alt": "Studio workspace",
+          "short": "Workstation",
+          "title": "Productive Corner",
+          "features": [
+            "Wall-mounted desk",
+            "Task lighting",
+            "Cable management",
+            "Ergonomic chair",
+            "Shelving above"
+          ]
+        },
+        {
+          "alt": "Studio bathroom design",
+          "short": "Compact Bath",
+          "title": "Efficient Bathroom",
+          "features": [
+            "Space-saving fixtures",
+            "Corner shower",
+            "Floating vanity",
+            "Medicine cabinet",
+            "Stacked storage"
+          ]
+        },
+        {
+          "alt": "Studio with smart storage",
+          "short": "Smart Storage",
+          "title": "Organized Living",
+          "features": [
+            "Under-bed drawers",
+            "Wall-mounted shelves",
+            "Multi-purpose furniture",
+            "Vertical organization",
+            "Hidden compartments"
+          ]
+        },
+        {
+          "alt": "Studio living area",
+          "short": "Living Space",
+          "title": "Comfortable Lounge",
+          "features": [
+            "Convertible sofa",
+            "Nesting tables",
+            "Entertainment center",
+            "Accent lighting",
+            "Area rug"
+          ]
+        },
+        {
+          "alt": "Studio dining nook",
+          "short": "Dining Area",
+          "title": "Compact Dining",
+          "features": [
+            "Drop-leaf table",
+            "Foldable chairs",
+            "Breakfast bar",
+            "Wall-mounted options",
+            "Multi-purpose space"
+          ]
+        },
+        {
+          "alt": "Studio balcony space",
+          "short": "Balcony Retreat",
+          "title": "Outdoor Extension",
+          "features": [
+            "Compact bistro set",
+            "Vertical garden",
+            "City views",
+            "Privacy screens",
+            "Fresh air access"
+          ]
+        }
+      ]
+    },
+    "custom-designs": {
+      "title": "Custom Designs",
+      "subtitle": "Your Home, Your Style",
+      "cards": [
+        {
+          "alt": "Luxury custom design bathroom",
+          "short": "Luxury - Made to order.",
+          "title": "Luxury Custom Design",
+          "features": [
+            "Luxury finishes",
+            "Innovative architectural details",
+            "Spaces according to your needs",
+            "Integrated smart services",
+            "Complete comfort and privacy"
+          ]
+        },
+        {
+          "alt": "Modern custom design living room",
+          "short": "Modern - Clear lines.",
+          "title": "Modern Custom Design",
+          "features": [
+            "Neutral colors and modern lines",
+            "Ample natural lighting",
+            "Custom furniture",
+            "Smart space division",
+            "Comfort and flexibility"
+          ]
+        },
+        {
+          "alt": "Family custom design bedroom",
+          "short": "Family - Multiple rooms.",
+          "title": "Family Custom Design",
+          "features": [
+            "Bedrooms and living rooms to order",
+            "Play areas for children",
+            "Spacious modern kitchen",
+            "Back garden",
+            "Warm atmosphere for family"
+          ]
+        },
+        {
+          "alt": "Bohemian custom design living space",
+          "short": "Bohemian - Warm colors.",
+          "title": "Bohemian Custom Design",
+          "features": [
+            "Warm colors and handmade decorations",
+            "Comfortable outdoor seating",
+            "Natural plants in every corner",
+            "Soft lighting",
+            "Relaxation spaces"
+          ]
+        },
+        {
+          "alt": "Scandinavian custom design interior",
+          "short": "Scandinavian - Simplicity and elegance.",
+          "title": "Scandinavian Custom Design",
+          "features": [
+            "Light colors and simple lines",
+            "Ample natural lighting",
+            "Practical and comfortable furniture",
+            "Wooden details",
+            "Spacious balconies"
+          ]
+        },
+        {
+          "alt": "Luxury custom design with pool",
+          "short": "Luxury - Private pool.",
+          "title": "Luxury Custom Design with Pool",
+          "features": [
+            "Private pool and garden",
+            "High-quality finishes",
+            "Home cinema room",
+            "Integrated security system",
+            "Panoramic view"
+          ]
+        },
+        {
+          "alt": "Smart custom design home",
+          "short": "Smart - Advanced control systems.",
+          "title": "Smart Custom Design",
+          "features": [
+            "Remote control for lighting and AC",
+            "Security systems and cameras",
+            "Voice assistant",
+            "Futuristic design",
+            "High comfort and luxury"
+          ]
+        },
+        {
+          "alt": "Beach custom design villa",
+          "short": "Beach - Sea view.",
+          "title": "Beach Custom Design",
+          "features": [
+            "Balconies overlooking the sea",
+            "Outdoor seating on the sand",
+            "Panoramic windows",
+            "Humidity-resistant furniture",
+            "Unique relaxation atmosphere"
+          ]
+        },
+        {
+          "alt": "Exceptional custom design architecture",
+          "short": "Exceptional - Unique design.",
+          "title": "Exceptional Custom Design",
+          "features": [
+            "Innovative architecture",
+            "Open spaces and natural lighting",
+            "Luxury finishes",
+            "Integrated entertainment facilities",
+            "Unparalleled living experience"
+          ]
+        },
+        {
+          "alt": "Practical custom design space",
+          "short": "Practical - Smart space utilization.",
+          "title": "Practical Custom Design",
+          "features": [
+            "Smart space division",
+            "Multi-purpose rooms",
+            "Durable and practical finishes",
+            "Open modern kitchen",
+            "Comfort and usage flexibility"
+          ]
+        }
+      ]
+    }
+  }
+}

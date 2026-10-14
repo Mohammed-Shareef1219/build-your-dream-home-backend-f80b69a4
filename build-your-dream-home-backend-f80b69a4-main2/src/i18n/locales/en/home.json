@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "badge": "Smart real estate marketing",
+    "titleLine1": "Find Your Dream Property Smartly.",
+    "titleLine2": "Know the market value in a minute.",
+    "subtitle": "From 80m² to 300m² — villa, apartment, or commercial space. Make it yours in a few simple steps.",
+    "browseProperties": "Browse Properties",
+    "freeConsultation": "Free Consultation"
+  },
+  "valueProps": {
+    "curated": { "title": "Curated Listings", "desc": "Hand-picked properties across every style and budget." },
+    "trusted": { "title": "Trusted Broker", "desc": "Verified listings with transparent pricing." },
+    "fast": { "title": "Fast Consultation", "desc": "Free expert advice within 24 hours." }
+  },
+  "whoWeAre": {
+    "badge": "Who We Are",
+    "titlePrefix": "Brokers + programmers, powered by",
+    "titleHighlight": "Technology",
+    "description": "We are a team of real estate experts and programmers specializing in transforming your property search into a fast and smart experience, using the latest <em>artificial intelligence technologies</em>.",
+    "goal": { "title": "Our Goal", "desc": "Make buying, selling, or renting your property easier, faster, and clearer than ever before." },
+    "vision": { "title": "Our Vision", "desc": "A future where everyone can find their perfect property effortlessly." },
+    "futureVision": { "title": "Vision for the Future", "desc": "Integrity of brokers, speed of technology — for everyone." },
+    "aspiration": { "title": "Our Aspiration", "desc": "The leading Arab platform for smart real estate marketing in minutes." }
+  },
+  "propertyTypes": {
+    "heading": "Property Types",
+    "subheading": "Choose from a variety of verified properties and styles.",
+    "explore": "Explore",
+    "villas": { "title": "Villas", "desc": "Luxurious and modern villas with spacious areas in prime locations." },
+    "apartments": { "title": "Apartments", "desc": "Practical and beautiful apartments of every size for families and individuals." },
+    "commercial": { "title": "Commercial Properties", "desc": "Innovative spaces for shops, offices, and businesses." }
+  },
+  "gallery": {
+    "heading": "Property Gallery",
+    "subheading": "Get inspired by high-quality virtual tours of our properties.",
+    "openGallery": "Open gallery"
+  },
+  "tips": {
+    "heading": "Real Estate Tips",
+    "subheading": "Learn from our experts the best practices in buying and investing in real estate.",
+    "location": { "title": "Choosing Property Location", "desc": "The right location maximizes investment value. Study the neighborhood and future growth carefully." },
+    "valuation": { "title": "Market Valuation", "desc": "Set a realistic budget and check market prices to get the best deal without overpaying." },
+    "legal": { "title": "Legal Verification", "desc": "Ensure all property documents and ownership titles are clear and legally sound." }
+  },
+  "featured": {
+    "heading": "Featured Properties",
+    "subheading": "Hand-picked homes ready to view.",
+    "viewAll": "View all",
+    "empty": "No properties listed yet.",
+    "addFirst": "Add your first property"
+  },
+  "steps": {
+    "heading": "Start Searching",
+    "subheading": "Follow these simple steps to find your dream property.",
+    "createAccount": { "title": "Create Account", "desc": "Create your personal account on our platform." },
+    "browseListings": { "title": "Browse Listings", "desc": "Explore the property gallery and use smart filters." },
+    "scheduleTour": { "title": "Schedule a Tour", "desc": "Book a physical or virtual tour with our experts." },
+    "closeDeal": { "title": "Close the Deal", "desc": "Get full legal support to complete your purchase safely." }
+  },
+  "consultationSection": {
+    "heading": "Client Consultation",
+    "subheading": "Our team combines artificial intelligence with real human support to guide you through every step of your real estate journey.",
+    "personalized": { "title": "Personalized Support", "desc": "Real brokers ready to help you at every step — completely free of charge." },
+    "smartValuation": { "title": "Smart Valuation", "desc": "Answer simple questions and receive property recommendations that speak to your style and budget." },
+    "transparency": { "title": "Price Transparency", "desc": "No hidden fees. Real-time market prices for all properties." }
+  },
+  "whyChooseUs": {
+    "heading": "Why Choose Us?",
+    "subheading": "Because we're truly different. We combine Technology with human expertise for your perfect real estate experience.",
+    "technology": { "title": "Technology-Powered", "desc": "Latest artificial intelligence for accurate property matching." },
+    "humanSupport": { "title": "Human Support", "desc": "Real certified experts to guide you personally." },
+    "saveTime": { "title": "Save Time", "desc": "Find your perfect property in minutes, not weeks." },
+    "saveMoney": { "title": "Save Money", "desc": "Best market deals with zero hidden commissions." },
+    "uniqueExperience": { "title": "Unique Experience", "desc": "Simple interface anyone can use." },
+    "verifiedListings": { "title": "Verified Listings", "desc": "Properties of all sizes with full price transparency and free consultation." },
+    "quote": "\"You won't find all of this anywhere else, because we work to achieve one goal: for you to invest or buy your dream property with confidence, without wasting time or money.\""
+  },
+  "cta": {
+    "heading": "Free Consultation",
+    "subheading": "Get a free consultation from our experts to help you find your dream property.",
+    "book": "Book Free Consultation"
+  }
+}

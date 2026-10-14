@@ -1,0 +1,36 @@
+{
+  "page": {
+    "eyebrow": "Property Request",
+    "title": "Request the property you need",
+    "subtitle": "Can't find what you're looking for in our listings? Tell us the type and code and our team will follow up with you quickly."
+  },
+  "form": {
+    "name": "Your name",
+    "namePlaceholder": "e.g. Ahmed Mohamed",
+    "phone": "Phone number",
+    "phonePlaceholder": "e.g. 01001234567",
+    "email": "Email address",
+    "emailPlaceholder": "e.g. you@example.com",
+    "code": "Property code",
+    "codePlaceholder": "e.g. BH-1024",
+    "type": "Property type",
+    "typePlaceholder": "Select property type",
+    "submit": "Send request",
+    "submitting": "Sending…",
+    "errors": {
+      "required": "Please fill in all fields and choose a property type.",
+      "failed": "Failed to send request: {{message}}"
+    },
+    "success": "Your request has been sent successfully! We will contact you soon."
+  },
+  "success": {
+    "title": "Request received!",
+    "body": "Thank you — our team will review your request and contact you as soon as possible.",
+    "again": "Send another request"
+  },
+  "contact": {
+    "ctaTitle": "Didn't find the right property?",
+    "ctaText": "Send us a property request with the type and code you're looking for.",
+    "ctaButton": "Request a property"
+  }
+}
