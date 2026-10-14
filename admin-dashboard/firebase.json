@@ -1,0 +1,28 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "**/node_modules/**",
+      "server.mjs",
+      "start-dashboard.bat",
+      "package.json",
+      "package-lock.json"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-store" },
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          { "key": "Referrer-Policy", "value": "no-referrer" }
+        ]
+      }
+    ]
+  }
+}

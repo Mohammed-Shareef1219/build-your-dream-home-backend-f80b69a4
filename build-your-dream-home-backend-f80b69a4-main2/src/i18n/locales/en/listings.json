@@ -1,0 +1,250 @@
+{
+  "properties": {
+    "brand": "IBN BEITAK",
+    "detailsBar": "DETAILS",
+    "tabs": {
+      "properties": "PROPERTIES",
+      "invest": "INVEST",
+      "vr": "VR TOURS"
+    },
+    "filters": {
+      "searchPlaceholder": "Search by location, title, size...",
+      "matchingListings": "{{count}} matching listings",
+      "reset": "Reset filters",
+      "noResults": "No properties match your filters."
+    },
+    "types": {
+      "all": "All Types",
+      "villa": "Villa",
+      "apartment": "Apartment",
+      "duplex": "Duplex",
+      "country_house": "Country House",
+      "studio": "Studio",
+      "smart_home": "Smart Home"
+    },
+    "beds": {
+      "any": "Any Beds",
+      "1": "1+",
+      "2": "2+",
+      "3": "3+",
+      "4": "4+"
+    },
+    "sorts": {
+      "featured": "Featured first",
+      "price_asc": "Price ↑",
+      "price_desc": "Price ↓",
+      "newest": "Newest"
+    },
+    "moodIcons": {
+      "kitchen": "Kitchen",
+      "living": "Living",
+      "bath": "Bath",
+      "beds": "Beds",
+      "garden": "Garden"
+    },
+    "card": {
+      "propertyCode": "[Property Code: {{code}}]",
+      "views": "{{count}} views",
+      "startingFrom": "Starting from",
+      "details": "Details",
+      "arabicLabels": {
+        "villa": "Villa Property",
+        "apartment": "Apartment Property",
+        "duplex": "Duplex Property",
+        "studio": "Studio Property",
+        "country_house": "Country Property",
+        "default": "Property"
+      }
+    },
+    "toggleFavorite": "Toggle favorite",
+    "signInFavorites": "Please sign in to save favorites",
+    "developerStrip": {
+      "tagline": "DEVELOPMENTS",
+      "description": "Verified developer · Direct owner contact on every listing",
+      "callNow": "CALL NOW"
+    },
+    "aiAssistant": {
+      "label": "AI ASSISTANT (ZEYAD):",
+      "hint": "\"Ask about financing!\""
+    },
+    "tabIntros": {
+      "properties": {
+        "badge": "PROPERTIES",
+        "title": "Find a home ready to move into",
+        "content": "An advanced search engine for every available unit on the live market — sale or rent.",
+        "details": "Filter by location, size, price and number of rooms to narrow thousands of listings to the few that fit.",
+        "objective": "Quick, traditional browsing to find the right property for immediate occupancy."
+      },
+      "invest": {
+        "badge": "INVESTMENT",
+        "title": "Put your capital to work",
+        "content": "Off-plan residential projects and prime commercial or office assets curated for yield.",
+        "details": "Each opportunity displays expected ROI, long-term payment plans and projected price growth.",
+        "objective": "Built for investors looking to grow capital — not for immediate occupancy."
+      },
+      "vr": {
+        "badge": "VR TOURS",
+        "title": "Walk the unit before you visit",
+        "content": "Interactive 360° virtual reality tours of selected properties.",
+        "details": "Move room to room and inspect real finishes as if you were standing inside the unit.",
+        "objective": "Accurate remote inspection — saving time, effort and unnecessary site visits."
+      },
+      "detailsLabel": "Details:",
+      "objectiveLabel": "Objective:"
+    },
+    "invest": {
+      "offPlan": "OFF-PLAN",
+      "roiLabel": "ROI {{roi}}",
+      "requestMemo": "Request investment memo",
+      "deals": {
+        "marina": { "name": "Marina Tower — Off-plan", "location": "New Alamein, North Coast" },
+        "capital": { "name": "Capital Business Hub", "location": "New Administrative Capital" },
+        "zayed": { "name": "Sheikh Zayed Office Park", "location": "Sheikh Zayed, Giza" }
+      }
+    },
+    "vr": {
+      "badge": "360° VR",
+      "enter": "Enter",
+      "playAria": "Play VR tour",
+      "tours": {
+        "penthouse": { "name": "Penthouse — Marina Tower", "rooms": "5 rooms · 320m²" },
+        "villa": { "name": "Smart Villa — Sheikh Zayed", "rooms": "4 rooms · 410m²" },
+        "loft": { "name": "Loft — New Capital", "rooms": "2 rooms · 145m²" }
+      }
+    }
+  },
+  "propertyDetail": {
+    "loading": "Loading…",
+    "notFound": "Property not found.",
+    "backToListings": "Back to listings",
+    "aboutTitle": "About this property",
+    "featuresTitle": "Features",
+    "priceLabel": "Price",
+    "statusLabel": "Status: {{status}}",
+    "beds": "beds",
+    "baths": "baths",
+    "inquireTitle": "Inquire about this property",
+    "form": {
+      "name": "Name *",
+      "email": "Email *",
+      "phone": "Phone",
+      "message": "Message *",
+      "sending": "Sending...",
+      "send": "Send Inquiry"
+    },
+    "toasts": {
+      "signInFavorites": "Please sign in to save favorites",
+      "removedFavorite": "Removed from favorites",
+      "addedFavorite": "Added to favorites",
+      "inquirySent": "Inquiry sent! We'll be in touch soon."
+    }
+  },
+  "catalog": {
+    "backToTypes": "Back to Property Types",
+    "developerTagline": "Ebny Betak Real Estate Development",
+    "salesBooking": "For Sales and Booking",
+    "designLabel": "Design:",
+    "builderLabel": "Builder:",
+    "sellerLabel": "Seller:",
+    "codeLabel": "Code:",
+    "notFoundTitle": "Catalogue not found",
+    "notFoundText": "That property type doesn't exist.",
+    "errorTitle": "Something went wrong",
+    "categories": {
+      "apartment": { "title": "Smart Apartments", "arabicTitle": "شقق ذكية", "subtitle": "Luxury Apartment Models Catalogue", "directoryLine": "Vision 2026 — Smart Apartments" },
+      "villa": { "title": "Luxury Villas", "arabicTitle": "فيلات فاخرة", "subtitle": "Luxury Villa Collection Catalogue", "directoryLine": "Vision 2026 — Luxury Villas" },
+      "duplex": { "title": "Duplex Designs", "arabicTitle": "تصميمات دوبليكس", "subtitle": "Luxury Duplex Models Catalogue", "directoryLine": "Vision 2026 — Duplex Units" },
+      "country_house": { "title": "Country Houses", "arabicTitle": "البيوت الريفية", "subtitle": "Country & Countryside Homes Catalogue", "directoryLine": "Vision 2026 — Country Houses" },
+      "studio": { "title": "Studios", "arabicTitle": "استديوهات", "subtitle": "Smart Studios Catalogue", "directoryLine": "2026 Studio Directory" }
+    }
+  },
+  "catalogDetail": {
+    "propertyCode": "[Property Code: {{code}}]",
+    "views1250": "1,250 views",
+    "commentsTitle": "COMMENTS & QUESTIONS",
+    "askPlaceholder": "Ask a question about this unit…",
+    "send": "Send",
+    "comments": {
+      "q1": "Are installment plans available?",
+      "q2": "Is the smart-home package included in the price?",
+      "q3": "How soon can I schedule a site visit?"
+    },
+    "unitDescriptionTitle": "UNIT DESCRIPTION",
+    "specTable": {
+      "propertyType": "Property Type",
+      "moodBoard": "Mood Board",
+      "feature": "Feature"
+    },
+    "engagement": {
+      "title": "ENGAGEMENT COUNTER",
+      "likes": "45 people liked this unit",
+      "bookings": "3 similar units have been booked",
+      "viewsWeek": "1,250 views this week"
+    },
+    "sidebar": {
+      "developments": "DEVELOPMENTS",
+      "callNow": "CALL NOW",
+      "viewOnMap": "VIEW ON MAP",
+      "share": "Share:"
+    },
+    "mobileBar": {
+      "code": "Code: {{code}}",
+      "call": "Call"
+    },
+    "aiAssistant": {
+      "name": "AI ASSISTANT (ZEYAD)",
+      "hint": "\"Ask about Financing!\"",
+      "greeting": "Hi, I'm Zeyad 👋 Ask about financing, installments, or scheduling a tour.",
+      "financingReply": "Great question! Installment plans up to 8 years are available — want me to send the full payment plan?",
+      "inputPlaceholder": "Type a message…",
+      "openAria": "Open AI assistant",
+      "online": "Zeyad · Online"
+    },
+    "notFoundTitle": "Property not found",
+    "errorTitle": "Something went wrong",
+    "back": "Back",
+    "backTo": "Back to {{title}}",
+    "boards": {
+      "apartment": {
+        "kitchen": { "label": "Kitchen", "caption": "Open-plan smart kitchen with energy-efficient appliances." },
+        "living": { "label": "Living Room", "caption": "Spacious living area with voice-controlled lighting." },
+        "bath": { "label": "Bathroom", "caption": "Super-lux finishing with smart mirror and rain shower." },
+        "bedroom": { "label": "Bedrooms", "caption": "Three private bedrooms with ambient climate zoning." },
+        "balcony": { "label": "Balcony / Garden", "caption": "Floor-to-ceiling windows opening to a green skyline." }
+      },
+      "villa": {
+        "exterior": { "label": "Exterior", "caption": "Panoramic facade with absolute privacy." },
+        "reception": { "label": "Reception", "caption": "Grand reception with double-height ceilings." },
+        "kitchen": { "label": "Kitchen", "caption": "Chef's kitchen with island and pantry." },
+        "master": { "label": "Master Rooms", "caption": "Master suites with dressing rooms." },
+        "garden": { "label": "Garden", "caption": "Private garden with infinity pool." }
+      },
+      "duplex": {
+        "ground": { "label": "Ground Floor", "caption": "Guest-area ground floor with privacy zoning." },
+        "first": { "label": "First Floor", "caption": "Family bedrooms upstairs for total separation." },
+        "stairs": { "label": "Internal Stairs", "caption": "Sculptural glass-walled internal staircase." },
+        "terrace": { "label": "Terrace", "caption": "Wide terrace and private garden." }
+      },
+      "studio": {
+        "sleeping": { "label": "Sleeping Area", "caption": "Smart furnishing maximises every square meter." },
+        "kitchen": { "label": "American Kitchen", "caption": "Open American kitchen, energy-efficient." },
+        "bath": { "label": "Bathroom", "caption": "Compact spa-style bathroom." }
+      },
+      "country_house": {
+        "landscape": { "label": "Landscape", "caption": "Tranquility of nature with open green spaces." },
+        "reception": { "label": "Rustic Reception", "caption": "Natural stone meets warm wooden tones." },
+        "rooms": { "label": "Wooden Rooms", "caption": "Wooden rooms with fresh air & quietness." },
+        "bbq": { "label": "BBQ Area", "caption": "Outdoor seating around the BBQ pavilion." }
+      },
+      "heroLabel": "Exterior"
+    },
+    "pitch": {
+      "apartment": "Smart design providing maximum space utilization, with separate bedrooms for ultimate privacy.",
+      "villa": "Panoramic views with absolute privacy, featuring a modern design with luxurious touches.",
+      "duplex": "Complete separation between guest area and bedrooms, with a private garden and elegant internal stairs.",
+      "studio": "Smart furnishing, energy-efficient and close to all services — the perfect investor unit.",
+      "country_house": "The tranquility of nature with a design that blends natural stone with open green spaces."
+    },
+    "smartHomeLine": "Smart Home: Complete control over your home via your phone (lighting, AC, security) with 2026 technology."
+  }
+}

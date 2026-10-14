@@ -1,0 +1,186 @@
+{
+  "about": {
+    "eyebrow": "About Us",
+    "title": "Who We Are",
+    "intro": "Brokers + programmers, powered by technology. We are a team of real estate experts and programmers specializing in transforming your property search into a fast and smart experience, using the latest artificial intelligence technologies.",
+    "blocks": {
+      "goal": { "title": "Our Goal", "text": "Make buying, selling, or renting your property easier, faster, and clearer than ever before." },
+      "vision": { "title": "Our Vision", "text": "A future where everyone can find their perfect property effortlessly." },
+      "futureVision": { "title": "Vision for the Future", "text": "Integrity of brokers, speed of technology — for everyone." },
+      "aspiration": { "title": "Our Aspiration", "text": "The leading Arab platform for smart real estate marketing in minutes." }
+    }
+  },
+  "blog": {
+    "eyebrow": "Blog & News",
+    "title": "Latest real estate updates",
+    "banner": "Latest real estate updates and platform news.",
+    "news": {
+      "cairoMarket": { "tag": "Market", "title": "Cairo property market up 4.2% this quarter" },
+      "aiTool": { "tag": "Product", "title": "New AI Valuation Tool launched" },
+      "agentAhmed": { "tag": "Agent", "title": "Agent Ahmed Mansour closes 12 deals this week" },
+      "ibnBeitak": { "tag": "Partnership", "title": "Ibn Beitak joins as featured partner agency" },
+      "sheikhZayed": { "tag": "Market", "title": "Sheikh Zayed commercial space demand +3.4%" },
+      "smartTours": { "tag": "Product", "title": "Smart Tours: 320+ bookings this week" }
+    },
+    "ticker": [
+      "Cairo Market: +4.2% ↑",
+      "Agent Ahmed Mansour: 12 Deals Closed",
+      "New AI Valuation Tool Launched",
+      "New Cairo Villa prices +6.1% ↑",
+      "6 October apartment demand +9% ↑",
+      "Agent Sara Ali: 8 Deals Closed",
+      "Sheikh Zayed Commercial +3.4% ↑",
+      "Mortgage rates stable at 14.5%",
+      "North Coast rentals +18% ↑",
+      "AI matched 1,240 buyers this week"
+    ]
+  },
+  "careers": {
+    "eyebrow": "Careers",
+    "title": "Build the future with us",
+    "openRoles": { "label": "Open Roles", "text": "Join our team of brokers and programmers." },
+    "mission": { "label": "Mission", "text": "Build the future of AI-powered real estate marketing." },
+    "brokersHeading": "Our Brokers & Sales Team",
+    "brokersSub": "50 trusted professionals across Ibn Beitak, Z, and Al-Nujoom.",
+    "roles": {
+      "senior": "Senior Broker",
+      "sales": "Sales Consultant",
+      "advisor": "Property Advisor"
+    },
+    "locations": {
+      "newCairo": "New Cairo",
+      "october": "6 October",
+      "sheikhZayed": "Sheikh Zayed",
+      "maadi": "Maadi",
+      "heliopolis": "Heliopolis",
+      "alexandria": "Alexandria",
+      "northCoast": "North Coast",
+      "settlement5": "5th Settlement"
+    }
+  },
+  "support": {
+    "eyebrow": "Help Center",
+    "title": "How to use our simple interface",
+    "subtitle": "Follow these simple steps to find your dream property.",
+    "stepLabel": "Step {{number}}",
+    "steps": {
+      "createAccount": { "title": "Create Account", "text": "Sign up in seconds with email or Google." },
+      "browseListings": { "title": "Browse Listings", "text": "Filter villas, apartments, and commercial spaces." },
+      "scheduleTour": { "title": "Schedule a Tour", "text": "Book a real or virtual tour with a verified broker." },
+      "closeDeal": { "title": "Close the Deal", "text": "Finalize with transparent pricing and full support." }
+    },
+    "contact": {
+      "whatsapp": { "label": "WhatsApp", "note": "Tap to chat instantly." },
+      "telegram": { "label": "Telegram", "note": "Send us a Telegram message." },
+      "email": { "label": "Email", "note": "Reply within 24 hours." }
+    },
+    "bookConsultation": "Book Free Consultation"
+  },
+  "resources": {
+    "eyebrow": "Resources",
+    "title": "Real Estate Guides & Smart Tips",
+    "subtitle": "Learn from people who actually close deals.",
+    "banner": "Set a realistic budget and check market prices to get the best deal without overpaying.",
+    "guides": {
+      "realEstateGuides": { "title": "Real Estate Guides", "text": "Learn best practices in buying and investing in real estate from our experts — written by brokers who close deals every week." },
+      "marketStudy": { "title": "Egyptian Market Study Program", "text": "A complete curriculum analyzing the Egyptian real estate market: supply zones, price cycles, currency impact, and developer track records." },
+      "smartTips": { "title": "Smart Tips for Property Valuation", "text": "Set a realistic budget and check market prices to get the best deal without overpaying. Learn the 7 indicators that signal a fair price." },
+      "smartBudgeting": { "title": "Smart Budgeting", "text": "Down payments, installments, mortgage rates, and total cost of ownership — clearly explained for first-time buyers." }
+    },
+    "curriculumHeading": "Egyptian Market — 4-Week Study Program",
+    "curriculum": {
+      "week1": { "week": "Week 1", "topic": "Market Fundamentals", "detail": "Supply & demand zones across Greater Cairo, Alexandria, and the North Coast." },
+      "week2": { "week": "Week 2", "topic": "Price Cycles & Currency", "detail": "How EGP volatility, inflation, and interest rates shape property prices." },
+      "week3": { "week": "Week 3", "topic": "Developer Track Records", "detail": "Evaluating delivery history, finishing quality, and after-sales service." },
+      "week4": { "week": "Week 4", "topic": "Investment Math", "detail": "ROI, rental yields, capital gains, and exit strategies in the Egyptian market." }
+    }
+  },
+  "neighborhoods": {
+    "eyebrow": "Neighborhood Directory",
+    "title": "Choosing the Property Location",
+    "subtitle": "The right location increases the value of your investment. Research the neighborhood carefully.",
+    "specs": {
+      "commercial": "Commercial Spaces",
+      "garages": "Garages & Parking",
+      "gardens": "Gardens",
+      "services": "Services",
+      "infrastructure": "Infrastructure"
+    },
+    "areas": {
+      "newCairo": {
+        "name": "New Cairo",
+        "location": "East Cairo, near Ring Road & Suez Road",
+        "commercial": "Cairo Festival City, Point 90, Downtown Mall — premium retail & offices.",
+        "garages": "Underground parking in most compounds; surface lots at malls.",
+        "gardens": "Family Park, Al Andalus Park, large private compound gardens.",
+        "services": "International schools (AIS, CAC), hospitals (Dar Al Fouad), gyms, banks.",
+        "infrastructure": "Wide highways, fiber internet, reliable utilities, security gates."
+      },
+      "october": {
+        "name": "6 October City",
+        "location": "West Cairo, ~32 km from Tahrir",
+        "commercial": "Mall of Arabia, Mall of Egypt, Dandy Mega Mall — full retail mix.",
+        "garages": "Plentiful surface and basement parking; affordable rates.",
+        "gardens": "Hadayek October, central green spines in Dreamland and Beverly Hills.",
+        "services": "Universities (MSA, MUST, NU), hospitals, supermarkets, mosques & churches.",
+        "infrastructure": "26th of July Corridor access, metro line under construction, gas grid."
+      },
+      "sheikhZayed": {
+        "name": "Sheikh Zayed",
+        "location": "West Cairo, adjacent to 6 October",
+        "commercial": "Arkan Plaza, Galleria 40, Americana Plaza — upscale dining & shops.",
+        "garages": "Compound-based covered parking; valet at major plazas.",
+        "gardens": "Compound landscaping, Beverly Hills lakes, Allegria golf greens.",
+        "services": "Top international schools, Sheikh Zayed Hospital, premium clinics.",
+        "infrastructure": "New Cairo–Alex desert road, fiber, premium utilities."
+      },
+      "northCoast": {
+        "name": "North Coast (Sahel)",
+        "location": "Mediterranean coast, Alexandria → Marsa Matrouh",
+        "commercial": "Marassi Marina, Hacienda White, Almaza Bay retail strips.",
+        "garages": "Open-air resort parking; villa private garages.",
+        "gardens": "Beachfront landscaping, lagoons, palm-lined promenades.",
+        "services": "Seasonal clinics, supermarkets, beach clubs, hotels.",
+        "infrastructure": "Fouka Road shortcut to Cairo (2h), new highways, gas stations."
+      },
+      "maadi": {
+        "name": "Maadi",
+        "location": "South Cairo, along the Nile",
+        "commercial": "Road 9, Maadi Grand Mall, CityStars Maadi — diverse retail.",
+        "garages": "Street parking and small underground garages in newer buildings.",
+        "gardens": "Tree-lined streets, Wadi Degla Protectorate, sporting club greens.",
+        "services": "CAC, embassies, Maadi Military Hospital, Cairo American College.",
+        "infrastructure": "Metro Line 1, Ring Road, expat-friendly utilities."
+      },
+      "heliopolis": {
+        "name": "Heliopolis & 5th Settlement",
+        "location": "East Cairo",
+        "commercial": "Heliopolis Korba, City Stars, Cairo Festival, Down Town Katameya.",
+        "garages": "Compound parking; underground at malls and offices.",
+        "gardens": "Merryland Park, Family Park, private compound gardens.",
+        "services": "Schools, hospitals (Cleopatra, Air Force), banks, embassies nearby.",
+        "infrastructure": "Monorail to New Capital, Ring Road, metro extensions."
+      }
+    }
+  },
+  "investment": {
+    "eyebrow": "Real Estate Investment",
+    "title": "Earn income from your property",
+    "subtitle": "Rentals, garages, palm groves — discover how every property can pay you back.",
+    "legal": {
+      "heading": "Legal Verification",
+      "text": "Ensure all property documents and title deeds are clear and legally valid. Our in-house legal team reviews every contract before signing — registered with the Egyptian Real Estate Publicity Department."
+    },
+    "strategies": {
+      "residential": { "title": "Residential Rentals", "location": "New Cairo, Maadi, Sheikh Zayed, 6 October", "text": "Buy a furnished apartment or villa and rent it to expats, executives, or short-term tourists. Average gross yield: 6–9% annually." },
+      "garage": { "title": "Garage & Parking Income", "location": "Downtown Cairo, Mohandessin, Heliopolis, Zamalek", "text": "Purchase a covered parking unit or small lot in dense areas. Monthly rentals to residents and offices generate steady cash flow with near-zero maintenance." },
+      "palm": { "title": "Palm Groves & Agricultural Land", "location": "Siwa, Fayoum, Wadi El Natrun, North Coast hinterland", "text": "Buy producing palm groves or plant new ones. Annual date harvests plus rising land value give a long-term inflation hedge." },
+      "commercial": { "title": "Commercial Spaces", "location": "5th Settlement, Sheikh Zayed, New Capital", "text": "Lease retail units, clinics, or co-working spaces to businesses on multi-year contracts — higher yields than residential." }
+    },
+    "advisor": {
+      "title": "Talk to an investment advisor",
+      "text": "Free 24-hour consultation — we'll match the right strategy to your budget.",
+      "button": "Book Now"
+    }
+  }
+}

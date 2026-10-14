@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BuildYourHome — Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a1a26;
+    --surface: #0f2536;
+    --surface-2: #142c40;
+    --border: rgba(255,255,255,0.08);
+    --text: #f3f6f8;
+    --text-muted: #93a5b3;
+    --primary: #0f2a3d;
+    --secondary: #17b384;
+    --accent: #f0b429;
+    --danger: #e6564a;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-display { font-family: 'Outfit', 'Inter', sans-serif; }
+  svg.ic { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+  .sidebar {
+    background: var(--primary);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    animation: slideInLeft 600ms var(--ease) both;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 28px; }
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(23,179,132,0.4);
+  }
+  .brand-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 17px; }
+  .brand-sub { font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .nav-section { margin-bottom: 24px; }
+  .nav-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); padding: 0 12px 8px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 10px;
+    color: var(--text-muted); font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all 180ms var(--ease); margin-bottom: 2px;
+    position: relative;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+  .nav-item.active { background: rgba(23,179,132,0.14); color: #4ce0ac; }
+  .nav-item.active::before {
+    content: ''; position: absolute; left: -16px; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 20px; background: var(--secondary); border-radius: 0 4px 4px 0;
+  }
+  .nav-badge {
+    margin-inline-start: auto; background: var(--accent); color: #21160a;
+    font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 999px;
+  }
+
+  .main { padding: 28px 32px 60px; max-width: 1400px; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; gap: 16px; flex-wrap: wrap;
+    animation: fadeInUp 600ms var(--ease) both;
+  }
+  .page-title { font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; }
+  .page-sub { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+  .search {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 8px 14px; width: 260px; color: var(--text-muted); font-size: 13px;
+  }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: #10202b;
+  }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 10px; background: var(--surface);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); cursor: pointer; transition: all 180ms var(--ease); position: relative;
+  }
+  .icon-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .dot { position: absolute; top: 7px; right: 8px; width: 7px; height: 7px; border-radius: 999px; background: var(--danger); }
+
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px; opacity: 0; transform: translateY(16px);
+    transition: opacity 600ms var(--ease), transform 600ms var(--ease), border-color 200ms;
+  }
+  .kpi-card.revealed { opacity: 1; transform: translateY(0); }
+  .kpi-card:hover { border-color: rgba(23,179,132,0.4); transform: translateY(-3px); }
+  .kpi-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+  .kpi-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .kpi-trend { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 3px; }
+  .kpi-trend svg { width: 13px; height: 13px; }
+  .kpi-trend.up { color: #4ce0ac; }
+  .kpi-trend.down { color: var(--danger); }
+  .kpi-value { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 700; line-height: 1; }
+  .kpi-label { color: var(--text-muted); font-size: 13px; margin-top: 6px; }
+
+  .panel-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 1100px) { .panel-grid { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+  }
+  .panel.revealed { opacity: 1; transform: translateY(0); }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .panel-title { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; }
+  .panel-sub { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+  .pill-toggle { display: flex; background: var(--surface-2); border-radius: 8px; padding: 3px; font-size: 12px; }
+  .pill-toggle span { padding: 5px 12px; border-radius: 6px; color: var(--text-muted); cursor: pointer; }
+  .pill-toggle span.active { background: var(--secondary); color: #06231a; font-weight: 600; }
+
+  .bottom-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  @media (max-width: 1100px) { .bottom-grid { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--text-muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; padding: 0 10px 10px; }
+  td { padding: 12px 10px; border-top: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .status-pill { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; display: inline-block; }
+  .status-new { background: rgba(240,180,41,0.15); color: var(--accent); }
+  .status-progress { background: rgba(23,179,132,0.15); color: #4ce0ac; }
+  .status-done { background: rgba(255,255,255,0.08); color: var(--text-muted); }
+  .row-name { font-weight: 600; }
+  .row-sub { color: var(--text-muted); font-size: 11px; margin-top: 1px; }
+
+  .prop-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }
+  .prop-item:first-child { border-top: none; padding-top: 0; }
+  .prop-thumb { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+  .prop-name { font-size: 13px; font-weight: 600; }
+  .prop-meta { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .prop-price { margin-inline-start: auto; font-size: 13px; font-weight: 700; color: var(--accent); font-family: 'Outfit', sans-serif; }
+
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideInLeft { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: translateX(0); } }
+  .note {
+    max-width: 1400px; margin: 0 32px 8px; padding: 10px 14px; border-radius: 10px;
+    background: rgba(240,180,41,0.08); border: 1px solid rgba(240,180,41,0.25);
+    color: #f0c15c; font-size: 12px;
+  }
+
+  /* ---------- Login gate overlay ---------- */
+  #loginGate {
+    position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center;
+    background:
+      radial-gradient(900px 480px at 85% -10%, rgba(23,179,132,.12), transparent 60%),
+      radial-gradient(700px 420px at -10% 110%, rgba(240,180,41,.08), transparent 60%),
+      var(--bg);
+  }
+  .login-card {
+    width: min(400px, 92vw); background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.45); padding: 34px 30px;
+  }
+  .login-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .login-sub { color: var(--text-muted); font-size: 13.5px; margin: 6px 0 22px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; letter-spacing: .4px; text-transform: uppercase; }
+  .field input {
+    width: 100%; padding: 11px 13px; font-size: 14px; color: var(--text);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; outline: none;
+  }
+  .field input:focus { border-color: var(--secondary); }
+  .login-btn {
+    width: 100%; margin-top: 6px; padding: 12px; font-size: 14.5px; font-weight: 600; color: #06231a;
+    background: linear-gradient(135deg, var(--secondary), #12a077); border: 0; border-radius: 10px; cursor: pointer;
+  }
+  .login-btn:hover { filter: brightness(1.07); }
+  .login-btn:disabled { opacity: .6; cursor: wait; }
+  .login-note { margin-top: 16px; font-size: 12px; color: var(--text-muted); text-align: center; }
+  .form-msg { min-height: 18px; margin-top: 12px; font-size: 13px; font-weight: 500; text-align: center; }
+  .form-msg.err { color: var(--danger); }
+  .form-msg.ok { color: #4ce0ac; }
+
+  /* ---------- SPA pages ---------- */
+  .page { display: none; }
+  .page.active { display: block; animation: fadeInUp 450ms var(--ease) both; }
+  .page-toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+  .text-input {
+    padding: 9px 12px; font-size: 13px; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px; outline: none;
+    font-family: inherit;
+  }
+  .text-input:focus { border-color: var(--secondary); }
+  textarea.text-input { resize: vertical; }
+  .btn-primary {
+    padding: 9px 16px; font-size: 13px; font-weight: 600; color: #06231a;
+    background: linear-gradient(135deg, var(--secondary), #12a077); border: 0; border-radius: 10px; cursor: pointer;
+    transition: filter 160ms;
+  }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-primary:disabled { opacity: .55; cursor: wait; }
+  .btn-ghost {
+    padding: 9px 16px; font-size: 13px; font-weight: 500; color: var(--text-muted);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; cursor: pointer;
+  }
+  .btn-ghost:hover { color: var(--text); }
+  .btn-danger {
+    padding: 9px 16px; font-size: 13px; font-weight: 600; color: #fff;
+    background: var(--danger); border: 0; border-radius: 10px; cursor: pointer;
+  }
+  .btn-danger:hover { filter: brightness(1.08); }
+  .row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+  .act-btn {
+    width: 30px; height: 30px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border);
+    display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted);
+    transition: all 150ms;
+  }
+  .act-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .act-btn.del:hover { color: var(--danger); border-color: var(--danger); }
+  .act-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- Modals ---------- */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200; display: none;
+    align-items: center; justify-content: center; padding: 20px;
+    background: rgba(4, 12, 18, 0.72); backdrop-filter: blur(3px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    width: min(520px, 94vw); max-height: 90vh; overflow-y: auto;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.5); padding: 24px;
+    animation: fadeInUp 300ms var(--ease) both;
+  }
+  .modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .modal-x {
+    width: 30px; height: 30px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer; font-size: 13px;
+  }
+  .modal-x:hover { color: var(--text); }
+  .role-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--border); }
+  .role-row:first-of-type { border-top: none; }
+  .set-row { display: flex; justify-content: space-between; gap: 14px; padding: 11px 0; border-top: 1px solid var(--border); font-size: 13.5px; }
+  .set-row:first-of-type { border-top: none; }
+  .set-row span { color: var(--text-muted); }
+  .status-select {
+    font-size: 11.5px; font-weight: 600; padding: 3px 6px; border-radius: 8px;
+    background: transparent; border: 1px solid transparent; color: inherit; cursor: pointer; outline: none;
+    font-family: inherit;
+  }
+  .status-select:hover, .status-select:focus { border-color: var(--border); background: var(--surface-2); }
+  .status-select option { background: var(--surface); color: var(--text); }
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOGIN GATE (Firebase Auth) ══════════ -->
+<div id="loginGate">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="brand-mark"><svg class="ic" style="color:white" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+      <div>
+        <div class="brand-name">BuildYourHome</div>
+        <div class="brand-sub">Admin</div>
+      </div>
+    </div>
+    <p class="login-sub">Admin dashboard · authorized access only</p>
+    <div class="field">
+      <label for="loginEmail">Email</label>
+      <input id="loginEmail" type="email" autocomplete="username" placeholder="you@example.com" />
+    </div>
+    <div class="field">
+      <label for="loginPass">Password</label>
+      <input id="loginPass" type="password" autocomplete="current-password" placeholder="••••••••" />
+    </div>
+    <button id="loginBtn" class="login-btn">Sign in</button>
+    <div id="formMsg" class="form-msg"></div>
+    <p class="login-note">🔒 This dashboard only accepts <b>buildyourhom@gmail.com</b>. Any other account is signed out immediately.</p>
+    <div class="form-msg" id="gateMsg" style="min-height:0"></div>
+  </div>
+</div>
+
+<div class="note">Live dashboard — connected to Firestore. Numbers update in real time.</div>
+
+<div class="layout" id="dashboardLayout" style="display:none">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><svg class="ic" style="color:white" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+      <div>
+        <div class="brand-name">BuildYourHome</div>
+        <div class="brand-sub">Admin</div>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Overview</div>
+      <div class="nav-item active" data-page="dashboard"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Dashboard</div>
+      <div class="nav-item" data-page="analytics"><svg class="ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Analytics</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Manage</div>
+      <div class="nav-item" data-page="properties"><svg class="ic" viewBox="0 0 24 24"><path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18Z"/><path d="M6 12H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2"/><path d="M18 9h2a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg>Properties</div>
+      <div class="nav-item" data-page="inquiries"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Inquiries<span class="nav-badge" id="inqBadge" style="display:none">0</span></div>
+      <div class="nav-item" data-page="consultations"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16h4"/></svg>Consultations</div>
+      <div class="nav-item" data-page="customers"><svg class="ic" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Customers</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">System</div>
+      <div class="nav-item" data-page="roles"><svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Roles &amp; access</div>
+      <div class="nav-item" data-page="settings"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>Settings</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="page-title font-display" id="pageTitle">Overview</div>
+        <div class="page-sub" id="pageSub">Welcome back — here's what's happening today.</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="search"><svg class="ic" style="width:16px;height:16px" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Search properties, leads…</div>
+        <div class="icon-btn"><svg class="ic" style="width:17px;height:17px" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot"></span></div>
+        <div class="avatar" id="avatarInitials">B</div>
+      </div>
+    </div>
+
+    <div class="kpi-grid" id="kpiGrid">
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-icon" style="background:rgba(23,179,132,0.15)"><svg class="ic" style="color:#4ce0ac" viewBox="0 0 24 24"><path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18Z"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg></div>
+          <div class="kpi-trend up"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg><span id="trendActive">18%</span></div>
+        </div>
+        <div class="kpi-value" id="kpiActive">0</div>
+        <div class="kpi-label">Active listings</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-icon" style="background:rgba(240,180,41,0.15)"><svg class="ic" style="color:#f0b429" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+          <div class="kpi-trend up"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg><span id="trendInq">7%</span></div>
+        </div>
+        <div class="kpi-value" id="kpiInq30">0</div>
+        <div class="kpi-label">New inquiries (30d)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-icon" style="background:rgba(59,130,246,0.15)"><svg class="ic" style="color:#60a5fa" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16h4"/></svg></div>
+          <div class="kpi-trend down"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M7 7 17 17M17 7v10H7"/></svg>3%</div>
+        </div>
+        <div class="kpi-value" id="kpiConsults">0</div>
+        <div class="kpi-label">Consultations booked</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-icon" style="background:rgba(230,86,74,0.15)"><svg class="ic" style="color:#e6564a" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="kpi-trend up"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg>12%</div>
+        </div>
+        <div class="kpi-value"><span id="kpiPortfolio">0</span></div>
+        <div class="kpi-label">Portfolio value (EGP)</div>
+        <div class="kpi-label" id="kpiPortfolioSub" style="font-size:11px; min-height:14px"></div>
+      </div>
+    </div>
+
+    <div class="panel-grid">
+      <div class="panel" id="panelChart">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Inquiries &amp; consultations</div>
+            <div class="panel-sub" id="trendSub">Last 6 months</div>
+          </div>
+          <div class="pill-toggle"><span class="active" data-range="monthly">Monthly</span><span data-range="weekly">Weekly</span></div>
+        </div>
+        <div style="position:relative; height:260px;">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+
+      <div class="panel" id="panelDonut">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Listings by type</div>
+            <div class="panel-sub" id="donutSub">active properties</div>
+          </div>
+        </div>
+        <div style="position:relative; height:200px;">
+          <canvas id="typeChart"></canvas>
+        </div>
+        <div id="typeLegend" style="display:flex; flex-direction:column; gap:8px; margin-top:14px; font-size:12px;"></div>
+      </div>
+    </div>
+
+    <div class="bottom-grid">
+      <div class="panel" id="panelTable">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Recent inquiries</div>
+            <div class="panel-sub">Latest activity across all listings</div>
+          </div>
+          <div class="icon-btn"><svg class="ic" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <table>
+          <thead><tr><th>Contact</th><th>Property</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="inquiryRows"></tbody>
+        </table>
+      </div>
+
+      <div class="panel" id="panelProps">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Top properties</div>
+            <div class="panel-sub">Latest listings</div>
+          </div>
+        </div>
+        <div id="propList"></div>
+      </div>
+    </div>
+
+    <!-- ══════════ DASHBOARD PAGES (SPA routing) ══════════ -->
+    <section class="page" id="page-properties">
+      <div class="page-toolbar">
+        <input id="propSearch" class="text-input" style="max-width:260px" placeholder="Search title, type, location…" />
+        <select id="propStatusFilter" class="text-input" style="max-width:150px">
+          <option value="">All statuses</option>
+          <option value="active">Active</option>
+          <option value="sold">Sold</option>
+        </select>
+        <button id="addPropBtn" class="btn-primary">+ Add property</button>
+      </div>
+      <div class="panel">
+        <table>
+          <thead><tr><th>Listing</th><th>Type</th><th>Location</th><th>Price</th><th>Status</th><th></th></tr></thead>
+          <tbody id="propTableRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page" id="page-inquiries">
+      <div class="page-toolbar">
+        <input id="inqSearch" class="text-input" style="max-width:260px" placeholder="Search name, email, property…" />
+        <select id="inqStatusFilter" class="text-input" style="max-width:160px">
+          <option value="">All statuses</option>
+          <option value="new">New</option>
+          <option value="in progress">In progress</option>
+          <option value="closed">Closed</option>
+        </select>
+        <button id="addInqBtn" class="btn-primary">+ Add inquiry</button>
+      </div>
+      <div class="panel">
+        <table>
+          <thead><tr><th>Contact</th><th>Property</th><th>Message</th><th>Status</th><th>Date</th><th></th></tr></thead>
+          <tbody id="inqTableRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page" id="page-consultations">
+      <div class="page-toolbar">
+        <input id="consSearch" class="text-input" style="max-width:260px" placeholder="Search name, email…" />
+        <select id="consStatusFilter" class="text-input" style="max-width:160px">
+          <option value="">All statuses</option>
+          <option value="new">New</option>
+          <option value="in progress">In progress</option>
+          <option value="closed">Closed</option>
+        </select>
+        <button id="addConsBtn" class="btn-primary">+ Add consultation</button>
+      </div>
+      <div class="panel">
+        <table>
+          <thead><tr><th>Contact</th><th>Preferred time</th><th>Message</th><th>Status</th><th>Date</th><th></th></tr></thead>
+          <tbody id="consTableRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page" id="page-customers">
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Customers</div><div class="panel-sub">Everyone who has inquired or booked a consultation</div></div></div>
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Activity</th><th>Last contact</th></tr></thead>
+          <tbody id="custTableRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page" id="page-analytics">
+      <div class="kpi-grid">
+        <div class="kpi-card revealed"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(23,179,132,0.15)"><svg class="ic" style="color:#4ce0ac" viewBox="0 0 24 24"><path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18Z"/></svg></div></div><div class="kpi-value" id="anTotal">0</div><div class="kpi-label">Total listings</div></div>
+        <div class="kpi-card revealed"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(240,180,41,0.15)"><svg class="ic" style="color:#f0b429" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div></div><div class="kpi-value" id="anInq">0</div><div class="kpi-label">Total inquiries</div></div>
+        <div class="kpi-card revealed"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(59,130,246,0.15)"><svg class="ic" style="color:#60a5fa" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/></svg></div></div><div class="kpi-value" id="anCons">0</div><div class="kpi-label">Total consultations</div></div>
+        <div class="kpi-card revealed"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(230,86,74,0.15)"><svg class="ic" style="color:#e6564a" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div></div><div class="kpi-value" id="anConv">0%</div><div class="kpi-label">Inquiries → closed</div></div>
+      </div>
+      <div class="panel-grid">
+        <div class="panel revealed">
+          <div class="panel-head"><div><div class="panel-title">Requests by property</div><div class="panel-sub">Inquiries + consultations per listing</div></div></div>
+          <div style="position:relative; height:280px"><canvas id="anBar"></canvas></div>
+        </div>
+        <div class="panel revealed">
+          <div class="panel-head"><div><div class="panel-title">Lead status mix</div><div class="panel-sub">All inquiries &amp; consultations</div></div></div>
+          <div style="position:relative; height:280px"><canvas id="anMix"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-roles">
+      <div class="panel" style="max-width:640px">
+        <div class="panel-head"><div><div class="panel-title">Roles &amp; access</div><div class="panel-sub">Who can open this dashboard</div></div></div>
+        <div class="role-row">
+          <div class="avatar" style="width:34px;height:34px;font-size:12px">BU</div>
+          <div style="flex:1"><div class="row-name">buildyourhom@gmail.com</div><div class="row-sub">Full access — the only account allowed by Firebase rules</div></div>
+          <span class="status-pill status-progress">Owner</span>
+        </div>
+        <p style="color:var(--text-muted); font-size:12.5px; line-height:1.6">Access is enforced twice: client-side (only this email can sign in) and server-side (Firestore security rules only allow this account to read or write any data). To grant someone else access, the security rules in <b>firestore.rules</b> must be updated.</p>
+      </div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="panel" style="max-width:640px">
+        <div class="panel-head"><div><div class="panel-title">Settings</div><div class="panel-sub">Account &amp; project info</div></div></div>
+        <div class="set-row"><span>Signed in as</span><b id="setEmail">—</b></div>
+        <div class="set-row"><span>Firebase project</span><b>realestate-dashboard-cc499</b></div>
+        <div class="set-row"><span>Plan</span><b>Spark (free)</b></div>
+        <div class="set-row"><span>Data region</span><b>nam5 (US)</b></div>
+        <div class="set-row"><span>Firestore database</span><b>(default)</b></div>
+        <button id="signOutBtn" class="btn-danger" style="margin-top:18px">Sign out</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ══════════ PROPERTY MODAL ══════════ -->
+<div class="modal-overlay" id="propModal">
+  <div class="modal">
+    <div class="modal-head"><div class="panel-title" id="propModalTitle">Add property</div><button class="modal-x" data-close="propModal">✕</button></div>
+    <div class="field"><label>Title</label><input id="fTitle" class="text-input" placeholder="e.g. Marina Villa 12" /></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+      <div class="field"><label>Type</label><input id="fType" class="text-input" placeholder="Villa, Apartment…" /></div>
+      <div class="field"><label>Location</label><input id="fLocation" class="text-input" placeholder="e.g. New Cairo" /></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+      <div class="field"><label>Price (EGP)</label><input id="fPrice" class="text-input" type="number" min="0" placeholder="4200000" /></div>
+      <div class="field"><label>Status</label><select id="fStatus" class="text-input"><option value="active">Active</option><option value="sold">Sold</option></select></div>
+    </div>
+    <div class="field"><label>Image URL (optional)</label><input id="fImage" class="text-input" placeholder="https://…" /></div>
+    <div class="form-msg" id="propModalMsg"></div>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:6px">
+      <button class="btn-ghost" data-close="propModal">Cancel</button>
+      <button id="propSaveBtn" class="btn-primary">Save property</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ LEAD MODAL (inquiries & consultations) ══════════ -->
+<div class="modal-overlay" id="leadModal">
+  <div class="modal">
+    <div class="modal-head"><div class="panel-title" id="leadModalTitle">Add inquiry</div><button class="modal-x" data-close="leadModal">✕</button></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+      <div class="field"><label>Name</label><input id="lName" class="text-input" placeholder="Full name" /></div>
+      <div class="field"><label>Phone</label><input id="lPhone" class="text-input" placeholder="+20 …" /></div>
+    </div>
+    <div class="field"><label>Email</label><input id="lEmail" class="text-input" type="email" placeholder="name@email.com" /></div>
+    <div class="field" id="leadPropField"><label>Interested in (property)</label><select id="lProperty" class="text-input"></select></div>
+    <div class="field" id="leadTimeField" style="display:none"><label>Preferred time</label><input id="lTime" class="text-input" placeholder="e.g. Weekday mornings" /></div>
+    <div class="field"><label>Message</label><textarea id="lMessage" class="text-input" rows="3" placeholder="What are they asking about?"></textarea></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+      <div class="field"><label>Status</label><select id="lStatus" class="text-input"><option value="new">New</option><option value="in progress">In progress</option><option value="closed">Closed</option></select></div>
+    </div>
+    <div class="form-msg" id="leadModalMsg"></div>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:6px">
+      <button class="btn-ghost" data-close="leadModal">Cancel</button>
+      <button id="leadSaveBtn" class="btn-primary">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CONFIRM DIALOG ══════════ -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="width:min(380px,92vw)">
+    <div class="modal-head"><div class="panel-title">Confirm delete</div><button class="modal-x" data-close="confirmModal">✕</button></div>
+    <p id="confirmMsg" style="color:var(--text-muted); font-size:13.5px; line-height:1.6; margin:0 0 18px">Are you sure?</p>
+    <div style="display:flex; gap:10px; justify-content:flex-end">
+      <button class="btn-ghost" data-close="confirmModal">Cancel</button>
+      <button id="confirmYes" class="btn-danger">Delete</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="module">
+  // ════════════════════════════════════════════════════════════════════
+  // Step 1 — FIREBASE CONFIG (your real project)
+  // ════════════════════════════════════════════════════════════════════
+  const firebaseConfig = {
+    apiKey: "AIzaSyDhvZDseAsgtVhjnvjd6mFdOZQ6zw8nFXA",
+    authDomain: "realestate-dashboard-cc499.firebaseapp.com",
+    projectId: "realestate-dashboard-cc499",
+    storageBucket: "realestate-dashboard-cc499.firebasestorage.app",
+    messagingSenderId: "371853049505",
+    appId: "1:371853049505:web:631651b92bd5f5dde9fae0",
+    measurementId: "G-1H4E03PB81"
+  };
+  // ════════════════════════════════════════════════════════════════════
+  // Step 2 — COLLECTION NAMES (only if yours differ in Firebase console)
+  // ════════════════════════════════════════════════════════════════════
+  const COL = { properties: "properties", inquiries: "inquiries", consultations: "consultations" };
+  // ════════════════════════════════════════════════════════════════════
+
+  // ─────────── everything below runs automatically — no edits needed ───────────
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, collection, onSnapshot, doc, addDoc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const ALLOWED_EMAIL = "buildyourhom@gmail.com";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  /* ══════════ helpers ══════════ */
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
+  const fmtInt = (n) => new Intl.NumberFormat("en-US").format(n || 0);
+  function fmtMoney(v) {
+    if (v == null || isNaN(v)) return "—";
+    return new Intl.NumberFormat("en-US", { style: "currency", currency: "EGP", maximumFractionDigits: 0 }).format(v);
+  }
+  function pick(o, ...keys) { for (const k of keys) { if (o && o[k] != null && o[k] !== "") return o[k]; } return null; }
+  function toDate(v) {
+    if (!v) return null;
+    if (v.toDate) return v.toDate();
+    if (v.seconds != null) return new Date(v.seconds * 1000);
+    const d = new Date(v);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function pickDate(o) { return toDate(pick(o, "createdAt", "created_at", "date", "timestamp", "submittedAt")); }
+  function pickTitle(o) { return pick(o, "title", "name", "titleEn", "nameEn") || "Untitled property"; }
+  function pickImage(o) { return pick(o, "image", "imageUrl", "photo", "thumbnail", "cover"); }
+  function pickType(o) { return pick(o, "type", "category", "propertyType", "listingType") || "Other"; }
+  function pickPrice(o) {
+    const raw = pick(o, "price", "priceValue", "amount", "monthlyRent");
+    const n = typeof raw === "string" ? parseFloat(String(raw).replace(/[^\d.]/g, "")) : raw;
+    return (typeof n === "number" && !isNaN(n)) ? n : null;
+  }
+  function pickStatus(o) { return String(pick(o, "status", "listingStatus", "state") || "").toLowerCase(); }
+  function fmtWhen(d) {
+    if (!d) return "—";
+    const diff = Date.now() - d.getTime();
+    const m = Math.floor(diff / 60000), h = Math.floor(diff / 3600000), dd = Math.floor(diff / 86400000);
+    if (m < 1) return "Today";
+    if (h < 24) return "Today";
+    if (dd === 1) return "Yesterday";
+    if (dd < 7) return dd + " days ago";
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+  function isActiveStatus(s) { return !s || ["active","published","available","for sale","for rent"].includes(s); }
+
+  /* ══════════ AUTH GATE — exact email match only ══════════ */
+  const loginBtn = $("loginBtn"), emailIn = $("loginEmail"), passIn = $("loginPass"), formMsg = $("formMsg");
+  let busy = false;
+  function showFormMsg(text, cls) { formMsg.textContent = text; formMsg.className = "form-msg " + (cls || ""); }
+
+  function precheck(email) {
+    const e = (email || "").trim().toLowerCase();
+    if (!e) return "Enter your email.";
+    if (!e.includes("@")) return "Enter a valid email address.";
+    if (e !== ALLOWED_EMAIL) return "Access denied: this dashboard is restricted to " + ALLOWED_EMAIL + ".";
+    return null;
+  }
+
+  loginBtn.addEventListener("click", doLogin);
+  passIn.addEventListener("keydown", (e) => { if (e.key === "Enter") doLogin(); });
+
+  async function doLogin() {
+    if (busy) return;
+    const err = precheck(emailIn.value);
+    if (err) { showFormMsg(err, "err"); return; }
+    busy = true; loginBtn.disabled = true; showFormMsg("Signing in…", "");
+    try {
+      await signInWithEmailAndPassword(auth, emailIn.value.trim(), passIn.value);
+      showFormMsg("", "");
+    } catch (e) {
+      busy = false; loginBtn.disabled = false;
+      const map = {
+        "auth/invalid-credential": "Wrong email or password.",
+        "auth/wrong-password": "Wrong email or password.",
+        "auth/user-not-found": "Access denied: this dashboard is restricted to " + ALLOWED_EMAIL + ".",
+        "auth/configuration-not-found": "Setup: Email/Password sign-in is not enabled yet (Firebase console → Authentication → Sign-in method).",
+        "auth/operation-not-allowed": "Setup: Email/Password sign-in is not enabled yet (Firebase console → Authentication → Sign-in method).",
+        "auth/too-many-requests": "Too many attempts. Wait a moment and try again.",
+        "auth/network-request-failed": "Network error — check your connection.",
+        "auth/invalid-email": "Enter a valid email address."
+      };
+      showFormMsg(map[e && e.code] || "Sign-in failed. Try again.", "err");
+    }
+  }
+
+  async function enforceGate(user) {
+    if (!user) { showGate(); return; }
+    const email = (user.email || "").trim().toLowerCase();
+    if (email !== ALLOWED_EMAIL) {
+      try { await signOut(auth); } catch (_) {}
+      showGate();
+      showGateMsg("Access denied: only " + ALLOWED_EMAIL + " may use this dashboard.", true);
+      return;
+    }
+    showApp(user);
+  }
+  function showGateMsg(text, isErr) {
+    const el = $("gateMsg");
+    el.textContent = text;
+    el.style.color = isErr ? "var(--danger)" : "#4ce0ac";
+  }
+  function showGate() {
+    $("dashboardLayout").style.display = "none";
+    document.querySelector(".note").style.display = "none";
+    $("loginGate").style.display = "flex";
+  }
+  function showApp(user) {
+    $("loginGate").style.display = "none";
+    document.querySelector(".note").style.display = "";
+    $("dashboardLayout").style.display = "";
+    $("avatarInitials").textContent = (user.email || "A").slice(0, 2).toUpperCase();
+    currentUser = user;
+    startRealtime();
+  }
+
+  onAuthStateChanged(auth, enforceGate);
+  // sidebar sign-out: reuse the topbar avatar as a click-to-signout button
+  $("avatarInitials").addEventListener("click", () => { if (confirm("Sign out?")) signOut(auth); });
+
+  // ── Entrance reveal (original design behavior) ──
+  const revealTargets = document.querySelectorAll(".kpi-card, .panel");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = Array.from(revealTargets).indexOf(el) * 70;
+        setTimeout(() => el.classList.add("revealed"), delay);
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealTargets.forEach((el) => io.observe(el));
+
+  /* ══════════ REAL-TIME DATA (onSnapshot) ══════════ */
+  let started = false;
+  let currentUser = null;
+  let toldPermission = false;
+  const store = { properties: [], inquiries: [], consultations: [] };
+
+  function startRealtime() {
+    if (started) return;
+    started = true;
+    const wire = (colName, key) => {
+      onSnapshot(collection(db, colName), (snap) => {
+        store[key] = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        render();
+      }, (err) => {
+        console.error("[Firestore]", key, err.code || err.message);
+        if (err.code === "permission-denied" && !toldPermission) {
+          toldPermission = true;
+          toast("Firestore is denying reads right now — security rules sync is still pending on Google's side. Data will appear automatically once it completes.", true);
+        }
+      });
+    };
+    wire(COL.properties, "properties");
+    wire(COL.inquiries, "inquiries");
+    wire(COL.consultations, "consultations");
+  }
+
+  /* ══════════ RENDER ══════════ */
+  let range = "monthly";
+  document.querySelectorAll(".pill-toggle span").forEach((el) => {
+    el.addEventListener("click", () => {
+      document.querySelectorAll(".pill-toggle span").forEach((s) => s.classList.remove("active"));
+      el.classList.add("active");
+      range = el.dataset.range;
+      renderTrend();
+    });
+  });
+
+  function bucketize(items, buckets, isMonthly) {
+    const counts = buckets.map(() => 0);
+    for (const it of items) {
+      const d = pickDate(it); if (!d) continue;
+      for (let i = 0; i < buckets.length; i++) {
+        const b = buckets[i], next = new Date(b);
+        if (isMonthly) next.setMonth(b.getMonth() + 1); else next.setDate(b.getDate() + 7);
+        if (d >= b && d < next) { counts[i]++; break; }
+      }
+    }
+    return counts;
+  }
+  function lastNMonths(n) {
+    const out = [], d = new Date(); d.setDate(1);
+    for (let i = n - 1; i >= 0; i--) out.push(new Date(d.getFullYear(), d.getMonth() - i, 1));
+    return out;
+  }
+  function lastNWeeks(n) {
+    const out = [], now = new Date(); now.setHours(0, 0, 0, 0);
+    const monday = new Date(now); monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+    for (let i = n - 1; i >= 0; i--) { const t = new Date(monday); t.setDate(monday.getDate() - 7 * i); out.push(t); }
+    return out;
+  }
+  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const monLabel = (d) => MON[d.getMonth()];
+  const wkLabel = (d) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+  const charts = {};
+  function makeChart(id, cfg) {
+    const el = $(id);
+    if (!el) return;
+    if (charts[id]) charts[id].destroy();
+    charts[id] = new Chart(el, cfg);
+  }
+
+  function renderTrend() {
+    const isMonthly = range === "monthly";
+    const N = 6;
+    const buckets = isMonthly ? lastNMonths(N) : lastNWeeks(N);
+    const labels = buckets.map(isMonthly ? monLabel : wkLabel);
+    $("trendSub").textContent = isMonthly ? "Last 6 months" : "Last 6 weeks";
+    makeChart("trendChart", {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          { label: "Inquiries", data: bucketize(store.inquiries, buckets, isMonthly), borderColor: "#17b384", backgroundColor: "rgba(23,179,132,0.12)", fill: true, tension: 0.35, pointRadius: 0, borderWidth: 2.5 },
+          { label: "Consultations", data: bucketize(store.consultations, buckets, isMonthly), borderColor: "#f0b429", backgroundColor: "rgba(240,180,41,0.08)", fill: true, tension: 0.35, pointRadius: 0, borderWidth: 2.5 },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: "#0f2536", borderColor: "rgba(255,255,255,0.1)", borderWidth: 1, titleColor: "#f3f6f8", bodyColor: "#93a5b3", padding: 10 },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#93a5b3", font: { size: 11 } } },
+          y: { grid: { color: "rgba(255,255,255,0.06)" }, ticks: { color: "#93a5b3", font: { size: 11 } }, beginAtZero: true, ticks: { precision: 0 } },
+        },
+      },
+    });
+  }
+
+  function renderKpis() {
+    const P = store.properties, I = store.inquiries, C = store.consultations;
+
+    const active = P.filter((p) => isActiveStatus(pickStatus(p)));
+    const activeEl = $("kpiActive");
+    if (activeEl.dataset.live !== "1") {
+      animateCounter(activeEl, active.length);
+      activeEl.dataset.live = "1";
+    } else {
+      activeEl.textContent = fmtInt(active.length);
+    }
+
+    const since30 = Date.now() - 30 * 86400000;
+    const inq30 = I.filter((i) => { const d = pickDate(i); return d && d.getTime() >= since30; });
+    const inqEl = $("kpiInq30");
+    if (inqEl.dataset.live !== "1") { animateCounter(inqEl, inq30.length); inqEl.dataset.live = "1"; }
+    else inqEl.textContent = fmtInt(inq30.length);
+
+    const consEl = $("kpiConsults");
+    if (consEl.dataset.live !== "1") { animateCounter(consEl, C.length); consEl.dataset.live = "1"; }
+    else consEl.textContent = fmtInt(C.length);
+
+    const total = P.reduce((s, p) => s + (pickPrice(p) || 0), 0);
+    $("kpiPortfolio").textContent = total >= 1e6 ? (total / 1e6).toFixed(1) + "M" : fmtInt(total);
+    $("kpiPortfolioSub").textContent = P.length ? fmtInt(P.length) + " listings · " + fmtMoney(total) : "";
+  }
+
+  function animateCounter(el, target) {
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      el.textContent = fmtInt(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function renderInquiries() {
+    const I = store.inquiries.slice().sort((a, b) => ((pickDate(b) && pickDate(b).getTime()) || 0) - ((pickDate(a) && pickDate(a).getTime()) || 0)).slice(0, 5);
+    $("inquiryRows").innerHTML = I.map((i) => {
+      const name = pick(i, "name", "fullName", "customerName") || "—";
+      const email = pick(i, "email") || "";
+      const prop = pick(i, "propertyTitle", "property", "propertyId") || "—";
+      const status = String(pick(i, "status") || "new").toLowerCase();
+      const d = pickDate(i);
+      const pill = status === "done" || status === "closed" ? "done"
+        : (["in progress", "progress", "contacted"].includes(status) ? "progress" : "new");
+      return "<tr>" +
+        '<td><div class="row-name">' + esc(name) + '</div><div class="row-sub">' + esc(email) + "</div></td>" +
+        "<td>" + esc(prop) + "</td>" +
+        '<td><span class="status-pill status-' + pill + '">' + (pill === "done" ? "Closed" : pill === "progress" ? "In progress" : "New") + "</span></td>" +
+        '<td style="color:var(--text-muted)">' + fmtWhen(d) + "</td>" +
+      "</tr>";
+    }).join("") || '<tr><td colspan="4" style="color:var(--text-muted); padding:20px 10px; text-align:center">No inquiries yet</td></tr>';
+
+    const badge = $("inqBadge");
+    badge.textContent = fmtInt(store.inquiries.length);
+    badge.style.display = store.inquiries.length ? "" : "none";
+  }
+
+  function renderProps() {
+    const P = store.properties.slice().sort((a, b) => ((pickDate(b) && pickDate(b).getTime()) || 0) - ((pickDate(a) && pickDate(a).getTime()) || 0)).slice(0, 4);
+    $("propList").innerHTML = P.map((p) => {
+      const img = pickImage(p);
+      const thumb = img
+        ? '<img class="prop-thumb" src="' + esc(img) + '" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility=\'hidden\'" />'
+        : '<div class="prop-thumb" style="background:var(--surface-2)"></div>';
+      const type = pickType(p);
+      const loc = pick(p, "location", "city", "area", "district", "address") || "";
+      const price = pickPrice(p);
+      return '<div class="prop-item">' + thumb +
+        "<div><div class=\"prop-name\">" + esc(pickTitle(p)) + '</div><div class="prop-meta">' + esc(type + (loc ? " · " + loc : "")) + "</div></div>" +
+        '<div class="prop-price">' + (price != null ? fmtMoney(price) : "") + "</div>" +
+      "</div>";
+    }).join("") || '<div style="color:var(--text-muted); font-size:13px; padding:16px 0">No properties yet</div>';
+  }
+
+  function renderDonut() {
+    const P = store.properties;
+    const byType = {};
+    for (const p of P) { const t = pickType(p); byType[t] = (byType[t] || 0) + 1; }
+    const keys = Object.keys(byType);
+    const colors = ["#17b384", "#f0b429", "#60a5fa", "#e6564a", "#93a5b3", "#9b8cff", "#2dd4bf", "#fb7185"];
+    makeChart("typeChart", {
+      type: "doughnut",
+      data: { labels: keys, datasets: [{ data: keys.map((k) => byType[k]), backgroundColor: keys.map((_, i) => colors[i % colors.length]), borderColor: "#0f2536", borderWidth: 3 }] },
+      options: { responsive: true, maintainAspectRatio: false, cutout: "70%", plugins: { legend: { display: false } } },
+    });
+    $("typeLegend").innerHTML = keys.length
+      ? keys.map((k, i) =>
+          '<div style="display:flex; align-items:center; justify-content:space-between;">' +
+          '<span style="display:flex; align-items:center; gap:8px; color:var(--text-muted)">' +
+          '<span style="width:8px; height:8px; border-radius:2px; background:' + colors[i % colors.length] + '"></span>' + esc(k) +
+          "</span>" +
+          '<span style="font-weight:600">' + byType[k] + "</span></div>"
+        ).join("")
+      : '<span style="color:var(--text-muted)">No listings yet</span>';
+    const active = P.filter((p) => isActiveStatus(pickStatus(p))).length;
+    $("donutSub").textContent = active + " active properties";
+  }
+
+  function render() {
+    if (!$("dashboardLayout") || $("dashboardLayout").style.display === "none") return;
+    renderKpis();
+    renderInquiries();
+    renderProps();
+    renderDonut();
+    renderTrend();
+    if (currentPage !== "dashboard") renderPage(currentPage);
+  }
+
+  /* ══════════ SPA PAGES — routing & renderers ══════════ */
+  const PAGE_META = {
+    dashboard:     { title: "Overview",      sub: "Welcome back — here's what's happening today." },
+    analytics:     { title: "Analytics",     sub: "Performance across listings and leads." },
+    properties:    { title: "Properties",    sub: "Manage your listings — changes save to Firestore in real time." },
+    inquiries:     { title: "Inquiries",     sub: "Buyer questions and viewing requests." },
+    consultations: { title: "Consultations", sub: "Advisory sessions booked by prospects." },
+    customers:     { title: "Customers",     sub: "Everyone who has reached out." },
+    roles:         { title: "Roles & access", sub: "Who can open this dashboard." },
+    settings:      { title: "Settings",      sub: "Account & project info." },
+  };
+  let currentPage = "dashboard";
+
+  function renderPage(page) {
+    if (page === "properties") renderPropsPage();
+    else if (page === "inquiries") renderInquiriesPage();
+    else if (page === "consultations") renderConsultationsPage();
+    else if (page === "customers") renderCustomersPage();
+    else if (page === "analytics") renderAnalyticsPage();
+    else if (page === "settings") { const el = $("setEmail"); if (el && currentUser) el.textContent = currentUser.email || "—"; }
+  }
+
+  function pillFor(status) {
+    const s = String(status || "new").toLowerCase();
+    return s === "done" || s === "closed" ? "done" : (["in progress", "progress", "contacted"].includes(s) ? "progress" : "new");
+  }
+  function pillLabel(pill) { return pill === "done" ? "Closed" : pill === "progress" ? "In progress" : "New"; }
+
+  function statusCell(value, collectionName, id) {
+    const pill = pillFor(value);
+    const opts = ["new", "in progress", "closed"]
+      .map((s) => '<option value="' + s + '"' + (s === (value || "new").toLowerCase() ? " selected" : "") + ">" + pillLabel(pillFor(s)) + "</option>")
+      .join("");
+    return '<select class="status-pill status-' + pill + ' status-select" data-kind="' + collectionName + '" data-id="' + esc(id) + '">' + opts + "</select>";
+  }
+
+  function actionCell(kind, id) {
+    const edit = '<button class="act-btn" data-act="edit" data-kind="' + kind + '" data-id="' + esc(id) + '" title="Edit"><svg viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>';
+    const del = '<button class="act-btn del" data-act="delete" data-kind="' + kind + '" data-id="' + esc(id) + '" title="Delete"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>';
+    return '<div class="row-actions">' + edit + del + "</div>";
+  }
+
+  function renderPropsPage() {
+    const q = ($("propSearch").value || "").toLowerCase();
+    const st = $("propStatusFilter").value;
+    const rows = store.properties
+      .filter((p) => {
+        const hay = (pickTitle(p) + " " + pickType(p) + " " + (pick(p, "location", "city", "area") || "")).toLowerCase();
+        return (!q || hay.includes(q)) && (!st || pickStatus(p) === st);
+      })
+      .sort((a, b) => ((pickDate(b) && pickDate(b).getTime()) || 0) - ((pickDate(a) && pickDate(a).getTime()) || 0));
+    $("propTableRows").innerHTML = rows.map((p) => {
+      const img = pickImage(p);
+      const thumb = img
+        ? '<img class="prop-thumb" src="' + esc(img) + '" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility=\'hidden\'" />'
+        : '<div class="prop-thumb" style="background:var(--surface-2)"></div>';
+      const price = pickPrice(p);
+      const stt = pickStatus(p);
+      const pill = stt === "sold" ? "done" : "progress";
+      return "<tr>" +
+        '<td><div style="display:flex; align-items:center; gap:12px">' + thumb +
+          '<div><div class="row-name">' + esc(pickTitle(p)) + '</div><div class="row-sub">' + esc(String(p.id)) + "</div></div></div></td>" +
+        "<td>" + esc(pickType(p)) + "</td>" +
+        '<td style="color:var(--text-muted)">' + esc(pick(p, "location", "city", "area") || "—") + "</td>" +
+        '<td style="font-weight:600">' + (price != null ? fmtMoney(price) : "—") + "</td>" +
+        '<td><span class="status-pill status-' + pill + '">' + (stt === "sold" ? "Sold" : "Active") + "</span></td>" +
+        "<td>" + actionCell("properties", p.id) + "</td>" +
+      "</tr>";
+    }).join("") || '<tr><td colspan="6" style="color:var(--text-muted); padding:20px 10px; text-align:center">No properties match</td></tr>';
+  }
+
+  function renderInquiriesPage() {
+    const q = ($("inqSearch").value || "").toLowerCase();
+    const st = $("inqStatusFilter").value;
+    const rows = store.inquiries
+      .filter((i) => {
+        const hay = ((pick(i, "name") || "") + " " + (pick(i, "email") || "") + " " + (pick(i, "propertyTitle") || "")).toLowerCase();
+        return (!q || hay.includes(q)) && (!st || String(i.status || "new").toLowerCase() === st);
+      })
+      .sort((a, b) => ((pickDate(b) && pickDate(b).getTime()) || 0) - ((pickDate(a) && pickDate(a).getTime()) || 0));
+    $("inqTableRows").innerHTML = rows.map((i) =>
+      "<tr>" +
+        '<td><div class="row-name">' + esc(pick(i, "name") || "—") + '</div><div class="row-sub">' + esc(pick(i, "email") || "") + "</div></td>" +
+        "<td>" + esc(pick(i, "propertyTitle") || "—") + "</td>" +
+        '<td style="max-width:220px"><div class="row-sub" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">' + esc(pick(i, "message") || "") + "</div></td>" +
+        "<td>" + statusCell(i.status, "inquiries", i.id) + "</td>" +
+        '<td style="color:var(--text-muted)">' + fmtWhen(pickDate(i)) + "</td>" +
+        "<td>" + actionCell("inquiries", i.id) + "</td>" +
+      "</tr>"
+    ).join("") || '<tr><td colspan="6" style="color:var(--text-muted); padding:20px 10px; text-align:center">No inquiries match</td></tr>';
+  }
+
+  function renderConsultationsPage() {
+    const q = ($("consSearch").value || "").toLowerCase();
+    const st = $("consStatusFilter").value;
+    const rows = store.consultations
+      .filter((c) => {
+        const hay = ((pick(c, "name") || "") + " " + (pick(c, "email") || "")).toLowerCase();
+        return (!q || hay.includes(q)) && (!st || String(c.status || "new").toLowerCase() === st);
+      })
+      .sort((a, b) => ((pickDate(b) && pickDate(b).getTime()) || 0) - ((pickDate(a) && pickDate(a).getTime()) || 0));
+    $("consTableRows").innerHTML = rows.map((c) =>
+      "<tr>" +
+        '<td><div class="row-name">' + esc(pick(c, "name") || "—") + '</div><div class="row-sub">' + esc(pick(c, "email") || "") + "</div></td>" +
+        "<td>" + esc(pick(c, "preferredTime") || "—") + "</td>" +
+        '<td style="max-width:220px"><div class="row-sub" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">' + esc(pick(c, "message") || "") + "</div></td>" +
+        "<td>" + statusCell(c.status, "consultations", c.id) + "</td>" +
+        '<td style="color:var(--text-muted)">' + fmtWhen(pickDate(c)) + "</td>" +
+        "<td>" + actionCell("consultations", c.id) + "</td>" +
+      "</tr>"
+    ).join("") || '<tr><td colspan="6" style="color:var(--text-muted); padding:20px 10px; text-align:center">No consultations match</td></tr>';
+  }
+
+  function renderCustomersPage() {
+    const map = {};
+    const add = (docx, kind) => {
+      const email = String(pick(docx, "email") || "—").toLowerCase();
+      const m = map[email] || (map[email] = { name: pick(docx, "name") || email, email: pick(docx, "email") || "—", phone: pick(docx, "phone") || "—", inquiries: 0, consultations: 0, last: null });
+      m[kind]++;
+      const d = pickDate(docx);
+      if (d && (!m.last || d > m.last)) m.last = d;
+      if (pick(docx, "name")) m.name = pick(docx, "name");
+    };
+    store.inquiries.forEach((i) => add(i, "inquiries"));
+    store.consultations.forEach((c) => add(c, "consultations"));
+    const rows = Object.values(map).sort((a, b) => (b.last ? b.last.getTime() : 0) - (a.last ? a.last.getTime() : 0));
+    $("custTableRows").innerHTML = rows.map((m) =>
+      "<tr>" +
+        '<td><div class="row-name">' + esc(m.name) + "</div></td>" +
+        "<td>" + esc(m.email) + "</td>" +
+        '<td style="color:var(--text-muted)">' + esc(m.phone) + "</td>" +
+        '<td><span class="status-pill status-progress">' + m.inquiries + ' inq</span> <span class="status-pill status-new">' + m.consultations + ' cons</span></td>' +
+        '<td style="color:var(--text-muted)">' + fmtWhen(m.last) + "</td>" +
+      "</tr>"
+    ).join("") || '<tr><td colspan="5" style="color:var(--text-muted); padding:20px 10px; text-align:center">No customers yet</td></tr>';
+  }
+
+  function renderAnalyticsPage() {
+    const P = store.properties, I = store.inquiries, C = store.consultations;
+    $("anTotal").textContent = fmtInt(P.length);
+    $("anInq").textContent = fmtInt(I.length);
+    $("anCons").textContent = fmtInt(C.length);
+    const closed = I.filter((i) => String(i.status || "").toLowerCase() === "closed").length;
+    $("anConv").textContent = I.length ? Math.round((closed / I.length) * 100) + "%" : "0%";
+
+    const byTitle = {};
+    for (const p of P) byTitle[pickTitle(p)] = 0;
+    for (const i of I) { const t = pick(i, "propertyTitle"); if (t && t in byTitle) byTitle[t]++; }
+    for (const c of C) { const t = c.propertyTitle; if (t && t in byTitle) byTitle[t]++; }
+    const names = Object.keys(byTitle).slice(0, 8);
+    makeChart("anBar", {
+      type: "bar",
+      data: { labels: names, datasets: [{ data: names.map((n) => byTitle[n]), backgroundColor: "rgba(23,179,132,0.7)", borderRadius: 6 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { color: "#93a5b3", font: { size: 10 } } }, y: { beginAtZero: true, ticks: { color: "#93a5b3", precision: 0 }, grid: { color: "rgba(255,255,255,0.06)" } } } },
+    });
+
+    const mix = { New: 0, "In progress": 0, Closed: 0 };
+    [...I, ...C].forEach((d) => mix[pillLabel(pillFor(d.status))]++);
+    makeChart("anMix", {
+      type: "doughnut",
+      data: { labels: Object.keys(mix), datasets: [{ data: Object.values(mix), backgroundColor: ["#f0b429", "#17b384", "rgba(255,255,255,0.2)"], borderColor: "#0f2536", borderWidth: 3 }] },
+      options: { responsive: true, maintainAspectRatio: false, cutout: "68%", plugins: { legend: { position: "bottom", labels: { color: "#93a5b3", boxWidth: 10, font: { size: 11 } } } } },
+    });
+  }
+
+  /* ══════════ NAVIGATION ══════════ */
+  function showPage(name) {
+    if (!PAGE_META[name]) return;
+    currentPage = name;
+    document.querySelectorAll(".nav-item[data-page]").forEach((el) => el.classList.toggle("active", el.dataset.page === name));
+    document.querySelectorAll(".page").forEach((el) => el.classList.remove("active"));
+    const sec = $("page-" + name);
+    if (sec) sec.classList.add("active");
+    const dashboardEls = ["kpiGrid", "panelChart", "panelDonut", "panelTable", "panelProps"].map($).filter(Boolean);
+    dashboardEls.forEach((el) => { el.style.display = name === "dashboard" ? "" : "none"; });
+    const meta = PAGE_META[name];
+    if (meta) { $("pageTitle").textContent = meta.title; $("pageSub").textContent = meta.sub; }
+    if (name !== "dashboard") renderPage(name);
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll(".nav-item[data-page]").forEach((el) => el.addEventListener("click", () => showPage(el.dataset.page)));
+
+  /* ══════════ TOASTS ══════════ */
+  function toast(msg, isErr) {
+    let box = document.getElementById("toastBox");
+    if (!box) { box = document.createElement("div"); box.id = "toastBox"; box.style.cssText = "position:fixed; bottom:22px; right:22px; z-index:300; display:flex; flex-direction:column; gap:8px"; document.body.appendChild(box); }
+    const t = document.createElement("div");
+    t.style.cssText = "padding:11px 16px; border-radius:10px; font-size:13px; font-weight:500; max-width:320px; box-shadow:0 10px 30px rgba(0,0,0,.4); animation:fadeInUp 250ms ease both; background:" + (isErr ? "rgba(230,86,74,0.95)" : "rgba(23,179,132,0.95)") + "; color:#fff";
+    t.textContent = msg;
+    box.appendChild(t);
+    setTimeout(() => { t.style.opacity = "0"; t.style.transition = "opacity 400ms"; setTimeout(() => t.remove(), 420); }, 4200);
+  }
+
+  /* ══════════ CRUD — Firestore writes ══════════ */
+  function niceWriteError(e) {
+    if (e && e.code === "permission-denied") return "Firestore denied the write — security rules sync is still pending on Google's side. Try again later.";
+    if (e && e.code === "unavailable") return "Network trouble reaching Firestore — check your connection and retry.";
+    return (e && (e.code || e.message)) || "Write failed";
+  }
+  async function guarded(fn, okMsg) {
+    try { await fn(); if (okMsg) toast(okMsg); }
+    catch (e) { console.error(e); toast(niceWriteError(e), true); }
+  }
+
+  function openModal(id) { $(id).classList.add("open"); }
+  function closeModal(id) { $(id).classList.remove("open"); }
+  document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => closeModal(b.dataset.close)));
+  document.querySelectorAll(".modal-overlay").forEach((ov) => ov.addEventListener("click", (e) => { if (e.target === ov) ov.classList.remove("open"); }));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") document.querySelectorAll(".modal-overlay.open").forEach((ov) => ov.classList.remove("open")); });
+
+  /* ---- property modal ---- */
+  let editingPropId = null;
+  function openPropModal(p) {
+    editingPropId = p ? p.id : null;
+    $("propModalTitle").textContent = p ? "Edit property" : "Add property";
+    $("fTitle").value = p ? (pickTitle(p) === "Untitled property" ? "" : pickTitle(p)) : "";
+    $("fType").value = p ? (pickType(p) === "Other" ? "" : pickType(p)) : "";
+    $("fLocation").value = p ? (pick(p, "location", "city", "area") || "") : "";
+    $("fPrice").value = p ? (pickPrice(p) ?? "") : "";
+    $("fStatus").value = p ? (pickStatus(p) === "sold" ? "sold" : "active") : "active";
+    $("fImage").value = p ? (pickImage(p) || "") : "";
+    $("propModalMsg").textContent = "";
+    openModal("propModal");
+    setTimeout(() => $("fTitle").focus(), 60);
+  }
+  $("addPropBtn").addEventListener("click", () => openPropModal(null));
+  $("propSaveBtn").addEventListener("click", () => {
+    const title = $("fTitle").value.trim();
+    if (!title) { $("propModalMsg").textContent = "Title is required."; $("propModalMsg").className = "form-msg err"; return; }
+    const data = {
+      title,
+      type: $("fType").value.trim() || "Other",
+      location: $("fLocation").value.trim(),
+      price: parseInt($("fPrice").value, 10) || 0,
+      status: $("fStatus").value,
+      image: $("fImage").value.trim(),
+    };
+    const btn = $("propSaveBtn");
+    btn.disabled = true;
+    guarded(async () => {
+      if (editingPropId) await updateDoc(doc(db, "properties", editingPropId), data);
+      else await addDoc(collection(db, "properties"), { ...data, createdAt: serverTimestamp() });
+      closeModal("propModal");
+    }, editingPropId ? "Property updated" : "Property added").finally(() => { btn.disabled = false; });
+  });
+
+  /* ---- lead modal (inquiries / consultations) ---- */
+  let leadKind = "inquiries";
+  let editingLeadId = null;
+  function openLeadModal(kind, d) {
+    leadKind = kind;
+    editingLeadId = d ? d.id : null;
+    $("leadModalTitle").textContent = (d ? "Edit " : "Add ") + (kind === "inquiries" ? "inquiry" : "consultation");
+    $("leadPropField").style.display = kind === "inquiries" ? "" : "none";
+    $("leadTimeField").style.display = kind === "consultations" ? "" : "none";
+    const sel = $("lProperty");
+    sel.innerHTML = '<option value="">— none —</option>' + store.properties.map((p) => '<option value="' + esc(pickTitle(p)) + '">' + esc(pickTitle(p)) + "</option>").join("");
+    sel.value = d ? (pick(d, "propertyTitle") || "") : "";
+    if (sel.value && ![...sel.options].some((o) => o.value === sel.value)) sel.value = "";
+    $("lName").value = d ? (pick(d, "name") || "") : "";
+    $("lEmail").value = d ? (pick(d, "email") || "") : "";
+    $("lPhone").value = d ? (pick(d, "phone") || "") : "";
+    $("lTime").value = d ? (pick(d, "preferredTime") || "") : "";
+    $("lMessage").value = d ? (pick(d, "message") || "") : "";
+    $("lStatus").value = d ? String(d.status || "new").toLowerCase() : "new";
+    $("leadModalMsg").textContent = "";
+    openModal("leadModal");
+    setTimeout(() => $("lName").focus(), 60);
+  }
+  $("addInqBtn").addEventListener("click", () => openLeadModal("inquiries", null));
+  $("addConsBtn").addEventListener("click", () => openLeadModal("consultations", null));
+  $("leadSaveBtn").addEventListener("click", () => {
+    const name = $("lName").value.trim();
+    if (!name) { $("leadModalMsg").textContent = "Name is required."; $("leadModalMsg").className = "form-msg err"; return; }
+    const data = {
+      name,
+      email: $("lEmail").value.trim(),
+      phone: $("lPhone").value.trim(),
+      message: $("lMessage").value.trim(),
+      status: $("lStatus").value,
+    };
+    if (leadKind === "inquiries") data.propertyTitle = $("lProperty").value;
+    else data.preferredTime = $("lTime").value.trim();
+    const btn = $("leadSaveBtn");
+    btn.disabled = true;
+    guarded(async () => {
+      if (editingLeadId) await updateDoc(doc(db, leadKind, editingLeadId), data);
+      else await addDoc(collection(db, leadKind), { ...data, createdAt: serverTimestamp() });
+      closeModal("leadModal");
+    }, editingLeadId ? "Saved" : "Added").finally(() => { btn.disabled = false; });
+  });
+
+  /* ---- status selects + row actions (event delegation) ---- */
+  document.addEventListener("change", (e) => {
+    const sel = e.target;
+    if (sel && sel.classList && sel.classList.contains("status-select")) {
+      guarded(() => updateDoc(doc(db, sel.dataset.kind, sel.dataset.id), { status: sel.value }), "Status updated");
+    }
+  });
+
+  let confirmCtx = null;
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-act]");
+    if (!btn) return;
+    const { act, kind, id } = btn.dataset;
+    if (act === "edit") {
+      const src = kind === "properties" ? store.properties : kind === "inquiries" ? store.inquiries : store.consultations;
+      const d = src.find((x) => x.id === id);
+      if (!d) return;
+      if (kind === "properties") openPropModal(d);
+      else openLeadModal(kind, d);
+    } else if (act === "delete") {
+      confirmCtx = { kind, id };
+      $("confirmMsg").textContent = "Delete this " + (kind === "properties" ? "property" : kind === "inquiries" ? "inquiry" : "consultation") + " permanently? This cannot be undone.";
+      openModal("confirmModal");
+    }
+  });
+  $("confirmYes").addEventListener("click", () => {
+    if (!confirmCtx) return;
+    const { kind, id } = confirmCtx;
+    confirmCtx = null;
+    closeModal("confirmModal");
+    guarded(() => deleteDoc(doc(db, kind, id)), "Deleted");
+  });
+
+  /* ---- toolbar filters ---- */
+  ["propSearch", "propStatusFilter", "inqSearch", "inqStatusFilter", "consSearch", "consStatusFilter"].forEach((id) => {
+    const el = $(id);
+    if (el) { el.addEventListener("input", () => renderPage(currentPage)); el.addEventListener("change", () => renderPage(currentPage)); }
+  });
+
+  /* ---- settings: sign out ---- */
+  $("signOutBtn").addEventListener("click", () => { if (confirm("Sign out?")) signOut(auth); });
+
+</script>
+</body>
+</html>

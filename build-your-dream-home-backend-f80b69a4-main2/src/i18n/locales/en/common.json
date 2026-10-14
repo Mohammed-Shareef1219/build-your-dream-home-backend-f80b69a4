@@ -1,0 +1,194 @@
+{
+  "brand": "BuildYourHome",
+  "actions": {
+    "explore": "Explore",
+    "viewDetails": "View full details",
+    "learnMore": "Learn more",
+    "submit": "Submit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "reset": "Reset filters",
+    "loading": "Loading…"
+  },
+  "language": {
+    "toggle": "Toggle language",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "nav": {
+    "home": "Home",
+    "propertyTypes": "Property Types",
+    "designGallery": "Design Gallery",
+    "listings": "Listings",
+    "freeConsultation": "Free Consultation",
+    "toggleTheme": "Toggle theme",
+    "toggleMenu": "Toggle menu",
+    "administrator": "Administrator",
+    "profileSettings": "Profile Settings",
+    "favorites": "Favorites",
+    "adminDashboard": "Admin Dashboard",
+    "signOut": "Sign out",
+    "login": "Login",
+    "signup": "Sign up"
+  },
+  "footer": {
+    "tagline": "Your digital broker for modern real estate. Design, discover, and own smarter.",
+    "ticker": {
+      "cairoMarket": "Cairo Market: +4.2% ↑",
+      "agentAhmed": "Agent Ahmed Mansour: 12 Deals Closed this week",
+      "aiValuationTool": "New AI Valuation Tool Launched",
+      "newCairoVillas": "New Cairo: Villa prices +6.1% ↑",
+      "octoberDemand": "6 October: Apartment demand +9% ↑",
+      "sheikhZayedCommercial": "Sheikh Zayed: Commercial +3.4% ↑",
+      "northCoastRentals": "North Coast: Summer rentals +18% ↑",
+      "maadiDuplex": "Maadi: Duplex listings +5% ↑",
+      "mortgageRates": "Mortgage rates stable at 14.5%",
+      "aiMatched": "AI matched 1,240 buyers this week",
+      "fifthSettlement": "5th Settlement: Townhouse +4.8% ↑",
+      "ibnBeitak": "Ibn Beitak joins as featured partner agency",
+      "smartTours": "Smart Tours booked: +320 this week"
+    },
+    "explore": {
+      "title": "Explore",
+      "propertyTypes": "Property Types",
+      "designGallery": "Design Gallery",
+      "listings": "Listings",
+      "freeConsultation": "Free Consultation"
+    },
+    "contact": {
+      "title": "Contact"
+    },
+    "follow": {
+      "title": "Follow"
+    },
+    "aboutUs": {
+      "title": "About Us",
+      "whoWeAre": "Who We Are",
+      "ourGoal": "Our Goal",
+      "ourVision": "Our Vision",
+      "ambition": "Ambition"
+    },
+    "careers": {
+      "title": "Careers",
+      "joinTeam": "Join Our Team",
+      "brokers": "Brokers",
+      "salesTeam": "Sales Team",
+      "aiEngineers": "AI Engineers"
+    },
+    "blog": {
+      "title": "Blog & News",
+      "marketUpdates": "Market Updates",
+      "platformNews": "Platform News",
+      "agentListings": "Agent Listings",
+      "localPrices": "Local Prices"
+    },
+    "resources": {
+      "title": "Resources",
+      "guides": "Real Estate Guides",
+      "egyptianMarket": "Egyptian Market",
+      "valuationTips": "Valuation Tips",
+      "smartBudgeting": "Smart Budgeting"
+    },
+    "neighborhoods": {
+      "title": "Neighborhoods",
+      "newCairo": "New Cairo",
+      "october": "6 October",
+      "sheikhZayed": "Sheikh Zayed",
+      "northCoast": "North Coast"
+    },
+    "investment": {
+      "title": "Investment",
+      "legalVerification": "Legal Verification",
+      "rentalIncome": "Rental Income",
+      "garagesLand": "Garages & Land",
+      "palmGroves": "Palm Groves"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Help Center",
+      "howItWorks": "How It Works",
+      "faq": "FAQ",
+      "contactUs": "Contact Us"
+    },
+    "steps": {
+      "title": "How to find your dream property",
+      "step": "Step {{number}}",
+      "createAccount": "Create Account",
+      "browseListings": "Browse Listings",
+      "scheduleTour": "Schedule a Tour",
+      "closeDeal": "Close the Deal"
+    },
+    "cta": {
+      "title": "Book Free Consultation",
+      "desc": "Get free expert advice within 24 hours. Our team combines AI with real human support to guide you.",
+      "bookNow": "Book Now",
+      "verified": "Verified listings with transparent pricing and no hidden fees.",
+      "bestDeals": "Best market deals with zero hidden commissions."
+    },
+    "bottom": {
+      "copyright": "© 2026 BuildYourHome. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    }
+  },
+  "profilePanel": {
+    "open": "Profile & Settings",
+    "title": "Profile & Settings",
+    "desc": "Manage your account, tours and preferences.",
+    "signInTitle": "You're signed out",
+    "signInDesc": "Sign in to manage your profile, saved listings and tour bookings.",
+    "login": "Login",
+    "signup": "Sign up",
+    "settings": "Profile Settings",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "changePhoto": "Change Photo",
+    "save": "Save Changes",
+    "saving": "Saving…",
+    "prefs": "Preferences",
+    "theme": "Theme",
+    "language": "Language",
+    "light": "Light",
+    "dark": "Dark",
+    "consult": "Consultation Tracker",
+    "consultDesc": "Expert advice within 24 hours.",
+    "consultationFallback": "Consultation",
+    "noConsult": "No requests yet.",
+    "bookConsult": "Book a free consultation →",
+    "ai": "AI Matching",
+    "aiDesc": "Smart valuation for your budget & style.",
+    "noAi": "Set preferences to see matches.",
+    "tours": "Scheduled Tours",
+    "noTours": "No tours scheduled.",
+    "browse": "Browse listings →",
+    "saved": "Saved Listings",
+    "noSaved": "No saved properties yet.",
+    "signOut": "Sign out",
+    "pending": "Pending",
+    "processing": "Processing",
+    "assigned": "Expert Assigned",
+    "left": "left",
+    "due": "Due",
+    "match": "100% Match for Your Style & Budget",
+    "virtual": "Virtual 360°",
+    "physical": "Physical"
+  },
+  "propertyCard": {
+    "signInToSave": "Please sign in to save favorites",
+    "removedFromFavorites": "Removed from favorites",
+    "addedToFavorites": "Added to favorites",
+    "featured": "Featured",
+    "toggleFavorite": "Toggle favorite",
+    "startingFrom": "Starting from",
+    "view": "View"
+  },
+  "protected": {
+    "checkingSession": "Checking your session…"
+  }
+}

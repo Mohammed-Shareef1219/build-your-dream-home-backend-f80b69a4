@@ -1,0 +1,362 @@
+import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { ArrowRight, CheckCircle2, MapPin, MessageCircle, Ruler, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import montCityImg from "@/assets/land-mont-city.jpg";
+import montCityImg2 from "@/assets/land-mont-city-2.jpg";
+import mountAgibaImg from "@/assets/land-mount-agiba.jpg";
+import mountAgibaImg2 from "@/assets/land-mount-agiba-2.jpg";
+
+/* ---------------- Shared showcase data (used by Home + Property Types) ---------------- */
+
+export interface ShowcaseCard {
+  slug: string;
+  image: string;
+  image2: string;
+  rating: number;
+  properties: number;
+  builder: string;
+  seller: string;
+  contact: string;
+  custom?: boolean;
+}
+
+export const SHOWCASE: ShowcaseCard[] = [
+  {
+    slug: "apartment",
+    image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&auto=format&fit=crop",
+    rating: 4.7,
+    properties: 38,
+    builder: "Aurora Developments",
+    seller: "Lina Haddad",
+    contact: "+971 50 123 4567",
+  },
+  {
+    slug: "villa",
+    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&auto=format&fit=crop",
+    rating: 4.9,
+    properties: 21,
+    builder: "Palm Crown Builders",
+    seller: "Omar Al-Faris",
+    contact: "+971 52 988 7710",
+  },
+  {
+    slug: "duplex",
+    image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&auto=format&fit=crop",
+    rating: 4.6,
+    properties: 27,
+    builder: "Skyline Residences",
+    seller: "Yasmin Karimi",
+    contact: "+971 55 660 4422",
+  },
+  {
+    slug: "country_house",
+    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900&auto=format&fit=crop",
+    rating: 4.8,
+    properties: 14,
+    builder: "EarthForm Studio",
+    seller: "Hassan Noor",
+    contact: "+971 56 230 1188",
+  },
+  {
+    slug: "studio",
+    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&auto=format&fit=crop",
+    rating: 4.5,
+    properties: 52,
+    builder: "Nest Micro Homes",
+    seller: "Reem Saleh",
+    contact: "+971 50 774 9931",
+  },
+  {
+    slug: "custom",
+    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&auto=format&fit=crop",
+    image2: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&auto=format&fit=crop",
+    rating: 5.0,
+    properties: 0,
+    builder: "BuildYourHome Atelier",
+    seller: "Design Concierge",
+    contact: "+971 50 000 1010",
+    custom: true,
+  },
+];
+
+export interface LandProject {
+  key: "mont_city" | "mount_agiba";
+  code: string;
+  image: string;
+  image2: string;
+  rating: number;
+  area: string;
+}
+
+export const LAND_PROJECTS: LandProject[] = [
+  { key: "mont_city", code: "IB-2026-A1", image: montCityImg, image2: montCityImg2, rating: 4.9, area: "200 m²" },
+  { key: "mount_agiba", code: "IB-2026-A2", image: mountAgibaImg, image2: mountAgibaImg2, rating: 4.9, area: "200 m²" },
+];
+
+/* ---------------- WhatsApp contact ---------------- */
+
+export const WHATSAPP_URL = "https://wa.me";
+
+/** Buy/Sell toggle + WhatsApp outreach, used on every property-type card. */
+export function CardRequestActions({ typeKey }: { typeKey: string }) {
+  const { t } = useTranslation("propertyTypes");
+  const [intent, setIntent] = useState<"buy" | "sell">("buy");
+
+  const typeLabel =
+    t(`showcase.cards.${typeKey}.title`, { defaultValue: "" }) ||
+    t(`heroCarousel.${typeKey}`, typeKey);
+  const message = `${t("showcase.whatsappMessage", { type: typeLabel })} ${t(
+    intent === "buy" ? "showcase.buy" : "showcase.sell",
+  )}`;
+
+  return (
+    <div className="mt-4 space-y-2.5">
+      <div className="flex items-center gap-2">
+        <span className="text-xs font-medium text-muted-foreground shrink-0">
+          {t("showcase.requestLabel")}:
+        </span>
+        <div className="flex rounded-full border border-foreground/15 overflow-hidden text-xs font-semibold">
+          {(["buy", "sell"] as const).map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => setIntent(opt)}
+              className={cn(
+                "px-3.5 py-1 transition-colors",
+                intent === opt
+                  ? "bg-secondary text-secondary-foreground"
+                  : "bg-transparent text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {t(`showcase.${opt}`)}
+            </button>
+          ))}
+        </div>
+      </div>
+      <a
+        href={`${WHATSAPP_URL}?text=${encodeURIComponent(message)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          "flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-white transition-colors w-full",
+          "bg-[#25D366] hover:bg-[#1da851]",
+        )}
+      >
+        <MessageCircle className="size-4" />
+        {t("showcase.requestViaWhatsApp")}
+      </a>
+    </div>
+  );
+}
+
+export const LAND_CONTACTS = ["01020010906", "01020010905", "01155405831"];
+
+export function ShowcaseCardView({ card }: { card: ShowcaseCard }) {
+  const { t } = useTranslation("propertyTypes");
+  const isCustom = card.custom;
+  const badge = t(`showcase.cards.${card.slug}.badge`);
+  const title = t(`showcase.cards.${card.slug}.title`);
+  const description = t(`showcase.cards.${card.slug}.description`);
+  const features = t(`showcase.cards.${card.slug}.features`, { returnObjects: true }) as string[];
+  const price = t(`showcase.cards.${card.slug}.price`);
+  return (
+    <article
+      className={`group rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 flex flex-col ${
+        isCustom ? "bg-secondary text-secondary-foreground" : "bg-card"
+      }`}
+    >
+      <div className="relative grid grid-cols-2 gap-0.5 overflow-hidden bg-muted">
+        {[card.image, card.image2].map((src) => (
+          <img
+            key={src}
+            src={src}
+            alt={description}
+            title={description}
+            loading="lazy"
+            className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ))}
+        <span className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-soft">
+          {badge}
+        </span>
+      </div>
+      <div className="p-6 flex flex-col flex-1">
+        <h3 className="text-xl font-bold">{title}</h3>
+        <p className={`mt-2 text-sm ${isCustom ? "text-secondary-foreground/85" : "text-muted-foreground"}`}>
+          {description}
+        </p>
+
+        <ul className="mt-5 space-y-2.5">
+          {features.map((f) => (
+            <li key={f} className="flex items-center gap-2 text-sm">
+              <CheckCircle2
+                className={`size-4 shrink-0 ${isCustom ? "text-accent" : "text-secondary"}`}
+              />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Meta strip */}
+        <div
+          className={`mt-5 grid grid-cols-3 gap-2 text-center text-xs rounded-xl py-3 ${
+            isCustom ? "bg-white/10" : "bg-muted/60"
+          }`}
+        >
+          <div>
+            <div className="font-bold text-base">★ {card.rating.toFixed(1)}</div>
+            <div className={isCustom ? "text-secondary-foreground/70" : "text-muted-foreground"}>{t("showcase.ratingLabel")}</div>
+          </div>
+          <div>
+            <div className="font-bold text-base">{card.properties || "—"}</div>
+            <div className={isCustom ? "text-secondary-foreground/70" : "text-muted-foreground"}>{t("showcase.listingsLabel")}</div>
+          </div>
+          <div>
+            <div className={`font-bold text-base ${isCustom ? "text-accent" : "text-secondary"}`}>{t("showcase.verified")}</div>
+            <div className={isCustom ? "text-secondary-foreground/70" : "text-muted-foreground"}>{t("showcase.builderLabel")}</div>
+          </div>
+        </div>
+
+        {/* Builder / seller / contact */}
+        <div
+          className={`mt-4 text-xs space-y-1 ${
+            isCustom ? "text-secondary-foreground/85" : "text-muted-foreground"
+          }`}
+        >
+          <div><span className="font-semibold">{t("showcase.builderLabel")}:</span> {card.builder}</div>
+          <div><span className="font-semibold">{t("showcase.sellerLabel")}:</span> {card.seller}</div>
+          <div><span className="font-semibold">{t("showcase.contactLabel")}:</span> {card.contact}</div>
+        </div>
+
+        <div className="mt-6 flex items-end justify-between gap-3 pt-4 border-t border-foreground/10">
+          <div className={`font-bold text-base ${isCustom ? "" : "text-primary"}`}>
+            {price}
+          </div>
+          {isCustom ? (
+            <Button asChild variant="outline" className="bg-white text-secondary hover:bg-white/90 border-white">
+              <Link to="/consultation">
+                {t("showcase.startDesigning")} <ArrowRight />
+              </Link>
+            </Button>
+          ) : (
+            <Button asChild variant="brand" size="sm">
+              <Link to="/catalog/$slug" params={{ slug: card.slug }}>
+                {t("showcase.explore")} <ArrowRight />
+              </Link>
+            </Button>
+          )}
+        </div>
+        <CardRequestActions typeKey={card.slug} />
+      </div>
+    </article>
+  );
+}
+
+export function LandShowcaseCard({ project }: { project: LandProject }) {
+  const { t } = useTranslation("propertyTypes");
+  const name = t(`land.projects.${project.key}.name`);
+  const arabicName = t(`land.projects.${project.key}.arabicName`);
+  const design = t(`land.projects.${project.key}.design`);
+  const features = t("land.features", { returnObjects: true }) as string[];
+  return (
+    <article className="group rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 flex flex-col bg-card">
+      <div className="relative grid grid-cols-2 gap-0.5 overflow-hidden bg-muted">
+        {[project.image, project.image2].map((src) => (
+          <img
+            key={src}
+            src={src}
+            alt={design}
+            title={design}
+            loading="lazy"
+            width={1200}
+            height={900}
+            className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ))}
+        <span className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-soft">
+          {t("land.badge")}
+        </span>
+      </div>
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-xl font-bold">{name}</h3>
+            <p className="text-sm text-muted-foreground">{arabicName}</p>
+          </div>
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-secondary shrink-0">
+            <Star className="size-4 fill-current" /> {project.rating.toFixed(1)}
+          </span>
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">{design}</p>
+
+        <div className="mt-4 space-y-2 text-sm">
+          <div className="flex items-center gap-2">
+            <Ruler className="size-4 text-secondary shrink-0" />
+            <span>
+              <span className="text-muted-foreground">{t("land.areaLabel")}:</span> {project.area}
+            </span>
+          </div>
+          <div className="flex items-start gap-2">
+            <MapPin className="size-4 text-secondary shrink-0 mt-0.5" />
+            <span className="text-foreground/80">{t("land.location")}</span>
+          </div>
+        </div>
+
+        <ul className="mt-5 space-y-2.5">
+          {features.map((f) => (
+            <li key={f} className="flex items-start gap-2 text-sm">
+              <CheckCircle2 className="size-4 shrink-0 text-secondary mt-0.5" />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5 text-xs space-y-1 text-muted-foreground">
+          <div><span className="font-semibold">{t("showcase.builderLabel")}:</span> {t("land.builder")}</div>
+          <div><span className="font-semibold">{t("showcase.sellerLabel")}:</span> {t("land.seller")}</div>
+          <div className="flex flex-wrap gap-x-2">
+            <span className="font-semibold">{t("showcase.contactLabel")}:</span>
+            {LAND_CONTACTS.map((c) => (
+              <a key={c} href={`tel:${c}`} className="text-secondary hover:underline" dir="ltr">
+                {c}
+              </a>
+            ))}
+          </div>
+          <div>{t("land.codeLabel")}: {project.code}</div>
+        </div>
+
+        <div className="mt-6 flex items-end justify-between gap-3 pt-4 border-t border-foreground/10">
+          <div className="font-bold text-base text-primary">{t("land.priceRange")}</div>
+          <Button asChild variant="brand" size="sm">
+            <Link to="/catalog/$slug/$code" params={{ slug: "land", code: project.code }}>
+              {t("showcase.explore")} <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+        <CardRequestActions typeKey="land" />
+      </div>
+    </article>
+  );
+}
+
+/** Full 8-card grid: 6 property types + 2 land projects. */
+export function PropertyTypesShowcaseGrid() {
+  return (
+    <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {SHOWCASE.map((c) => (
+        <ShowcaseCardView key={c.slug} card={c} />
+      ))}
+      {LAND_PROJECTS.map((lp) => (
+        <LandShowcaseCard key={lp.code} project={lp} />
+      ))}
+    </div>
+  );
+}
